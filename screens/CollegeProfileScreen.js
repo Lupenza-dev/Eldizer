@@ -13,9 +13,8 @@ const CollegeProfileScreen = () => {
   const {student} =useContext(AuthContext);
 
   useEffect(() => {
-    setData(JSON.parse(student));
+    setData(student);
   }, []);
-
   return (
     <>
    
@@ -23,6 +22,7 @@ const CollegeProfileScreen = () => {
     <SafeAreaView style={{ backgroundColor: '#fff' , flex: 1}}>
     <ScrollView style={{ marginTop: 15}}>
          <InputProfile icon="university" label="College Name" text={data.college_name} />
+         <InputProfile icon="id-card-o" label="Form Four " text={data.index_no} />
          <InputProfile icon="id-card-o" label="Reg ID" text={data.student_reg_id} />
          <InputProfile icon="file-code-o" label="Course" text={data.course} />
          <InputProfile icon="calendar" label="Course Year" text={data.study_year} />

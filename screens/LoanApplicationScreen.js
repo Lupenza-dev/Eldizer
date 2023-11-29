@@ -52,11 +52,11 @@ const getAgents=()=>{
 
     axios.request(config)
     .then((response) => {
-      console.log(response.data);
+      //console.log(response.data);
       setAgents(response.data.data);
     })
     .catch((error) => {
-      console.log(error.response.data);
+     // console.log(error.response.data);
     });
 
 }
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     topView: {
-      backgroundColor: '#078586',
+      backgroundColor: '#272F3B',
       justifyContent: 'center',
       alignItems: 'center',
      marginTop: -60,
@@ -225,12 +225,12 @@ const styles = StyleSheet.create({
     headerGuarantorView:{
         fontSize: 14,
         fontWeight: 'bold',
-        color: "#078586"
+        color: "#272F3B"
     },
     termsHeader:{
       fontSize: 15,
       fontWeight: 'bold',
-      color: "#078586"
+      color: "#272F3B"
     },
     bottomNavigationView: {
       backgroundColor: '#fff',
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
       marginLeft: 10,
       fontSize: 16,
       fontWeight: 'bold',
-      color: '#078586'
+      color: '#272F3B'
     },
     guarantorContainer:{
       borderWidth: 0.2,
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     borderWidth: 1,
-    borderColor: '#078586',
+    borderColor: '#272F3B',
     borderRadius: 10,
     padding: 10,
     marginTop: 10
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
               type="font-awesome"
               size={20}
              // reverse
-              color="#078586"
+              color="#272F3B"
             /> */}
             { guarantor1Status ? (
               <View style={styles.guarantorSubView}>
@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
               type="font-awesome"
               size={20}
               //reverse
-              color="#078586"
+              color="#272F3B"
             />
             </View>
             )
@@ -420,7 +420,7 @@ const styles = StyleSheet.create({
               type="font-awesome"
               size={20}
              // reverse
-              color="#078586"
+              color="#272F3B"
             /> */}
             { guarantor2Status ? (
               <View style={styles.guarantorSubView}>
@@ -441,7 +441,7 @@ const styles = StyleSheet.create({
               type="font-awesome"
               size={20}
               //reverse
-              color="#078586"
+              color="#272F3B"
             />
             </View>
             )
@@ -504,7 +504,7 @@ const styles = StyleSheet.create({
                   padding: 10,
                   fontSize: 20,
                   fontWeight: 'bold',
-                  color: "#078586"
+                  color: "#272F3B"
                 }}> 
                 Loan Guarantor
               </Text>
@@ -536,7 +536,7 @@ const styles = StyleSheet.create({
                   padding: 10,
                   fontSize: 20,
                   fontWeight: 'bold',
-                  color: "#078586"
+                  color: "#272F3B"
                 }}> 
                 Loan Guarantor 2
               </Text>

@@ -13,7 +13,7 @@ const BottomTabNavigation = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: '#078586',
+        tabBarActiveTintColor: '#272F3B',
         tabBarIcon: ({ color, size, focused }) => {
           let iconName;
           if (route.name === 'Home') {

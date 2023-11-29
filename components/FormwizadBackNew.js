@@ -185,7 +185,7 @@ const styles =StyleSheet.create({
     justifyContent: 'space-between',
   },
   buttonContainer:{
-    backgroundColor: '#078586',
+    backgroundColor: '#272F3B',
     color: 'red',
     height: 40,
     width: 70,

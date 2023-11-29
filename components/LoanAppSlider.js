@@ -10,10 +10,17 @@ const LoanAppSlider = () => {
   return (
     <>
     <View style={styles.container}>
-        <View style={styles.upperContainer}>
+      <View style={styles.subContainer}>
+      <View style={styles.upperContainer}>
             <Text style={styles.uppertextHeader}>Fast Loan</Text>
             <Text style={styles.upperSubText}>From 40,000 - 300,000</Text>
         </View>
+        <View style={styles.loanValue}>
+          <Text style={styles.loanText}>{value.toLocaleString()}</Text>
+        </View>
+
+      </View>
+        
         <View style={{ padding: 5}}>
         <Slider
         value={value}
@@ -31,7 +38,7 @@ const LoanAppSlider = () => {
               size={10}
               reverse
               containerStyle={{ bottom: 11, right: 20 , left: -10 }}
-              color="#078586"
+              color="#272F3B"
             />
           ),
         }}
@@ -43,7 +50,7 @@ const LoanAppSlider = () => {
       </View>
     </View>
     <TouchableOpacity activeOpacity={0.9} style={styles.buttonStyle} onPress={()=>navigation.navigate('LoanApplicationScreen',value)} >
-        <Text  style={styles.buttonText}> <Text>Get Loan  {value.toLocaleString()}</Text></Text>
+        <Text  style={styles.buttonText}> <Text>Apply Loan  {value.toLocaleString()}</Text></Text>
      </TouchableOpacity>
     </>
   );
@@ -53,7 +60,7 @@ const styles=StyleSheet.create({
     container:{
         height: 160,
         borderWidth: 2,
-        borderColor: "#078586",
+        borderColor: "#272F3B",
         justifyContent: 'space-between',
         alignItems: 'stretch',
          margin: 10,
@@ -62,7 +69,7 @@ const styles=StyleSheet.create({
 
     },
     upperContainer:{
-        backgroundColor: "#078586",
+        backgroundColor: "#272F3B",
         paddingVertical: 16,
         paddingLeft: 10,
     },
@@ -80,7 +87,7 @@ const styles=StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 50,
-        backgroundColor: '#078586',
+        backgroundColor: '#272F3B',
         borderRadius: 10,
         margin: 10,
       },
@@ -89,6 +96,20 @@ const styles=StyleSheet.create({
         color: '#fff',
         fontWeight: '500',
       },
+      subContainer:{
+        backgroundColor: "#272F3B",
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+      },
+      loanValue:{
+        justifyContent: 'center',
+        paddingRight: 10,
+      },
+      loanText:{
+        color: 'white',
+        fontSize: 22,
+        fontWeight: '600'
+      }
 })
 
 export default LoanAppSlider;

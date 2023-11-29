@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView ,RefreshControl } from 'react-native'
 import { View, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Footer from '../components/Footer'
@@ -15,6 +15,8 @@ const PaymentScreen = () => {
   const {userToken} =useContext(AuthContext);
   const [paymentData, setPaymentData] =useState([]);
   const [isLoading,setIsLoading]      =useState(false);
+  const [refreshing, setRefreshing] =useState(false);
+
 
 const payments=()=>{
   let config = {
@@ -41,6 +43,15 @@ const payments=()=>{
 useEffect(() => {
   payments();
 }, []);
+
+const onRefresh = React.useCallback(() => {
+  setRefreshing(true);
+  payments();
+  setTimeout(() => {
+    setRefreshing(false);
+  }, 2000);
+}, []);
+
   return (
     <>
     <HeaderTab title="All Payments" />
@@ -50,7 +61,11 @@ useEffect(() => {
           textContent={'Loading...'}
           textStyle={{ color: '#FFF' }}
         />
-       <ScrollView >
+       <ScrollView
+         refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        } 
+       >
        <Search />
        {
         paymentData.map((payment,i)=>{

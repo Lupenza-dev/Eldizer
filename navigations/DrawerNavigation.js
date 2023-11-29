@@ -15,6 +15,7 @@ import ApplicationScreen from '../screens/ApplicationScreen';
 import DrawerNavigationExtended from './DrawerNavigationExtended';
 import CollegeProfileScreen from '../screens/CollegeProfileScreen';
 import AddressProfileScreen from '../screens/AddressProfileScreen';
+import TermsScreen from '../screens/TermsScreen';
 
 
 
@@ -34,10 +35,10 @@ const DrawerNavigation = () => {
     screenOptions={{
       headerTintColor: "white",
       //  drawerActiveTintColor: 'white',
-        //drawerActiveBackgroundColor: "#078586",
+        //drawerActiveBackgroundColor: "#272F3B",
         headerShown: false,
         headerStyle:{
-          backgroundColor: '#078586'
+          backgroundColor: '#272F3B'
         }
     }}>
         <Drawer.Screen name='HomeScreen' component={HomeScreen} options={{ headerShown: false}}/>
@@ -60,6 +61,7 @@ const DrawerNavigation = () => {
         <Drawer.Screen name="ProfileScreen" component={ProfileScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="CollegeProfileScreen" component={CollegeProfileScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="AddressProfileScreen" component={AddressProfileScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="TermsScreen" component={TermsScreen} options={{ drawerItemStyle:{display: 'none'} }} />
     </Drawer.Navigator>
     </>
   )

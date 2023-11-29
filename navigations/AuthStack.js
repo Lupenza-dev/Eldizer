@@ -17,7 +17,7 @@ const AuthStack = () => {
     <Stack.Navigator screenOptions={{
       headerTintColor: "white",
       headerStyle:{
-        backgroundColor: '#078586'
+        backgroundColor: '#272F3B'
       }
     }}  initialRouteName={LandingScreen}>
     <Stack.Screen name='LandingScreen'  component={LandingScreen}  options={{

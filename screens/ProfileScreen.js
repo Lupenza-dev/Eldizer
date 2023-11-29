@@ -13,7 +13,8 @@ const ProfileScreen = () => {
   const {customer} =useContext(AuthContext);
 
   useEffect(() => {
-    setData(JSON.parse(customer));
+    //console.log(customer);
+    setData(customer);
   }, []);
 
   return (

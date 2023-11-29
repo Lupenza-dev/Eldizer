@@ -48,7 +48,7 @@ const LoginScreen = ({ navigation}) => {
             <View style={styles.textContainer}>
                 <Image style={styles.minImageStyle} source={require('../assets/logo_min.png')} />
                 {/* <Text style={styles.headerText}>LOGO</Text> */}
-                <Text style={styles.headerText}>Tanzania's Most</Text>
+                <Text style={styles.headerText}>Tanzania's </Text>
                 <Text style={styles.headerText}>Most Trusted Lender</Text>
             </View>
         </ImageBackground>
@@ -74,8 +74,11 @@ const LoginScreen = ({ navigation}) => {
         <TouchableOpacity style={styles.buttonStyle} onPress={()=>userLogin(username,password)}>
         <Text style={styles.buttonText}>Log in</Text>
          </TouchableOpacity>
+        
          <Text  style={styles.forgotPasswordText} >Forgot Password ?</Text>
-         <IconButton  name="Create Account" onPress={() => navigation.navigate('RegisterScreen')} />
+         <TouchableOpacity style={styles.buttonStyle} onPress={() => navigation.navigate('RegisterScreen')}>
+        <Text style={styles.buttonText}>Create Account</Text>
+         </TouchableOpacity>
 
         </View>
         </View>
@@ -108,7 +111,7 @@ const styles =StyleSheet.create({
         marginBottom: 15,
         fontSize: 20,
         fontWeight: '500',
-        color: '#078586',
+        color: '#272F3B',
     },
     textLabel:{
         fontSize: 18,
@@ -128,7 +131,7 @@ const styles =StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 57,
-        backgroundColor: '#078586',
+        backgroundColor: '#272F3B',
         borderRadius: 10,
         // marginLeft: 5,
         // marginRight: 5,

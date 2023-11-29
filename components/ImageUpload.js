@@ -44,7 +44,7 @@ const ImageUpload = ({onImageChange}) => {
               type="font-awesome"
               size={10}
               reverse
-              color="#078586"
+              color="#272F3B"
               containerStyle={{ zIndex: 20, opacity: 1}}
             />
                 <Text style={styles.imageLabel}>Take Photo</Text>
@@ -55,7 +55,7 @@ const ImageUpload = ({onImageChange}) => {
               type="font-awesome"
               size={10}
               reverse
-              color="#078586"
+              color="#272F3B"
               containerStyle={{ zIndex: 20, opacity: 1}}
             />
                 <Text style={styles.imageLabel}>Select Photo</Text>
@@ -94,14 +94,14 @@ const styles = StyleSheet.create({
     },
     imageLabel:{
         fontSize: 14,
-        color: '#078586',
+        color: '#272F3B',
         fontWeight: 'bold',
         opacity: 1
     },
     headerText:{
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#078586',
+        color: '#272F3B',
         marginTop: 15,
         marginBottom: 10
     }

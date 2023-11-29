@@ -43,6 +43,7 @@ const FormWizard = () => {
   const [street, setStreet] = useState(null);
   const [residence, setResidence] = useState(null);
   const [registrationid, setRegistrationid] = useState(null);
+  const [indexno, setIndexno] = useState(null);
   const [course, setCourse] = useState(null);
   const [image, setImage] = useState(null);
   const [errors, setErrors] = useState(null);
@@ -158,7 +159,10 @@ const FormWizard = () => {
           notification("Course Year Field field required !!! 😡😡😡");
         } else if (!heslbValue) {
           notification("Heslb Status field required !!! 😡😡😡");
-        } else {
+        }else if(!indexno){
+          notification("Form Four Index No field required !!! 😡");
+        }
+         else {
           setCurrentStep(currentStep + 1);
         }
       }
@@ -278,6 +282,7 @@ const FormWizard = () => {
     formData.append('course', course);
     formData.append('study_year', yearValue);
     formData.append('heslb_status', heslbValue);
+    formData.append('index_no', indexno);
     if (image) {
       const uriParts = image.split('.');
       const fileType = uriParts[uriParts.length - 1];
@@ -381,10 +386,11 @@ const FormWizard = () => {
                 iconType="font-awesome"
                 iconName ="envelope-o"
                  onChangeText={text =>setEmail(text)} />
-                <FormInput placeholder="ID number" label="ID number" 
+                <FormInput placeholder="ID number (NIDA Number)" label="NIDA number" 
                  value={idnumber}
                  iconType="font-awesome"
                  iconName ="id-card-o"
+                 inputlength ={20}
                   onChangeText={text=>setIdnumber(text)}/>
                 {/* Add other FormInput components here */}
               </View>
@@ -481,7 +487,7 @@ const FormWizard = () => {
                height={100}
                onChangeText={text=>setStreet(text)} />
               {/* <FormInput placeholder="Residence Since" label="Residence Since ?" value={residence} onChangeText={text=>setResidence(text)} /> */}
-              <Text style={[styles.textlabel,{paddingTop: 10}]}>Residence Since ?</Text>
+              {/* <Text style={[styles.textlabel,{paddingTop: 10}]}>Residence Since ?</Text>
               <View style={styles.dateInput}>
               {/* <DateTimePicker
                 testID="dateTimePicker"
@@ -490,8 +496,8 @@ const FormWizard = () => {
                 is24Hour={true}
                 onChange={onChange}
                 
-              /> */}
-              </View>
+              // /> 
+              // </View> */}
              
             </View>
           }
@@ -525,6 +531,11 @@ const FormWizard = () => {
               </View>
 
               </View>
+              <FormInput placeholder="Form Four  Index No" label="Form Four Index No (S.0000.0000.2016)"
+               value={indexno} 
+               iconType="font-awesome"
+               iconName ="id-card-o"
+               onChangeText={text=>setIndexno(text)} />
               <FormInput placeholder="Registration ID" label="Registration ID"
                value={registrationid} 
                iconType="font-awesome"
@@ -708,7 +719,7 @@ const styles = StyleSheet.create({
     height: 60,
     width: '100%',
     borderWidth: 1,
-    borderColor: '#078586',
+    borderColor: '#272F3B',
     borderRadius: 10,
     padding: 10,
     marginTop: 5

@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#078586'
+    color: '#272F3B'
   },
   textSub: {
     fontSize: 15,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 60,
-    backgroundColor: '#078586',
+    backgroundColor: '#272F3B',
     borderRadius: 10,
     marginLeft: 5,
     marginRight: 5,

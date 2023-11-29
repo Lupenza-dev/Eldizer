@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
   headerText:{
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#078586',
+    color: '#272F3B',
   },
   textContainer:{
     borderLeftWidth: 5,
     paddingLeft: 10,
-    borderLeftColor: "#078586",
+    borderLeftColor: "#272F3B",
     marginBottom: 10
   }
 });

@@ -24,7 +24,7 @@ const ApplicationScreen = () => {
             type="antdesign"
             size={10}
             reverse
-            color="#078586"
+            color="#272F3B"
            />
         </View>
         <View>
@@ -78,7 +78,7 @@ const ApplicationScreen = () => {
                 <Text style={styles.rightTextSubContainer}>{data.agent_attended_date}</Text>
             </View>
             <View>
-                <Text style={styles.leftTextSubContainer}>Agent Remark</Text>
+                <Text style={styles.leftTextSubContainer}>Loan Remark</Text>
                 <View style={styles.textContainer}>
                     <ScrollView>
                     <Text style={styles.textInsideContainer} >
@@ -89,10 +89,10 @@ const ApplicationScreen = () => {
 
             </View>
         </View>
-        <View style={styles.agentContainer}>
+        {/* <View style={styles.agentContainer}>
             <Text style={styles.generalTitle}>Recommendation</Text>
-        </View>
-        <View>
+        </View> */}
+        {/* <View>
         <Text style={{...styles.leftTextSubContainer, marginTop: 10}}>Admin Remark</Text>
             <View style={styles.textContainer}>
                 <ScrollView>
@@ -101,7 +101,7 @@ const ApplicationScreen = () => {
                 </Text>
                 </ScrollView>
             </View>
-        </View>
+        </View> */}
         </ScrollView>
         
     </SafeAreaView>
@@ -124,7 +124,7 @@ const styles =StyleSheet.create({
     topTextStyle:{
         fontSize: 18,
         fontWeight: '600',
-        color: '#078586'
+        color: '#272F3B'
     },
     subContainer:{
         flexDirection: 'row',
@@ -166,7 +166,7 @@ const styles =StyleSheet.create({
     generalTitle:{
         fontSize: 18,
         fontWeight: '600',
-        color: '#078586' 
+        color: '#272F3B' 
     }
 
 

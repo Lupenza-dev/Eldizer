@@ -33,7 +33,7 @@ export default HeaderTab
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: "#078586",
+        backgroundColor: "#272F3B",
     },
     headerText:{
         fontSize: 20,

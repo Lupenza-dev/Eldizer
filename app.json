@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "Chuo Credit",
-    "slug": "Mikopo",
-    "version": "1.0.0",
+    "slug": "chuo-credit",
+    "version": "1.4.0",
     "orientation": "portrait",
-    "icon": "./assets/chuoicon.png",
+    "icon": "./assets/loogo_2.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/chuo.png",
+      "image": "./assets/framew.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -15,28 +15,38 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lupenza.Eldizer"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/loogo_2.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.lupenza.Eldizer"
+      "package": "com.lupenza.Eldizer",
+      "permissions" :[],
+      "versionCode": 4,
+      "blockedPermissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_VIDEOS",
+        "android.permission.READ_MEDIA_VIDEO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "6b8afed4-f5d3-4eb2-8aee-136c8744f1d9"
+        "projectId": "0030eed7-679c-408a-96d4-cefd29ecd468"
       }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/6b8afed4-f5d3-4eb2-8aee-136c8744f1d9"
+      "url": "https://u.expo.dev/fe51a432-8598-4fd9-bc79-bea4e25bc393"
     }
   }
 }

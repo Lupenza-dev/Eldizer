@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView , RefreshControl} from 'react-native'
 import { View, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
 import Footer from '../components/Footer'
@@ -16,6 +16,7 @@ const LoanScreen = () => {
   const {userToken} =useContext(AuthContext);
   const [loanData, setLoanData] =useState([]);
   const [isLoading,setIsLoading] =useState(false);
+  const [refreshing, setRefreshing] =useState(false);
   //console.log(userToken);
 
   //const {userToken} =useContext(AuthContext);
@@ -46,13 +47,25 @@ useEffect(() => {
   loans();
 }, []);
 
+const onRefresh = React.useCallback(() => {
+  setRefreshing(true);
+  loans();
+  setTimeout(() => {
+    setRefreshing(false);
+  }, 2000);
+}, []);
+
   return (
 
     <>
     <HeaderTab title="All Loans" />
     <SafeAreaView style={{ backgroundColor: '#fff' , flex: 1}}>
       
-       <ScrollView>
+       <ScrollView
+       refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      } 
+       >
        <Spinner
         visible={isLoading}
         textContent={'Loading...'}

@@ -11,13 +11,13 @@ export const AuthContext =createContext();
 
 export const AuthProvider =({ children })=>{
     const [userToken ,setUserToken]    =useState(null);
-    const [userInfo ,setUserInfo]      =useState([]);
+    const [userInfo ,setUserInfo]      =useState(null);
     const [studentName,setStudentName] =useState(null);
-    const [customer,setCustomer]       =useState([]);
-    const [student,setStudent]         =useState([]);
-    const [customerName,setCustomerName]  =useState([]);
-    const [image,setImage]                =useState([]);
-    const [email,setEmail]                =useState([]);
+    const [customer,setCustomer]       =useState(null);
+    const [student,setStudent]         =useState(null);
+    const [customerName,setCustomerName]  =useState(null);
+    const [image,setImage]                =useState(null);
+    const [email,setEmail]                =useState(null);
     const [isLoading ,setIsLoading]       =useState(false);
 
       
@@ -33,7 +33,7 @@ export const AuthProvider =({ children })=>{
               'Content-Type': 'application/json'
             }
           }).then(response => {
-            console.log(response.data.data.customer);
+            //console.log(response.data.data.customer);
              const userInfos    =response.data.data;
              const token        =response.data.token;
              const studentName  =response.data.data.name;
@@ -43,7 +43,7 @@ export const AuthProvider =({ children })=>{
              const image             =response.data.data.customer.image;
              const student           =response.data.data.customer.student;
         //     toastNotification(userInfos.message,'success');
-            setUserInfo(userInfos);
+           // setUserInfo(userInfos);
             setUserToken(token);
             setStudentName(studentName);
             setCustomer(customer);
@@ -55,7 +55,7 @@ export const AuthProvider =({ children })=>{
         //     //console.log(userInfos);
            AsyncStorage.setItem('userToken',token);
            AsyncStorage.setItem('studentName',studentName);
-            AsyncStorage.setItem('userInfo',userInfo);
+           // AsyncStorage.setItem('userInfo',userInfo);
             AsyncStorage.setItem('customer',JSON.stringify(customer));
             AsyncStorage.setItem('student',JSON.stringify(student));
             AsyncStorage.setItem('customerName',JSON.stringify(customerName));
@@ -76,11 +76,11 @@ export const AuthProvider =({ children })=>{
     }
     const logout =()=>{
         setUserToken(null);
-        setUserInfo(null);
+       // setUserInfo(null);
         setStudentName(null);
         AsyncStorage.removeItem('userToken');
         AsyncStorage.removeItem('studentName');
-        AsyncStorage.removeItem('userInfo');
+       // AsyncStorage.removeItem('userInfo');
         AsyncStorage.removeItem('customer');
         AsyncStorage.removeItem('student');
         AsyncStorage.removeItem('customerName');
@@ -92,7 +92,7 @@ export const AuthProvider =({ children })=>{
         try {
         let userToken =await AsyncStorage.getItem('userToken');
         let studentName =await AsyncStorage.getItem('studentName');
-        let userInfo =await AsyncStorage.getItem('userInfo');
+        //let userInfo =await AsyncStorage.getItem('userInfo');
         let customer =await AsyncStorage.getItem('customer');
         let student  =await AsyncStorage.getItem('student');
         let customerName  =await AsyncStorage.getItem('customerName');
@@ -101,7 +101,7 @@ export const AuthProvider =({ children })=>{
 
         setUserToken(userToken);
         setStudentName(studentName);
-        setUserInfo(userInfo);
+       // setUserInfo(userInfo);
         setCustomer(customer);
         setStudent(student);
         setCustomerName(customerName);

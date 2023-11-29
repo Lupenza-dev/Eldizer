@@ -44,7 +44,7 @@ const DropdownComponent = (props) => {
                 name="location-pin"
                 type="Ionicons"
                 size={20}
-                color="#078586"
+                color="#272F3B"
                 style={styles.icon}
               />
             )}
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     borderWidth: 1,
-    borderColor: '#078586',
+    borderColor: '#272F3B',
     borderRadius: 10,
     padding: 10,
     marginTop: 5
@@ -87,6 +87,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     marginTop: 5,
-    color: "#078586"
+    color: "#272F3B"
 }
 });

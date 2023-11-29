@@ -15,7 +15,7 @@ const Footer = () => {
 
   let textHeaderColor;
   if (activeRoute === "HomeScreen" || activeRoute === "LoanScreen" || activeRoute === "PaymentScreen") {
-    textHeaderColor = "#078586";
+    textHeaderColor = "#272F3B";
   } else {
     textHeaderColor = "#606060";
   }
@@ -45,27 +45,27 @@ const Footer = () => {
           name="home"
           type="antdesign"
           size={25}
-          color={route.name === "HomeScreen" ? "#078586" : "#606060"}
+          color={route.name === "HomeScreen" ? "#272F3B" : "#606060"}
         />
-        <Text style={[styles.textHeader, { color: route.name === "HomeScreen" ? "#078586" : "#606060" }]}>Home</Text>
+        <Text style={[styles.textHeader, { color: route.name === "HomeScreen" ? "#272F3B" : "#606060" }]}>Home</Text>
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('LoanScreen')}>
         <Icon
           name="switcher"
           type="antdesign"
           size={25}
-          color={route.name === "LoanScreen" ? "#078586" : "#606060"}
+          color={route.name === "LoanScreen" ? "#272F3B" : "#606060"}
         />
-        <Text style={[styles.textHeader, { color: route.name === "LoanScreen" ? "#078586" : "#606060" }]}>Loans</Text>
+        <Text style={[styles.textHeader, { color: route.name === "LoanScreen" ? "#272F3B" : "#606060" }]}>Loans</Text>
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('PaymentScreen')}>
         <Icon
           name="database"
           type="antdesign"
           size={25}
-          color={route.name === "PaymentScreen" ? "#078586" : "#606060"}
+          color={route.name === "PaymentScreen" ? "#272F3B" : "#606060"}
         />
-        <Text style={[styles.textHeader, { color: route.name === "PaymentScreen" ? "#078586" : "#606060" }]}>Payments</Text>
+        <Text style={[styles.textHeader, { color: route.name === "PaymentScreen" ? "#272F3B" : "#606060" }]}>Payments</Text>
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.8} onPress={() => logout()}>
         <Icon

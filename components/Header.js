@@ -29,7 +29,7 @@ const Header = () => {
               color="#fff"
         />
         <View style={styles.subTextContainer} >
-            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 15}}>1</Text>
+            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 15}}>0</Text>
         </View>
         </View>
         
@@ -45,7 +45,7 @@ export default Header
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: "#078586",
+        backgroundColor: "#272F3B",
         color: "#fff",
         // padding: 10
     },

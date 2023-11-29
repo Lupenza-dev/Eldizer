@@ -15,7 +15,7 @@ const PaymentCard = (props) => {
              type="font-awesome"
              size={30}
              style={{ transform: [{ rotate: '90deg' }] }}
-             color="#078586"
+             color="#272F3B"
             />
             </View>
         </View>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         paddingLeft: 15,
-        color: "#078586"
+        color: "#272F3B"
     },
     statusLabel:{
         height: 25,

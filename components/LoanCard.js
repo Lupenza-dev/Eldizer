@@ -1,11 +1,14 @@
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Icon } from 'react-native-elements'; 
 import { useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 
 
 
 const LoanCard = (props) => {
+const loan =props.data;
+const [borderColor ,setBorderColor]=useState([]);
+const [textColor ,setTextColor]=useState([]);
     const navigation = useNavigation();
 
 const handleLoanClick=(has_contract,contract,loan)=>{
@@ -15,8 +18,22 @@ const handleLoanClick=(has_contract,contract,loan)=>{
         navigation.navigate('ApplicationScreen' ,{loan: loan});
     }
 }
+
+useEffect(() => {
+    const level =loan.level;
+    if (level == "GRANTED") {
+        setTextColor({color: '#59B259'});
+        setBorderColor( {borderColor: "#59B259"});
+    }
+
+    if (level == "Cancelled" || level == "Rejected by Agent" || level == "Rejected by Admin" || level == "Default" ) {
+        setTextColor({color: '#F70000'});
+        setBorderColor( {borderColor: "#F70000"});
+    }
     
-    const loan =props.data;
+  }, []);
+    
+
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={() => handleLoanClick(loan.has_contract,loan.contract,loan)}>
      <View >
@@ -26,14 +43,14 @@ const handleLoanClick=(has_contract,contract,loan)=>{
               name="user-o"
               type="font-awesome"
               size={20}
-              color="#078586"
+              color="#272F3B"
             />
             <Icon
               name="money"
               type="font-awesome"
               size={20}
               style={{ transform: [{ rotate: '90deg' }] }}
-              color="#078586"
+              color="#272F3B"
             />
             </View>
             <View>
@@ -57,8 +74,8 @@ const handleLoanClick=(has_contract,contract,loan)=>{
             <View>
             <Text style={styles.numberText}>TZS {loan.loan_amount.toLocaleString()}</Text>
             </View>
-            <View style={styles.statusLabel}>
-            <Text style={styles.statusText}>{loan.level}</Text>
+            <View style={[styles.statusLabel,borderColor]}>
+            <Text style={[styles.statusText,textColor]}>{loan.level}</Text>
             </View>
         </View>
     </View>
@@ -106,7 +123,7 @@ const styles = StyleSheet.create({
     statusText:{
         fontSize: 15,
         fontWeight: '500',
-        color: '#078586',
+        color: '#272F3B',
         fontWeight: 'bold'
     },
     topContainer:{
@@ -148,6 +165,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 30,
         borderWidth: 1,
-        borderColor: "#078586"
+        borderColor: "#272F3B"
     }
 })

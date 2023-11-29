@@ -13,7 +13,7 @@ const IconButton = (props) => {
           type="font-awesome"
           size={25}
           reverse
-          color="#078586"
+          color="#272F3B"
       />
     </TouchableOpacity>
   )
@@ -24,7 +24,7 @@ export default IconButton
 const styles = StyleSheet.create({
     buttonConatiner:{
         height: 60,
-        backgroundColor: '#078586',
+        backgroundColor: '#272F3B',
         // marginRight: 10,
         // marginLeft: 10,
         justifyContent: 'center',

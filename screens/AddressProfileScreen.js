@@ -13,7 +13,7 @@ const AddressProfileScreen = () => {
   const {customer} =useContext(AuthContext);
 
   useEffect(() => {
-    setData(JSON.parse(customer));
+    setData(customer);
   }, []);
 
 

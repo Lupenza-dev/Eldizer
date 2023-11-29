@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useContext, useState } from 'react'
-import { View ,Text, StyleSheet,ScrollView, SafeAreaView} from 'react-native'
+import { View ,Text, StyleSheet,ScrollView, SafeAreaView, RefreshControl} from 'react-native'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import LoanAppSlider from '../components/LoanAppSlider'
@@ -13,23 +13,26 @@ import { Icon } from 'react-native-elements';
 
 const HomeScreen = () => {
   const {studentName,userInfo} =useContext(AuthContext);
-  const [user,setUser] =useState(null);
- // let userinfos =AsyncStorage.getItem('userToken');
- // alert(userInfo);
- const onLoad =async()=>{
-  try {
-  let userInfos =await AsyncStorage.getItem('userInfo');
-  setUser(userInfos);
-  } catch (error) {
-      console.log("is loged in error" + error); 
-  }
-}
- console.log(user);
+  const [refreshing, setRefreshing] =useState(false);
+
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+      
+    }, 2000);
+  }, []);
+
   return (
     <>
       <Header />
      <SafeAreaView style={{ backgroundColor: '#fff',flex:1, marginTop: 0}}> 
-     <ScrollView style={styles.container} >
+     <ScrollView style={styles.container} 
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      } 
+     >
         {/* <View style={styles.topContainer}>
           <View style={styles.subTopContainer}>
             <View>
@@ -57,8 +60,8 @@ const HomeScreen = () => {
             <Text style={styles.subDownHeaderText}>{userInfo.amount ?? 0}</Text>
             </View>
             <View style={styles.downMiddleContainer}>
-            <Text style={[styles.headerDownText,{color: "#078586"}]}>Outstandin Amount</Text>
-            <Text style={[styles.subDownHeaderText,{color:"#078586"}]}>{userInfo.outstanding_amount ?? 0}</Text>
+            <Text style={[styles.headerDownText,{color: "#272F3B"}]}>Outstandin Amount</Text>
+            <Text style={[styles.subDownHeaderText,{color:"#272F3B"}]}>{userInfo.outstanding_amount ?? 0}</Text>
             </View>
             <View style={styles.downRightContainer}>
             <Text style={styles.headerDownText}>Payment Date</Text>
@@ -88,15 +91,15 @@ const styles =StyleSheet.create({
     margin: 10,
     borderLeftWidth: 5,
     paddingLeft: 10,
-    borderLeftColor: "#078586",
+    borderLeftColor: "#272F3B",
   },
   headertext:{
     fontSize: 20,
     fontWeight: 'bold',
-    color: "#078586"
+    color: "#272F3B"
   },
   topContainer:{
-    backgroundColor: "#078586",
+    backgroundColor: "#272F3B",
     height: 260,
     justifyContent: 'space-between',
     padding: 10,
@@ -164,12 +167,12 @@ const styles =StyleSheet.create({
 
   },
   headerDownText:{
-    color: "#078586",
+    color: "#272F3B",
     fontSize: 12,
     fontWeight: 'bold'
   },
   subDownHeaderText:{
-    color: "#078586",
+    color: "#272F3B",
     fontSize: 15,
     fontWeight: "bold"
   }

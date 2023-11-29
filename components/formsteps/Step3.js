@@ -156,14 +156,14 @@ const styles = StyleSheet.create({
   textLabel:{
     fontSize: 22,
     textAlign: 'center',
-    color: '#078586',
+    color: '#272F3B',
     textDecorationLine: 'underline'
   },
   textlabe2:{
     fontSize: 15,
     fontWeight: 'bold',
     marginTop: 5,
-    color: "#078586"
+    color: "#272F3B"
 },
 
 
@@ -174,7 +174,7 @@ dropdown: {
   height: 60,
   width: '100%',
   borderWidth: 1,
-  borderColor: '#078586',
+  borderColor: '#272F3B',
   borderRadius: 10,
   padding: 10,
   marginTop: 5
@@ -183,7 +183,7 @@ dateInput: {
   height: 60,
   width: '100%',
   borderWidth: 1,
-  borderColor: '#078586',
+  borderColor: '#272F3B',
   borderRadius: 10,
   padding: 10,
   marginTop: 5,
@@ -211,7 +211,7 @@ textlabel:{
   fontSize: 15,
   fontWeight: 'bold',
   marginTop: 5,
-  color: "#078586"
+  color: "#272F3B"
 },
 textAlert:{
  color: 'red',

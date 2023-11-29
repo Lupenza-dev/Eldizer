@@ -7,17 +7,19 @@ import { useNavigation } from '@react-navigation/native';
 
 const DrawerNavigationExtended = (prop) => {
   const navigation = useNavigation();
+  const [data ,setData] =useState(null);
 
   const {customerName} =useContext(AuthContext);
   const {email} =useContext(AuthContext);
   const {image} =useContext(AuthContext);
   const {logout} =useContext(AuthContext);
+  
 
   // useEffect(() => {
   //   setData(JSON.parse(customer));
   // }, []);
 
-
+  // console.log(image);
   return (
     <>
     {/* <StatusBar
@@ -31,9 +33,14 @@ const DrawerNavigationExtended = (prop) => {
         </View>
         <View style={styles.imgContainer}>
           <View>
+            {/* <Image
+              style={styles.userImg}
+
+              source={image ? { uri: image ?? null } : require('../assets/userImage.png')}
+            /> */}
             <Image
               style={styles.userImg}
-              source={image ? { uri: image } : require('../assets/user.png')}
+              source={image ? { uri: image } : require('../assets/userImage.png')}
             />
           </View>
           <View>
@@ -77,7 +84,7 @@ const DrawerNavigationExtended = (prop) => {
         <Text style={styles.textDivider}>Eldizer Finance</Text>
         </View>
         <View>
-        <TouchableOpacity style={styles.drawerlinkContainer} activeOpacity={0.8} >
+        <TouchableOpacity style={styles.drawerlinkContainer} onPress={() =>navigation.navigate('TermsScreen')}  activeOpacity={0.8} >
           <Icon
               name="filetext1"
               type="antdesign"
@@ -116,7 +123,7 @@ const DrawerNavigationExtended = (prop) => {
 const styles =StyleSheet.create({
     topContainer:{
       height: 170,
-      backgroundColor: "#078586",
+      backgroundColor: "#272F3B",
       marginTop: -80,
     },
     userImg:{
@@ -134,7 +141,7 @@ const styles =StyleSheet.create({
       marginTop: -45
     },
     title:{
-      color: "#078586",
+      color: "#272F3B",
       fontSize: 16,
       fontWeight: 'bold',
       textAlign: 'center'
@@ -143,7 +150,7 @@ const styles =StyleSheet.create({
       fontSize: 15,
       paddingLeft: 10,
       fontWeight: '500'
-     // borderBottomColor: '#078586',
+     // borderBottomColor: '#272F3B',
      // borderBottomWidth: 1,
      // paddingBottom: 5
     },

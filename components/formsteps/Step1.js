@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   textLabel:{
     fontSize: 22,
     textAlign: 'center',
-    color: '#078586',
+    color: '#272F3B',
     textDecorationLine: 'underline'
   }
 })
