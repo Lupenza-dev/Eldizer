@@ -38,7 +38,7 @@ const ImageUpload = ({onImageChange}) => {
           }
         </View>
         <View style={{ paddingRight: 20}}>
-            <TouchableOpacity opacity={0.8}  style={styles.textUploadContainer}>
+            <TouchableOpacity opacity={0.8} onPress={pickImage} style={styles.textUploadContainer}>
             <Icon
               name="camera"
               type="font-awesome"

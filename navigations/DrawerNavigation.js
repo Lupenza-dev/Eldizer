@@ -16,6 +16,7 @@ import DrawerNavigationExtended from './DrawerNavigationExtended';
 import CollegeProfileScreen from '../screens/CollegeProfileScreen';
 import AddressProfileScreen from '../screens/AddressProfileScreen';
 import TermsScreen from '../screens/TermsScreen';
+import ChangePassword from '../screens/ChangePassword';
 
 
 
@@ -61,6 +62,7 @@ const DrawerNavigation = () => {
         <Drawer.Screen name="ProfileScreen" component={ProfileScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="CollegeProfileScreen" component={CollegeProfileScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="AddressProfileScreen" component={AddressProfileScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="ChangePassword" component={ChangePassword} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="TermsScreen" component={TermsScreen} options={{ drawerItemStyle:{display: 'none'} }} />
     </Drawer.Navigator>
     </>

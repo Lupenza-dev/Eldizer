@@ -16,11 +16,12 @@ import HeaderTab from './HeaderTab';
 import Spinner from 'react-native-loading-spinner-overlay';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import PhoneInput from './PhoneInput';
+import pushNotification from '../pushNotification';
 
 const FormWizard = () => {
+  const [expoPushToken] = pushNotification();
   const [currentStep, setCurrentStep] = useState(0);
   const steps = ['Personal Info', 'Address Info', 'College Info', 'Other Info'];
-
   const navigation = useNavigation();
   const [regions, setRegions] = useState([]);
   const [colleges, setColleges] = useState([]);
@@ -77,19 +78,6 @@ const FormWizard = () => {
     });
   }
 
-  // const getRegion = async () => {
-  //   try {
-  //     const response = await axios.get(`${BASE_URL}/get-regions`, {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     setRegions(response.data.data);
-  //   } catch (error) {
-  //     console.log('Error occurred:', error);
-  //   }
-  // };
-
   const getColleges = () => {
     axios.get(`${BASE_URL}/get-colleges`, {
       headers: {
@@ -107,16 +95,8 @@ const FormWizard = () => {
   useEffect(() => {
     getRegion();
     getColleges();
-  }, []);
-
-  // useEffect(() => {
-  //   getRegion().catch(error => {
-  //     console.log(error);
-  //   });
-  //   getColleges().catch(error => {
-  //     console.log(error);
-  //   });
-  // }, []);
+   
+  }, [expoPushToken]);
 
   const handleNextStep = () => {
     if (currentStep + 1 < steps.length) {
@@ -283,6 +263,7 @@ const FormWizard = () => {
     formData.append('study_year', yearValue);
     formData.append('heslb_status', heslbValue);
     formData.append('index_no', indexno);
+    formData.append('expo_push_token', expoPushToken ?? null);
     if (image) {
       const uriParts = image.split('.');
       const fileType = uriParts[uriParts.length - 1];

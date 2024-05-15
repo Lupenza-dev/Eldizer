@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "527717264113",
+    "project_id": "lupe-chuo-credit",
+    "storage_bucket": "lupe-chuo-credit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527717264113:android:cd9a2bd180ecd439cfd750",
+        "android_client_info": {
+          "package_name": "com.lupenza.Eldizer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnxkGqOjHfKEPzx0ILVdEQ2hGK6rzH_B0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

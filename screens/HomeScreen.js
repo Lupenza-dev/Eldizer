@@ -12,9 +12,8 @@ import { Icon } from 'react-native-elements';
 
 
 const HomeScreen = () => {
-  const {studentName,userInfo} =useContext(AuthContext);
+  const {studentName,userInfo , isPasswordChanged} =useContext(AuthContext);
   const [refreshing, setRefreshing] =useState(false);
-
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);

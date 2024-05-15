@@ -6,6 +6,7 @@ import CustomModal from '../components/CustomModal'
 import { AuthContext } from '../context/AuthContext'
 import MediumText from '../components/MediumText'
 import IconButton from '../components/IconButton'
+import pushNotification from '../pushNotification'
 
 const LoginScreen = ({ navigation}) => {
     const {login,isLoading} =useContext(AuthContext);
@@ -13,6 +14,8 @@ const LoginScreen = ({ navigation}) => {
     const [password ,setPassword] =useState(null);
     const [nameError,setNameError] =useState(false);
     const [passwordError,setPasswordError] =useState(false);
+    const [expoPushToken] = pushNotification();
+
     const userLogin =(username, password)=>{
         if(!username){
             setNameError(true);

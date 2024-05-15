@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, SafeAreaView, Dimensions, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Dimensions, TouchableOpacity ,ScrollView } from 'react-native'
 import React ,{useContext, useEffect, useState} from 'react'
-import { ScrollView } from 'react-native-gesture-handler'
+// import { ScrollView } from 'react-native-gesture-handler'
 import { Icon } from 'react-native-elements';
 import FormInput from '../components/FormInput';
 import IconButton from '../components/IconButton';

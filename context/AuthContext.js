@@ -5,6 +5,7 @@ import { BASE_URL } from '../utils/config';
 import CustomModal from '../components/CustomModal';
 import Toast from 'react-native-toast-message'
 import Spinner from 'react-native-loading-spinner-overlay';
+import pushNotification from '../pushNotification';
 
 
 export const AuthContext =createContext();
@@ -19,6 +20,9 @@ export const AuthProvider =({ children })=>{
     const [image,setImage]                =useState(null);
     const [email,setEmail]                =useState(null);
     const [isLoading ,setIsLoading]       =useState(false);
+    const [isPasswordChanged ,setIsPasswordChanged] =useState(null);
+    const [expoPushToken] = pushNotification();
+
 
       
     const login =(username,password)=>{
@@ -26,6 +30,7 @@ export const AuthProvider =({ children })=>{
           axios.post(`${BASE_URL}/user-authentication`, {
              email: username,
              password: password,
+             expo_push_token:expoPushToken ?? null
             // email:"admin@gmail.com",
             // password: "Admin@123"
           }, {
@@ -33,11 +38,11 @@ export const AuthProvider =({ children })=>{
               'Content-Type': 'application/json'
             }
           }).then(response => {
-            //console.log(response.data.data.customer);
              const userInfos    =response.data.data;
              const token        =response.data.token;
-             const studentName  =response.data.data.name;
-             const customer     =response.data.data.customer;
+             const password_change  =response.data.data.is_password_changed;
+             const studentName      =response.data.data.name;
+             const customer         =response.data.data.customer;
              const customerName     =response.data.data.customer.customer_name;
              const email             =response.data.data.customer.email;
              const image             =response.data.data.customer.image;
@@ -51,8 +56,10 @@ export const AuthProvider =({ children })=>{
             setCustomerName(customerName);
             setEmail(email);
             setImage(image);
+            setIsPasswordChanged(password_change);
             setIsLoading(false);
         //     //console.log(userInfos);
+           AsyncStorage.setItem('isPasswordChanged',password_change);
            AsyncStorage.setItem('userToken',token);
            AsyncStorage.setItem('studentName',studentName);
            // AsyncStorage.setItem('userInfo',userInfo);
@@ -78,7 +85,9 @@ export const AuthProvider =({ children })=>{
         setUserToken(null);
        // setUserInfo(null);
         setStudentName(null);
+        setIsPasswordChanged(null);
         AsyncStorage.removeItem('userToken');
+        AsyncStorage.removeItem('isPasswordChanged');
         AsyncStorage.removeItem('studentName');
        // AsyncStorage.removeItem('userInfo');
         AsyncStorage.removeItem('customer');
@@ -98,6 +107,7 @@ export const AuthProvider =({ children })=>{
         let customerName  =await AsyncStorage.getItem('customerName');
         let email  =await AsyncStorage.getItem('email');
         let image  =await AsyncStorage.getItem('image');
+        let password_change  =await AsyncStorage.getItem('isPasswordChanged');
 
         setUserToken(userToken);
         setStudentName(studentName);
@@ -107,6 +117,7 @@ export const AuthProvider =({ children })=>{
         setCustomerName(customerName);
         setEmail(email);
         setImage(image);
+        setIsPasswordChanged(password_change);
 
         } catch (error) {
             console.log("is loged in error" + error); 
@@ -115,8 +126,8 @@ export const AuthProvider =({ children })=>{
 
     useEffect(()=>{
         isLogedin();
-    },[]);
-    return <AuthContext.Provider value={{login ,logout,userToken,studentName,userInfo,isLoading,customer,student,customerName,email,image}}>
+    },[expoPushToken]);
+    return <AuthContext.Provider value={{login ,logout,userToken,studentName,userInfo,isLoading,customer,student,customerName,email,image,isPasswordChanged}}>
         {children}
        
     </AuthContext.Provider>

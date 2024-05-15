@@ -13,7 +13,7 @@ const LoanAppSlider = () => {
       <View style={styles.subContainer}>
       <View style={styles.upperContainer}>
             <Text style={styles.uppertextHeader}>Fast Loan</Text>
-            <Text style={styles.upperSubText}>From 40,000 - 300,000</Text>
+            <Text style={styles.upperSubText}>From 40,000 - 200,000</Text>
         </View>
         <View style={styles.loanValue}>
           <Text style={styles.loanText}>{value.toLocaleString()}</Text>
@@ -25,7 +25,7 @@ const LoanAppSlider = () => {
         <Slider
         value={value}
         onValueChange={setValue}
-        maximumValue={300000}
+        maximumValue={200000}
         minimumValue={40000}
         step={10000}
         trackStyle={{ height: 10, backgroundColor: 'transparent' }}
