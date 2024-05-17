@@ -31,8 +31,6 @@ export const AuthProvider =({ children })=>{
              email: username,
              password: password,
              expo_push_token:expoPushToken ?? null
-            // email:"admin@gmail.com",
-            // password: "Admin@123"
           }, {
             headers: {
               'Content-Type': 'application/json'
