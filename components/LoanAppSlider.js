@@ -49,7 +49,13 @@ const LoanAppSlider = () => {
       
       </View>
     </View>
-    <TouchableOpacity activeOpacity={0.9} style={styles.buttonStyle} onPress={()=>navigation.navigate('LoanApplicationScreen',value)} >
+    <TouchableOpacity activeOpacity={0.9} style={styles.buttonStyle} onPress={()=>navigation.navigate('LoanApplicationScreen',{
+      request_amount :value,
+      plan_applied: 1,
+      loan_type:1,
+      device_name:null,
+      device_id:null
+    })} >
         <Text  style={styles.buttonText}> <Text>Apply Loan  {value.toLocaleString()}</Text></Text>
      </TouchableOpacity>
     </>

@@ -18,6 +18,7 @@ const PhoneInput = (props) => {
       onChangeText={props.onChangeText} value={props.value ?? null} />
       
     </View>
+    <Text style={styles.captionText}>{props.caption ?? null}</Text>
   </View>
    {/* <Text style={styles.caption}>{value} / 9</Text> */}
   </>
@@ -58,5 +59,11 @@ const styles = StyleSheet.create({
       marginTop: 5,
       marginBottom: -7,
       textAlign: 'right'
+    },
+    captionText:{
+        fontSize: 12,
+        marginTop: 5,
+        color: 'red'
     }
+
 })

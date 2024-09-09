@@ -17,6 +17,9 @@ import CollegeProfileScreen from '../screens/CollegeProfileScreen';
 import AddressProfileScreen from '../screens/AddressProfileScreen';
 import TermsScreen from '../screens/TermsScreen';
 import ChangePassword from '../screens/ChangePassword';
+import NmbScreen from '../screens/NmbScreen';
+import NmbRequestScreen from '../screens/NmbRequestScreen';
+import DeviceScreen from '../screens/DeviceScreen';
 
 
 
@@ -64,6 +67,9 @@ const DrawerNavigation = () => {
         <Drawer.Screen name="AddressProfileScreen" component={AddressProfileScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="ChangePassword" component={ChangePassword} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="TermsScreen" component={TermsScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="NmbScreen" component={NmbScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="NmbRequestScreen" component={NmbRequestScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="DeviceScreen" component={DeviceScreen} options={{ drawerItemStyle:{display: 'none'} }} />
     </Drawer.Navigator>
     </>
   )

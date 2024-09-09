@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useContext, useState } from 'react'
-import { View ,Text, StyleSheet,ScrollView, SafeAreaView, RefreshControl} from 'react-native'
+import { View ,Text, StyleSheet,ScrollView, SafeAreaView, RefreshControl, TouchableOpacity} from 'react-native'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import LoanAppSlider from '../components/LoanAppSlider'
@@ -8,12 +8,16 @@ import LoanProcess from '../components/LoanProcess'
 import Partners from '../components/Partners'
 import { AuthContext } from '../context/AuthContext'
 import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native'
+import Service from '../components/Service'
 
 
 
 const HomeScreen = () => {
   const {studentName,userInfo , isPasswordChanged} =useContext(AuthContext);
   const [refreshing, setRefreshing] =useState(false);
+  const navigation = useNavigation();
+
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -70,7 +74,18 @@ const HomeScreen = () => {
           </View>
         </View> */}
         <LoanAppSlider />
-        <LoanProcess />
+        <View style={styles.nmbContainer}>
+          <View>
+            <Text style={styles.nmbText}>Link Chuo Credit Account With NMB</Text>
+          </View>
+          <View>
+            <TouchableOpacity activeOpacity={0.9} style={styles.buttonStyle} onPress={()=>navigation.navigate('NmbScreen')} >
+              <Text  style={styles.buttonText}> <Text>Press Here </Text></Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Service />
+        {/* <LoanProcess /> */}
         <Partners />
      </ScrollView>
      <Footer /> 
@@ -174,6 +189,35 @@ const styles =StyleSheet.create({
     color: "#272F3B",
     fontSize: 15,
     fontWeight: "bold"
+  },
+  nmbContainer:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 10,
+    paddingVertical: 10,
+    alignContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10
+  },
+  buttonStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    // height: 50,
+    backgroundColor: '#272F3B',
+    borderRadius: 10,
+    margin: 10,
+    padding: 10
+  },
+  buttonText: {
+    fontSize: 15,
+    color: '#fff',
+    fontWeight: '500',
+  },
+  nmbText:{
+    fontSize: 16,
+    fontWeight: '600'
   }
 
 })

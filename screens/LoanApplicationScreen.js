@@ -23,7 +23,7 @@ const LoanApplicationScreen = ({ route}) => {
 const screenHeight =Dimensions.get('window').height;
 //const containerHeight = 0.2 * screenHeight;
 const {userToken} =useContext(AuthContext);
-const request_amount =route.params;
+const {request_amount,plan_applied,loan_type,device_name,device_id} =route.params;
 const[totalAmount,setTotalAmount] =useState(0);
 const[startDate,setStartDate] =useState(null);
 const[endDate,setEndDate] =useState(null);
@@ -39,6 +39,7 @@ const [guarantor2pn,setGuarantor2pn]=useState(null);
 const [value,setValue] =useState(1);
 const [agents,setAgents]=useState([]);
 const [isLoading,setIsLoading] =useState(false);
+const [initialDeposit ,setInitialDeposit] =useState(null);
 const getAgents=()=>{
 
     let config = {
@@ -81,7 +82,7 @@ const loanApplication=()=>{
     },
     data:{
       'amount':request_amount,
-      'plan':1,
+      'plan':plan_applied ?? 1,
       'agent_id':value,
       'guarantor1fs':guarantor1fs,
       'guarantor1rs':guarantor1rs,
@@ -89,6 +90,8 @@ const loanApplication=()=>{
       'guarantor2fs':guarantor2fs,
       'guarantor2rs':guarantor2rs,
       'guarantor2pn':guarantor2pn,
+      'loan_type'   :loan_type,
+      'device_id'   :device_id ?? null
     }
   };
 
@@ -114,11 +117,13 @@ const datas   =agents.map(item => ({
   label: item.name,
   value: item.id.toString(), // Convert id to string if needed
 }));
-
 const loanCalculator=()=>{
   axios.post(`${BASE_URL}/loan-calculator`, {
       amount: request_amount,
-      plan:1,
+      plan:plan_applied,
+      loan_type:loan_type,
+      device_name:device_name,
+      device_id:device_id,
     }, {
       headers: {
       //  'Content-Type': 'application/json',
@@ -130,6 +135,7 @@ const loanCalculator=()=>{
       setStartDate(response.data.data.start_date);
       setEndDate(response.data.data.end_date);
       setPlan(response.data.data.plan);
+      setInitialDeposit(response.data.data.initial_deposit);
     }).catch(error => {
       console.log(error.response.data);
     });
@@ -361,6 +367,14 @@ const styles = StyleSheet.create({
                 <Text style={styles.leftSubMiddleText}>Request Amount</Text>
                 <Text>{request_amount.toLocaleString()} TZS</Text>
             </View>
+            {
+              loan_type == 2 ?
+              <View style={styles.subMiddleView} >
+              <Text style={styles.leftSubMiddleText}>Initial Deposit</Text>
+              <Text>{initialDeposit} TZS</Text>
+               </View>: ''
+            }
+            
             <View style={styles.subMiddleView} >
                 <Text style={styles.leftSubMiddleText}>Plan</Text>
                 <Text>{plan} month</Text>
@@ -373,19 +387,19 @@ const styles = StyleSheet.create({
                 <Text style={styles.leftSubMiddleText}>Expected End Date</Text>
                 <Text>{endDate}</Text>
             </View>
+            {
+              device_name && loan_type == 2 ? 
+                <View style={styles.subMiddleView}>
+                  <Text style={styles.leftSubMiddleText}>Device</Text>
+                  <Text>{device_name} </Text>
+              </View> : ''
+            }
+            
           </View>
           <Text style={styles.guarantorHeader}>Guarantors</Text>
           <View style={styles.guarantorContainer}>
           <TouchableOpacity activeOpacity={0.9} style={styles.guarantorView} onPress={toggleBottomNavigationView} >
             <View style={styles.guarantorSubView} >
-            {/* <Text onPress={toggleBottomNavigationView} style={styles.headerGuarantorView}> Add Guarantor</Text>
-            <Icon
-              name="plus-circle"
-              type="font-awesome"
-              size={20}
-             // reverse
-              color="#272F3B"
-            /> */}
             { guarantor1Status ? (
               <View style={styles.guarantorSubView}>
                 <Text onPress={toggleBottomNavigationView} style={styles.headerGuarantorView}> Added</Text>
@@ -414,14 +428,6 @@ const styles = StyleSheet.create({
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.9} style={[styles.guarantorView,{marginTop: 30}]} onPress={toggleBottomNavigationView2} >
             <View style={styles.guarantorSubView} >
-            {/* <Text onPress={toggleBottomNavigationView} style={styles.headerGuarantorView}> Add Guarantor</Text>
-            <Icon
-              name="plus-circle"
-              type="font-awesome"
-              size={20}
-             // reverse
-              color="#272F3B"
-            /> */}
             { guarantor2Status ? (
               <View style={styles.guarantorSubView}>
                 <Text onPress={toggleBottomNavigationView2} style={styles.headerGuarantorView}> Added</Text>
