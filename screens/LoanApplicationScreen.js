@@ -23,7 +23,7 @@ const LoanApplicationScreen = ({ route}) => {
 const screenHeight =Dimensions.get('window').height;
 //const containerHeight = 0.2 * screenHeight;
 const {userToken} =useContext(AuthContext);
-const {request_amount,plan_applied,loan_type,device_name,device_id} =route.params;
+const {request_amount,plan_applied,loan_type,device_name,device_id,initial_deposit} =route.params;
 const[totalAmount,setTotalAmount] =useState(0);
 const[startDate,setStartDate] =useState(null);
 const[endDate,setEndDate] =useState(null);
@@ -91,7 +91,8 @@ const loanApplication=()=>{
       'guarantor2rs':guarantor2rs,
       'guarantor2pn':guarantor2pn,
       'loan_type'   :loan_type,
-      'device_id'   :device_id ?? null
+      'device_id'   :device_id ?? null,
+      'initial_deposit'   :initial_deposit ?? 0,
     }
   };
 
@@ -364,14 +365,14 @@ const styles = StyleSheet.create({
           <View style={styles.middleView}>
             <Text style={styles.headerMiddleView}>Loan Details</Text>
             <View style={styles.subMiddleView} >
-                <Text style={styles.leftSubMiddleText}>Request Amount</Text>
+                <Text style={styles.leftSubMiddleText}>{ loan_type == 2 ? "Request Loan" : "Request Amount"}</Text>
                 <Text>{request_amount.toLocaleString()} TZS</Text>
             </View>
             {
               loan_type == 2 ?
               <View style={styles.subMiddleView} >
               <Text style={styles.leftSubMiddleText}>Initial Deposit</Text>
-              <Text>{initialDeposit} TZS</Text>
+              <Text>{initial_deposit.toLocaleString()} TZS</Text>
                </View>: ''
             }
             

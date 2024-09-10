@@ -83,11 +83,11 @@ const DeviceScreen = () => {
                    </View>
                    <View style={styles.textContainer}>
                      <Text style={styles.title}>Amount</Text>
-                     <Text style={styles.subTitle}>{device.price}</Text>
+                     <Text style={styles.subTitle}>{device.price.toLocaleString()}</Text>
                    </View>
                    <View style={styles.textContainer}>
                      <Text style={styles.title}>Initial Deposit</Text>
-                     <Text style={styles.subTitle}>{device.initial_deposit}</Text>
+                     <Text style={styles.subTitle}>{device.initial_deposit.toLocaleString()}</Text>
                    </View>
                    <View style={styles.textContainer}>
                      <Text style={styles.title}>Plan</Text>
@@ -96,11 +96,12 @@ const DeviceScreen = () => {
                    <TouchableOpacity
                      style={styles.buttonContainer}
                      onPress={() => navigation.navigate('LoanApplicationScreen', {
-                       request_amount: device.price,
+                       request_amount: device.price - device.initial_deposit,
                        plan_applied: device.plan,
                        loan_type: 2,
                        device_name: device.name,
-                       device_id: device.id
+                       device_id: device.id,
+                       initial_deposit: device.initial_deposit
                      })}
                    >
                      <Text style={styles.buttonText}>Apply / Purchase</Text>
