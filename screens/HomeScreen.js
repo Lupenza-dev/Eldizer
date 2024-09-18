@@ -74,7 +74,7 @@ const HomeScreen = () => {
           </View>
         </View> */}
         <LoanAppSlider />
-        <View style={styles.nmbContainer}>
+        {/* <View style={styles.nmbContainer}>
           <View>
             <Text style={styles.nmbText}>Link Chuo Credit Account With NMB</Text>
           </View>
@@ -83,9 +83,9 @@ const HomeScreen = () => {
               <Text  style={styles.buttonText}> <Text>Press Here </Text></Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
         <Service />
-        {/* <LoanProcess /> */}
+        <LoanProcess />
         <Partners />
      </ScrollView>
      <Footer /> 

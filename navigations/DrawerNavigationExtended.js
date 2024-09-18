@@ -102,7 +102,7 @@ const DrawerNavigationExtended = (prop) => {
             />
           <Text style={styles.linkText}>Contact Us</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerlinkContainer} activeOpacity={0.8}>
+        {/* <TouchableOpacity style={styles.drawerlinkContainer} activeOpacity={0.8}>
           <Icon
               name="link"
               type="antdesign"
@@ -110,7 +110,7 @@ const DrawerNavigationExtended = (prop) => {
               color="#606060"
             />
           <Text style={styles.linkText}>Unlink NMB Account</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity style={styles.drawerlinkContainer} activeOpacity={0.8} onPress={() => logout()}>
           <Icon
               name="logout"

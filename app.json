@@ -2,7 +2,7 @@
   "expo": {
     "name": "Chuo Credit",
     "slug": "chuo-credit",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "orientation": "portrait",
     "icon": "./assets/loogo_2.png",
     "userInterfaceStyle": "light",

@@ -24,7 +24,7 @@ const Service = () => {
             /> 
             <Text style={styles.paytext}>Pay Later</Text> 
         </TouchableOpacity>
-        <TouchableOpacity style={styles.payButton}  >
+        {/* <TouchableOpacity style={styles.payButton}  >
             <Icon
             name="fork"
             type="antdesign"
@@ -33,7 +33,7 @@ const Service = () => {
             color="#272F3B"
             /> 
             <Text style={styles.paytext}>Intern Loan</Text> 
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         </View>
         </View>
     </View>
