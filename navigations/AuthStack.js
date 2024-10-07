@@ -25,7 +25,7 @@ const AuthStack = () => {
       headerShown: false
     }} />
     <Stack.Screen  name='LoginScreen'  component={LoginScreen} options={{ headerShown: false}}  />
-    <Stack.Screen name='Forgotpassword'  component={ForgotPasswordScreen} options={{ headerBackTitle: ""}}  />
+    <Stack.Screen name='Forgotpassword'  component={ForgotPasswordScreen} options={{ headerBackTitle: "", title: "Recover Password"}}  />
     <Stack.Screen name='RegisterScreen'  component={RegisterScreen} options={{ headerShown: true , headerTitle:"Registration", headerBackTitleVisible:false }} />
     <Stack.Screen name='ChangePassword'  component={ChangePassword} options={{ headerShown: false , headerTitle:"Registration", headerBackTitleVisible:false }} />
     {/* <Stack.Screen name='Bottom'  component={BottomTabNavigation} options={{ headerShown: false}} /> */}

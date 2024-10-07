@@ -76,9 +76,9 @@ const LoginScreen = ({ navigation}) => {
         </View>
         <TouchableOpacity style={styles.buttonStyle} onPress={()=>userLogin(username,password)}>
         <Text style={styles.buttonText}>Log in</Text>
-         </TouchableOpacity>
+         </TouchableOpacity >
         
-         <Text  style={styles.forgotPasswordText} >Forgot Password ?</Text>
+         <Text  onPress={() => navigation.navigate('Forgotpassword')} style={styles.forgotPasswordText} >Forgot Password ?</Text>
          <TouchableOpacity style={styles.buttonStyle} onPress={() => navigation.navigate('RegisterScreen')}>
         <Text style={styles.buttonText}>Create Account</Text>
          </TouchableOpacity>
