@@ -10,6 +10,7 @@ import { AuthContext } from '../context/AuthContext'
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native'
 import Service from '../components/Service'
+import WarningCard from '../components/WarningCard'
 
 
 
@@ -74,6 +75,7 @@ const HomeScreen = () => {
           </View>
         </View> */}
         <LoanAppSlider />
+        <WarningCard />
         {/* <View style={styles.nmbContainer}>
           <View>
             <Text style={styles.nmbText}>Link Chuo Credit Account With NMB</Text>

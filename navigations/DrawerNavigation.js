@@ -20,6 +20,7 @@ import ChangePassword from '../screens/ChangePassword';
 import NmbScreen from '../screens/NmbScreen';
 import NmbRequestScreen from '../screens/NmbRequestScreen';
 import DeviceScreen from '../screens/DeviceScreen';
+import StudentRegSCreen from '../screens/StudentRegSCreen';
 
 
 
@@ -70,6 +71,7 @@ const DrawerNavigation = () => {
         <Drawer.Screen name="NmbScreen" component={NmbScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="NmbRequestScreen" component={NmbRequestScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="DeviceScreen" component={DeviceScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="StudentRegSCreen" component={StudentRegSCreen} options={{ drawerItemStyle:{display: 'none'} }} />
     </Drawer.Navigator>
     </>
   )

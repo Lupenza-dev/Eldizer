@@ -5,7 +5,8 @@ export const colors = {
   secondary: '#FF5733',
   accent: '#7A7A7A',
   white: '#fff',
-  danger: 'red'
+  danger: 'red',
+  warning: "#E8B61B"
 };
 
 export const fonts = {

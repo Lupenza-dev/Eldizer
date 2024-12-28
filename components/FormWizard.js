@@ -17,11 +17,12 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import PhoneInput from './PhoneInput';
 import pushNotification from '../pushNotification';
+import { Icon } from 'react-native-elements';
 
 const FormWizard = () => {
   const [expoPushToken] = pushNotification();
   const [currentStep, setCurrentStep] = useState(0);
-  const steps = ['Personal Info', 'Address Info', 'College Info', 'Other Info'];
+  const steps = ['Address Info', 'College Info', 'Other Info'];
   const navigation = useNavigation();
   const [regions, setRegions] = useState([]);
   const [colleges, setColleges] = useState([]);
@@ -101,18 +102,20 @@ const FormWizard = () => {
   const handleNextStep = () => {
     if (currentStep + 1 < steps.length) {
       if (currentStep === 0) {
+        setCurrentStep(currentStep + 1);
         if (!firstname) {
           notification("First name field required !!! 😡😡😡");
         } else if (!middlename) {
           notification("Middle name field required !!! 😡😡😡");
         } else if (!lastname) {
           notification("Last name field required !!! 😡😡😡");
-        } else if (!phone) {
+        } else if (!nida) {
           notification("Phone Number field required !!! 😡😡😡");
         } else {
           setCurrentStep(currentStep + 1);
         }
       } else if (currentStep === 1) {
+        setCurrentStep(currentStep + 1);
         if (!regionId) {
           notification("Region field required !!! 😡😡😡");
         } else if (!districtId) {
@@ -309,7 +312,8 @@ const FormWizard = () => {
                 }
                 {i < currentStep && /* Checked */
                   <View style={styles.stepNumberChecked}>
-                    <Ionicons name="md-checkmark" size={20} color="#fff" />
+                    <Ionicons name="checkmark" size={25} color="#fff" />
+                    {/* <Icon name='antdesign' type='check' size={20} color="#fff"/> */}
                   </View>
                 }
                 {i === currentStep && /* Selected */
@@ -324,49 +328,6 @@ const FormWizard = () => {
           <View style={styles.formContainer}>
             {currentStep === 0 &&
               <View>
-                <FormInput placeholder="First name" label="First name" 
-                value={firstname} 
-                iconType="font-awesome"
-                iconName ="user-o"
-                onChangeText={text => {
-                  setFirstname(text);
-                }}
-                />
-                <FormInput placeholder="Middle name" label="Middle name"
-                 value={middlename} 
-                 iconType="font-awesome"
-                 iconName ="user-o"
-                 onChangeText={text => {
-                   setMiddlename(text);
-                 }} />
-                <FormInput placeholder="Last name" label="Last name"
-                value={lastname} 
-                iconType="font-awesome"
-                iconName ="user-o"
-                onChangeText={text => {
-                  setLastname(text);
-                }} 
-                />
-                <FormInput placeholder="Other name" label="Other name" 
-                   iconType="font-awesome"
-                   iconName ="user-o"
-                   value={othername} 
-                   onChangeText={text => {
-                    setOtherName(text);
-                  }} 
-                />
-                <PhoneInput 
-                placeholder="673******" 
-                label="Phone number" 
-                 value={phone} 
-                 onChangeText={text => {
-                   setPhone(text);
-                 }}/>
-                <FormInput placeholder="Email" label="Email" 
-                value={email}
-                iconType="font-awesome"
-                iconName ="envelope-o"
-                 onChangeText={text =>setEmail(text)} />
                 <FormInput placeholder="ID number (NIDA Number)" label="NIDA number" 
                  value={idnumber}
                  iconType="font-awesome"
@@ -374,12 +335,7 @@ const FormWizard = () => {
                  inputlength ={20}
                   onChangeText={text=>setIdnumber(text)}/>
                 {/* Add other FormInput components here */}
-              </View>
-            }
-              {currentStep === 1 &&
-            <View>
-              {/* <FormInput placeholder="Region" label="Region" /> */}
-              <View  style={{ paddingTop: 10}}>
+                <View  style={{ paddingTop: 10}}>
               <Text style={styles.textlabel}>Region</Text>
               <Dropdown
                 style={styles.dropdown}
@@ -459,30 +415,15 @@ const FormWizard = () => {
                 )}
               />
               </View>
-              {/* <FormInput placeholder="District" label="District" />
-              <FormInput placeholder="Ward" label="Ward" /> */}
               <FormInput placeholder="Street" label="Street"
                value={street} 
                iconType="font-awesome"
                iconName ="map-marker"
                height={100}
                onChangeText={text=>setStreet(text)} />
-              {/* <FormInput placeholder="Residence Since" label="Residence Since ?" value={residence} onChangeText={text=>setResidence(text)} /> */}
-              {/* <Text style={[styles.textlabel,{paddingTop: 10}]}>Residence Since ?</Text>
-              <View style={styles.dateInput}>
-              {/* <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={mode}
-                is24Hour={true}
-                onChange={onChange}
-                
-              // /> 
-              // </View> */}
-             
-            </View>
-          }
-          {currentStep === 2 &&
+              </View>
+            }
+          {currentStep === 1 &&
             <View>
               <View>
               <View  style={{ paddingTop: 10}}>
@@ -580,7 +521,7 @@ const FormWizard = () => {
               {/* <FormInput placeholder="HESLB status" label="HESLB status" /> */}
             </View>
           }
-           {currentStep === 3 &&
+           {currentStep === 2 &&
             <View>
               <Spinner
                 visible={isLoading}
@@ -625,6 +566,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    justifyContent: 'center',
+    gap: 20
   },
   step: {
     alignItems: 'center',
