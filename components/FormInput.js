@@ -20,7 +20,8 @@ const FormInput = (props) => {
       autoCorrect={false}  
       placeholder={props.placeholder}
        onChangeText={props.onChangeText} 
-       value={props.value ?? null} />
+       value={props.value ?? null}
+       secureTextEntry={props.secureText} />
       </View>
     </View>
   )
