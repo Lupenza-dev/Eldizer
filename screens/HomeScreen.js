@@ -15,10 +15,9 @@ import WarningCard from '../components/WarningCard'
 
 
 const HomeScreen = () => {
-  const {studentName,userInfo , isPasswordChanged} =useContext(AuthContext);
+  const {studentName,userInfo , isPasswordChanged,regStage} =useContext(AuthContext);
   const [refreshing, setRefreshing] =useState(false);
   const navigation = useNavigation();
-
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -74,8 +73,13 @@ const HomeScreen = () => {
             
           </View>
         </View> */}
-        <LoanAppSlider />
-        <WarningCard />
+        {
+          regStage > 1 &&  <LoanAppSlider />
+        }
+        {
+          regStage < 4 && <WarningCard />
+        }
+        
         {/* <View style={styles.nmbContainer}>
           <View>
             <Text style={styles.nmbText}>Link Chuo Credit Account With NMB</Text>

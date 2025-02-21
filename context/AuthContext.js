@@ -22,6 +22,7 @@ export const AuthProvider =({ children })=>{
     const [isLoading ,setIsLoading]       =useState(false);
     const [isPasswordChanged ,setIsPasswordChanged] =useState(null);
     const [expoPushToken] = pushNotification();
+    const [regStage, setRegStage] =useState("");
 
 
       
@@ -44,6 +45,7 @@ export const AuthProvider =({ children })=>{
              const customerName     =response.data.data.customer.customer_name;
              const email             =response.data.data.customer.email;
              const image             =response.data.data.customer.image;
+             const stage             =response.data.data.customer.registration_stage;
              const student           =response.data.data.customer.student;
         //     toastNotification(userInfos.message,'success');
            // setUserInfo(userInfos);
@@ -55,11 +57,13 @@ export const AuthProvider =({ children })=>{
             setEmail(email);
             setImage(image);
             setIsPasswordChanged(password_change);
+            setRegStage(stage);
             setIsLoading(false);
         //     //console.log(userInfos);
            AsyncStorage.setItem('isPasswordChanged',password_change);
            AsyncStorage.setItem('userToken',token);
            AsyncStorage.setItem('studentName',studentName);
+           AsyncStorage.setItem('stage',JSON.stringify(stage));
            // AsyncStorage.setItem('userInfo',userInfo);
             AsyncStorage.setItem('customer',JSON.stringify(customer));
             AsyncStorage.setItem('student',JSON.stringify(student));
@@ -67,6 +71,7 @@ export const AuthProvider =({ children })=>{
             AsyncStorage.setItem('email',JSON.stringify(email));
             AsyncStorage.setItem('image',JSON.stringify(image));
           }).catch(error => {
+            console.log(error.response.data);
             setIsLoading(false);
             // const api_error =error.response.data.error_message;
             // toastNotification(api_error,'error');
@@ -93,6 +98,7 @@ export const AuthProvider =({ children })=>{
         AsyncStorage.removeItem('customerName');
         AsyncStorage.removeItem('email');
         AsyncStorage.removeItem('image');
+        AsyncStorage.removeItem('stage');
     }
 
     const isLogedin =async()=>{
@@ -106,6 +112,7 @@ export const AuthProvider =({ children })=>{
         let email  =await AsyncStorage.getItem('email');
         let image  =await AsyncStorage.getItem('image');
         let password_change  =await AsyncStorage.getItem('isPasswordChanged');
+        let stage  =await AsyncStorage.getItem('stage');
 
         setUserToken(userToken);
         setStudentName(studentName);
@@ -116,16 +123,22 @@ export const AuthProvider =({ children })=>{
         setEmail(email);
         setImage(image);
         setIsPasswordChanged(password_change);
+        setRegStage(stage);
 
         } catch (error) {
             console.log("is loged in error" + error); 
         }
     }
 
+    const completeRegistration = () => {
+      setRegStage(4);
+      AsyncStorage.setItem('stage',JSON.stringify(4));
+    }
+
     useEffect(()=>{
         isLogedin();
     },[expoPushToken]);
-    return <AuthContext.Provider value={{login ,logout,userToken,studentName,userInfo,isLoading,customer,student,customerName,email,image,isPasswordChanged}}>
+    return <AuthContext.Provider value={{login ,logout,userToken,studentName,userInfo,isLoading,customer,student,customerName,email,image,isPasswordChanged,regStage,completeRegistration}}>
         {children}
        
     </AuthContext.Provider>

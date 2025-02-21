@@ -62,6 +62,7 @@ const SignUpScreen = () => {
       });
       navigation.navigate('LoginScreen');
     } catch (error) {
+      console.log(error.response.data);
       setIsLoading(false);
       errorFunction(error.response.data.error_message ?? []);
     }

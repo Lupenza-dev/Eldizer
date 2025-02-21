@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import FormInput from './FormInput';
@@ -18,8 +18,11 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import PhoneInput from './PhoneInput';
 import pushNotification from '../pushNotification';
 import { Icon } from 'react-native-elements';
+import { AuthContext } from '../context/AuthContext';
 
 const FormWizard = () => {
+  const {userToken,completeRegistration} =useContext(AuthContext);
+
   const [expoPushToken] = pushNotification();
   const [currentStep, setCurrentStep] = useState(0);
   const steps = ['Address Info', 'College Info', 'Other Info'];
@@ -57,6 +60,7 @@ const FormWizard = () => {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(true);
   const [formData, setFormData] = useState({});
+  const [nida,setNida] =useState("");
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -75,7 +79,7 @@ const FormWizard = () => {
       setRegions(response.data.data);
     }).catch(error => {
      // console.log(error);
-      console.log(error.response.data);
+      console.log(error.response);
     });
   }
 
@@ -102,20 +106,9 @@ const FormWizard = () => {
   const handleNextStep = () => {
     if (currentStep + 1 < steps.length) {
       if (currentStep === 0) {
-        setCurrentStep(currentStep + 1);
-        if (!firstname) {
-          notification("First name field required !!! 😡😡😡");
-        } else if (!middlename) {
-          notification("Middle name field required !!! 😡😡😡");
-        } else if (!lastname) {
-          notification("Last name field required !!! 😡😡😡");
-        } else if (!nida) {
-          notification("Phone Number field required !!! 😡😡😡");
-        } else {
-          setCurrentStep(currentStep + 1);
+        if (!idnumber) {
+          notification("NIDA Number field required !!! 😡😡😡");
         }
-      } else if (currentStep === 1) {
-        setCurrentStep(currentStep + 1);
         if (!regionId) {
           notification("Region field required !!! 😡😡😡");
         } else if (!districtId) {
@@ -123,15 +116,11 @@ const FormWizard = () => {
         } else if (!wardId) {
           notification("Ward field required !!! 😡😡😡");
         } else if (!street) {
-          notification("Street field required !!! 😡😡😡");
-        // } else if (!residence) {
-        //   notification("Residence field required !!! 😡😡😡");
-        // }
-        }
-         else {
+          notification("Street field required !!! 😡😡😡");}
+        else {
           setCurrentStep(currentStep + 1);
         }
-      } else if (currentStep === 2) {
+      } else if (currentStep === 1) {
         if (!collegeValue) {
           notification("College Name field required !!! 😡😡😡");
         } else if (!registrationid) {
@@ -145,6 +134,13 @@ const FormWizard = () => {
         }else if(!indexno){
           notification("Form Four Index No field required !!! 😡");
         }
+         else {
+          setCurrentStep(currentStep + 1);
+        }
+      } else if (currentStep === 2) {
+        if (!image) {
+          notification("Image field required !!! 😡😡😡");
+        } 
          else {
           setCurrentStep(currentStep + 1);
         }
@@ -245,21 +241,19 @@ const FormWizard = () => {
   };
 
   const submitForm = async () => {
+    if (!image) {
+      notification("Image field required !!! 😡😡😡"); 
+    } else {
+      
     setIsLoading(true);
     var new_date = formatDateString(residence);
     const formData = new FormData();
-    formData.append('first_name', firstname);
-    formData.append('middle_name', middlename);
-    formData.append('last_name', lastname);
-    formData.append('other_name', othername);
-    formData.append('phone_number', phone);
-    formData.append('email', email);
     formData.append('id_number', idnumber);
     formData.append('region_id', regionId);
     formData.append('district_id', districtId);
     formData.append('ward_id', wardId);
     formData.append('street', street);
-    formData.append('resident_since', new_date);
+    // formData.append('resident_since', new_date);
     formData.append('college_id', collegeId);
     formData.append('student_reg_id', registrationid);
     formData.append('course', course);
@@ -277,24 +271,29 @@ const FormWizard = () => {
       });
     }
     try {
-      const response = await axios.post(`${BASE_URL}/customer-registration`, formData, {
+      const response = await axios.post(`${BASE_URL}/complete-registration`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${userToken}`, 
         },
+        maxBodyLength: Infinity,
+        maxContentLength: Infinity
       });
       console.log(response.data);
       setIsLoading(false);
+      completeRegistration();
       Toast.show({
         type: 'success',
         text1: response.data.message ?? null,
         position: 'top',
       });
-      navigation.navigate('LoginScreen');
+      navigation.navigate('HomeScreen');
     } catch (error) {
       setIsLoading(false);
       errorFunction(error.response.data.errors ?? []);
-      console.log(error.response.data);
+      console.log(error.response);
     }
+  }
   };
 
 
