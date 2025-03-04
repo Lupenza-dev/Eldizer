@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Linking, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import HeaderTab from '../components/HeaderTab'
 import Footer from '../components/Footer'
@@ -35,14 +35,14 @@ const NmbScreen = () => {
     axios.request(config)
     .then((response) => {
       setIsLoading(false);
-      console.log(response.data.message);
+      console.log(response.data);
       Toast.show({
         type: 'success',
         text1: response.data.message,
         position: 'top'
       });
      // navigation.navigate('HomeScreen');
-     // setAgents(response.data.data);
+     Linking.openURL(response.data.url);
     })
     .catch((error) => {
       setIsLoading(false);
@@ -102,7 +102,7 @@ const NmbScreen = () => {
     </View> */}
     <View style={{ marginVertical: 20}}>
     {/* <IconButton icon="arrow-circle-right" name="Submit Account Details"/> */}
-    <IconButton icon="arrow-circle-right" onPress={submitData} name="SUbmit"/>
+    <IconButton icon="arrow-circle-right" onPress={submitData} name="Submit"/>
     </View>
     
     </View>
