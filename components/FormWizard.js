@@ -261,15 +261,15 @@ const FormWizard = () => {
     formData.append('heslb_status', heslbValue);
     formData.append('index_no', indexno);
     formData.append('expo_push_token', expoPushToken ?? null);
-    if (image) {
-      const uriParts = image.split('.');
-      const fileType = uriParts[uriParts.length - 1];
-      formData.append('image', {
-        uri: image,
-        type: `image/${fileType}`,
-        name: `my-image.${fileType}`,
-      });
-    }
+    // if (image) {
+    //   const uriParts = image.split('.');
+    //   const fileType = uriParts[uriParts.length - 1];
+    //   formData.append('image', {
+    //     uri: image,
+    //     type: `image/${fileType}`,
+    //     name: `my-image.${fileType}`,
+    //   });
+    // }
     try {
       const response = await axios.post(`${BASE_URL}/complete-registration`, formData, {
         headers: {
@@ -291,7 +291,7 @@ const FormWizard = () => {
     } catch (error) {
       setIsLoading(false);
       errorFunction(error.response.data.errors ?? []);
-      console.log(error.response);
+      console.log(error.response  );
     }
   }
   };

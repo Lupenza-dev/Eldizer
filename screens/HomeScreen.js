@@ -73,12 +73,12 @@ const HomeScreen = () => {
             
           </View>
         </View> */}
-        <LoanAppSlider />
+        {/* <LoanAppSlider /> */}
         {
           regStage > 1 &&  <LoanAppSlider />
         }
         {
-          regStage < 4 && <WarningCard />
+          regStage > 4 && <WarningCard />
         }
         
         <View style={styles.nmbContainer}>
@@ -206,7 +206,8 @@ const styles =StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 10,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginVertical: 20
   },
   buttonStyle: {
     justifyContent: 'center',
