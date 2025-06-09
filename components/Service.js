@@ -9,9 +9,6 @@ const Service = () => {
 
   return (
     <View  style={styles.container}>
-        <View style={styles.textContainer} >
-          <Text style={styles.headerText}>Other Services</Text>
-        </View>
         <View>
           <View style={styles.serviceContainer}>
         <TouchableOpacity style={styles.payButton} onPress={()=>navigation.navigate('DeviceScreen')}  >
@@ -24,16 +21,26 @@ const Service = () => {
             /> 
             <Text style={styles.paytext}>Pay Later</Text> 
         </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.payButton}  >
+        <TouchableOpacity style={styles.payButton} onPress={()=>navigation.navigate('DeviceScreen')}  >
             <Icon
-            name="fork"
+            name="shoppingcart"
             type="antdesign"
             size={25}
             reverse
             color="#272F3B"
             /> 
-            <Text style={styles.paytext}>Intern Loan</Text> 
-        </TouchableOpacity> */}
+            <Text style={styles.paytext}>Pay Later</Text> 
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.payButton} onPress={()=>navigation.navigate('DeviceScreen')}  >
+            <Icon
+            name="shoppingcart"
+            type="antdesign"
+            size={25}
+            reverse
+            color="#272F3B"
+            /> 
+            <Text style={styles.paytext}>Pay Later</Text> 
+        </TouchableOpacity>
         </View>
         </View>
     </View>
@@ -77,7 +84,8 @@ const styles =StyleSheet.create({
 
     },
     serviceContainer:{
-      flexDirection: 'row'
+      flexDirection: 'row',
+      justifyContent: 'space-between'
     }
     
     
