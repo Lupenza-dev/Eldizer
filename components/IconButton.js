@@ -11,7 +11,7 @@ const IconButton = (props) => {
       <Icon
           name={props.icon}
           type="font-awesome"
-          size={25}
+          size={20}
           reverse
           color="#272F3B"
       />
@@ -23,7 +23,7 @@ export default IconButton
 
 const styles = StyleSheet.create({
     buttonConatiner:{
-        height: 60,
+        height: 50,
         backgroundColor: '#272F3B',
         // marginRight: 10,
         // marginLeft: 10,

@@ -1,22 +1,35 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
+import TangazoCard from './TangazoCard'
+import GroupCard from './GroupCard'
 
 const Advert = () => {
+    const [category,setCategory] =useState(1);
   return (
+    <>
     <View style={styles.container}>
-      <TouchableOpacity>
-        <View style={styles.buttonView}>
+      <TouchableOpacity onPress={()=>setCategory(1)}>
+        <View style={[styles.buttonView,category == 1 ? styles.activeTab: '']}>
             <Image source={ require('../assets/speaker.png')} style={styles.imageStyle} />
             <Text style={styles.buttonText}>Matangazo</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
-      <View style={styles.buttonView}>
+      <TouchableOpacity onPress={()=>setCategory(2)}>
+      <View style={[styles.buttonView,category == 2 ? styles.activeTab: '']}>
             <Image source={ require('../assets/community.png')} style={styles.imageStyle} />
             <Text style={styles.buttonText}>Groups</Text>
         </View>
       </TouchableOpacity>
     </View>
+    <View>
+        {
+            category == 1 &&   <TangazoCard/>
+        }
+         {
+            category == 2 &&   <GroupCard/>
+        }
+    </View>
+    </>
   )
 }
 
@@ -44,5 +57,8 @@ const styles = StyleSheet.create({
     buttonText:{
         fontWeight: 'bold',
         fontSize: 17
+    },
+    activeTab:{
+        backgroundColor: 'rgba(7, 133, 134,0.1)',
     }
 })

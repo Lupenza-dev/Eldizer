@@ -8,20 +8,25 @@ import { BASE_URL } from '../utils/config'
 import axios from 'axios'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { Image, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const DeviceScreen = () => {
  const navigation = useNavigation();
+ const route = useRoute();
  const { userToken } = useContext(AuthContext);
  const [deviceData, setDeviceData] = useState([]);
  const [isLoading, setIsLoading] = useState(false);
  const [refreshing, setRefreshing] = useState(false);
 
- const devices = () => {
+ const devices = (category = null) => {
+   let url = `${BASE_URL}/get-devices`;
+   if (category) {
+     url += `?category=${category}`;
+   }
    let config = {
      method: 'get',
      maxBodyLength: Infinity,
-     url: `${BASE_URL}/get-devices`,
+     url: url,
      headers: { 
        'Authorization': `Bearer ${userToken}`, 
      }
@@ -39,8 +44,10 @@ const DeviceScreen = () => {
  };
 
  useEffect(() => {
-   devices();
- }, []);
+   const { device_category } = route.params || {};
+   console.log(device_category);
+   devices(device_category);
+ }, [route.params]);
 
  const onRefresh = React.useCallback(() => {
    setRefreshing(true);
@@ -157,10 +164,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     fontWeight: 'bold',
+    width: '40%'
   },
   subTitle: {
     fontSize: 13,
     fontWeight: '400',
+    width: '60%'
   },
   buttonContainer: {
     backgroundColor: '#272F3B',
