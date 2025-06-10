@@ -4,9 +4,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
-const LoanAppSlider = () => {
+const LoanAppSlider = ({ onApply }) => {
   const [value, setValue] = useState(40000);
-  const navigation = useNavigation();
   return (
     <>
     <View style={styles.container}>
@@ -49,13 +48,7 @@ const LoanAppSlider = () => {
       
       </View>
     </View>
-    <TouchableOpacity activeOpacity={0.9} style={styles.buttonStyle} onPress={()=>navigation.navigate('LoanApplicationScreen',{
-      request_amount :value,
-      plan_applied: 1,
-      loan_type:1,
-      device_name:null,
-      device_id:null
-    })} >
+    <TouchableOpacity activeOpacity={0.9} style={styles.buttonStyle} onPress={() => onApply(value)}>
         <Text  style={styles.buttonText}> <Text>Apply Loan  {value.toLocaleString()}</Text></Text>
      </TouchableOpacity>
     </>
