@@ -1,10 +1,14 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import TangazoCard from './TangazoCard'
 import GroupCard from './GroupCard'
+import { BASE_URL } from '../utils/config'
+import { AuthContext } from '../context/AuthContext'
+import axios from 'axios'
 
-const Advert = () => {
+const Advert = ({ adData , groupData}) => {
     const [category,setCategory] =useState(1);
+    
   return (
     <>
     <View style={styles.container}>
@@ -23,10 +27,10 @@ const Advert = () => {
     </View>
     <View>
         {
-            category == 1 &&   <TangazoCard/>
+            category == 1 &&   <TangazoCard advert={adData}/>
         }
          {
-            category == 2 &&   <GroupCard/>
+            category == 2 &&   <GroupCard group={groupData}/>
         }
     </View>
     </>

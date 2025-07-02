@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { colors } from '../utils/GlobalStyles'
 import { Icon } from 'react-native-elements'
+import { AuthContext } from '../context/AuthContext'
 
 const CoinCard = () => {
+    const {customerName,email} =useContext(AuthContext);
   return (
     <View style={{ paddingHorizontal: 10}}>
         <View style={styles.topContainer} >
@@ -11,21 +13,22 @@ const CoinCard = () => {
                 <View>
                 <View style={styles.nameContainer}>
                     <Icon name='user' type='antdesign' color={colors.white} size={15}/>
-                    <Text style={{ color: '#ffff',fontSize: 16, fontWeight: 'bold'}}>John Doe</Text>
+                    <Text style={{ color: '#ffff',fontSize: 16, fontWeight: 'bold'}}>{customerName}</Text>
                 </View>
                 <View style={styles.nameContainer}>
                     <Icon name='mail' type='antdesign' color={colors.white} size={15}/>
-                    <Text style={{ color: '#ffff', fontSize: 14, fontWeight: '400'}}>John@gmail.com</Text>
+                    <Text style={{ color: '#ffff', fontSize: 14, fontWeight: '400'}}>{email}</Text>
                 </View>
                 </View>
                 
                 <Text style={{ color: '#ffff'}}>Logo</Text>
             </View>
             <View style={styles.coinTextContainer}>
-                <Text style={styles.coinText}>1,000,000</Text>
+                <Text style={styles.CardSubText}>OutStanding Amount</Text>
+                <Text style={styles.coinText}>350,000</Text>
             </View>
         </View>
-        <View style={styles.coinContainer}>
+        {/* <View style={styles.coinContainer}>
             <View style={styles.insideContainer}>
             <View style={styles.coinBox}>
                 <Text style={styles.coinBoxText}>Nunua{'\n'} Coin</Text>
@@ -38,7 +41,7 @@ const CoinCard = () => {
             </View>
             </View>
             
-        </View>
+        </View> */}
     </View>
   )
 }
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
     },
     coinTextContainer:{
         position: 'absolute',
-        bottom: '50%',
+        bottom: '30%',
         left: 120
     },
     coinBoxText:{
@@ -98,5 +101,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 5
+    },
+    CardSubText:{
+        color: '#fff',
+        fontSize: 13,
+        fontWeight: 'bold'
     }
 })

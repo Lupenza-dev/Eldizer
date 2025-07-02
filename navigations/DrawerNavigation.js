@@ -21,6 +21,8 @@ import NmbScreen from '../screens/NmbScreen';
 import NmbRequestScreen from '../screens/NmbRequestScreen';
 import DeviceScreen from '../screens/DeviceScreen';
 import StudentRegSCreen from '../screens/StudentRegSCreen';
+import AssignMentScreen from '../screens/AssignMentScreen';
+import QuestionScreen from '../screens/QuestionScreen';
 
 
 
@@ -72,6 +74,8 @@ const DrawerNavigation = () => {
         <Drawer.Screen name="NmbRequestScreen" component={NmbRequestScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="DeviceScreen" component={DeviceScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="StudentRegSCreen" component={StudentRegSCreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="AssignMentScreen" component={AssignMentScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="QuestionScreen" component={QuestionScreen} options={{ drawerItemStyle:{display: 'none'} }} />
     </Drawer.Navigator>
     </>
   )

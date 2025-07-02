@@ -1,18 +1,35 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors } from '../utils/GlobalStyles'
 
-const GroupCard = () => {
+const GroupCard = ({group}) => {
+    const handleClick = async (link) => {
+        const supported = await Linking.canOpenURL(link);
+        if (supported) {
+          await Linking.openURL(link);
+        } else {
+          alert(`Don't know how to open this URL: ${link}`);
+        }
+      };
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8}>
-        <View>
-            <Image source={require('../assets/whatsapp.png')} style={styles.imageStyle} />
-        </View>
-        <View style={{ flex: 1 , gap: 2}}>
-        <Text style={styles.title}>Group la Michezo UDOM</Text>
-        <Text style={styles.subTitle}>20-09-2025</Text>
-        </View>
-    </TouchableOpacity>
+    <>
+    {
+        group.map((item,i)=>(
+            <TouchableOpacity key={i} style={styles.container} activeOpacity={0.8} onPress={() => handleClick(item.link)}>
+            <View>
+                <Image source={{
+                    uri: item.image
+                }} style={styles.imageStyle} />
+            </View>
+            <View style={{ flex: 1 , gap: 2}}>
+            <Text style={styles.title}>{item.name}</Text>
+            <Text style={styles.subTitle}>{item.created_at}</Text>
+            </View>
+        </TouchableOpacity>
+        ))
+    }
+    </>
+   
   )
 }
 

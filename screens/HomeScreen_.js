@@ -91,7 +91,7 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <Service />
+        {/* <Service /> */}
         <LoanProcess />
         <Partners />
      </ScrollView>
