@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/loogo_2.png",
     "userInterfaceStyle": "light",
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/framew.png",
       "resizeMode": "contain",

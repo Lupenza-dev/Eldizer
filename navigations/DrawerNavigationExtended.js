@@ -40,8 +40,16 @@ const DrawerNavigationExtended = (prop) => {
             /> */}
             <Image
               style={styles.userImg}
-              source={image ? { uri: image } : require('../assets/userImage.png')}
+              source={require('../assets/userImage.png')}
             />
+            {/* <Image
+            style={styles.userImg}
+            source={
+              image && typeof image === 'string' && image.trim() !== ''
+                ? { uri: image }
+                : require('../assets/userImage.png')
+            }
+          /> */}
           </View>
           <View>
              <Text style={styles.title}>{customerName ?? "Name"}</Text>
