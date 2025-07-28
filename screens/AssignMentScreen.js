@@ -7,9 +7,11 @@ import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'
 import { BASE_URL } from '../utils/config'
 import Spinner from 'react-native-loading-spinner-overlay'
+import { useLanguage } from '../utils/LanguageContext'
 
 const AssignMentScreen = () => {
     const {userToken} =useContext(AuthContext);
+    const {t} =useLanguage();
   const [assignment, setAssignment] =useState([]);
   const [isLoading,setIsLoading] =useState(false);
 
@@ -40,7 +42,7 @@ const AssignMentScreen = () => {
     }, []);
   return (
     <>
-    <HeaderTab title="AssignMoney"/>
+    <HeaderTab title={t('Assighn_money')}/>
     <SafeAreaView style={{ backgroundColor: '#fff', flex: 1}}>
         <Spinner
             visible={isLoading}
@@ -49,7 +51,7 @@ const AssignMentScreen = () => {
         />
         <View style={{ paddingHorizontal: 10}}>
         <View>
-            <Text style={styles.title}>All Assignments</Text>
+            <Text style={styles.title}>{t("all_assignment")}</Text>
         </View>
         <View>
             {

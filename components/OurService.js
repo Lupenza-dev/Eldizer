@@ -6,11 +6,13 @@ import { useNavigation } from '@react-navigation/native'
 import { BottomSheet } from 'react-native-btr'
 import IconButton from './IconButton'
 import LoanAppSlider from './LoanAppSlider'
+import { useLanguage } from '../utils/LanguageContext'
 
 const screenHeight =Dimensions.get('window').height;
 
 const OurService = () => {
     const navigation =useNavigation();
+    const {t} =useLanguage();
 
     const [visible, setVisible] = useState(false);
     const [visible2, setVisible2] = useState(false);
@@ -39,7 +41,7 @@ const OurService = () => {
         <View style={styles.iconView}>
             <Image source={ require('../assets/money.png')} style={styles.imageStyle} />
         </View>
-        <Text style={styles.serviceText}>Kopa Pesa</Text>
+        <Text style={styles.serviceText}>{t('money_loan')}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.serviceContainer} onPress={()=>navigation.navigate('DeviceScreen',{
         device_category: 1
@@ -47,7 +49,7 @@ const OurService = () => {
         <View style={styles.iconView}>
             <Image source={ require('../assets/phone.png')} style={styles.imageStyle} />
         </View>
-        <Text style={styles.serviceText}>Kopa Simu</Text>
+        <Text style={styles.serviceText}>{t('phone_loan')}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.serviceContainer} onPress={()=>navigation.navigate('DeviceScreen',{
         device_category: 2
@@ -56,14 +58,14 @@ const OurService = () => {
         <Image source={ require('../assets/laptop.png')} style={styles.imageStyle} />
 
         </View>
-        <Text style={styles.serviceText}>Kopa Laptop</Text>
+        <Text style={styles.serviceText}>{t('laptop_loan')}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.serviceContainer} onPress={toggleBottomNavigationView2}>
         <View style={styles.iconView}>
         <Image source={ require('../assets/box.png')} style={styles.imageStyle} />
 
         </View>
-        <Text style={styles.serviceText}>Pedi</Text>
+        <Text style={styles.serviceText}>{t('pedi')}</Text>
       </TouchableOpacity>
       <BottomSheet
           visible={visible}
@@ -84,7 +86,7 @@ const OurService = () => {
                   fontWeight: 'bold',
                   color: "#272F3B"
                 }}> 
-                Kopa Pesa
+               {t('money_loan')}
               </Text>
              <View>
                 <LoanAppSlider onApply={closeBottomSheetAndNavigate} />
@@ -115,13 +117,13 @@ const OurService = () => {
                   color: "#272F3B",
                   marginTop: 10
                 }}> 
-               Coming Soon
+               {t('coming_soon')}
               </Text>
              </View>
             
             </View>
             <View style={{ marginHorizontal: 10, marginTop: 10}}>
-             <IconButton icon="arrow-circle-right" name="Close" onPress={toggleBottomNavigationView2} />
+             <IconButton icon="arrow-circle-right" name={t('close')} onPress={toggleBottomNavigationView2} />
              </View>
           </View>
         </BottomSheet>

@@ -3,9 +3,11 @@ import React, { useContext } from 'react'
 import { colors } from '../utils/GlobalStyles'
 import { Icon } from 'react-native-elements'
 import { AuthContext } from '../context/AuthContext'
+import { useLanguage } from '../utils/LanguageContext'
 
 const CoinCard = () => {
     const {customerName,email} =useContext(AuthContext);
+    const {t} =useLanguage();
   return (
     <View style={{ paddingHorizontal: 10}}>
         <View style={styles.topContainer} >
@@ -24,7 +26,7 @@ const CoinCard = () => {
                 <Text style={{ color: '#ffff'}}>Logo</Text>
             </View>
             <View style={styles.coinTextContainer}>
-                <Text style={styles.CardSubText}>OutStanding Amount</Text>
+                <Text style={styles.CardSubText}>{t('outstanding_amount')}</Text>
                 <Text style={styles.coinText}>350,000</Text>
             </View>
         </View>

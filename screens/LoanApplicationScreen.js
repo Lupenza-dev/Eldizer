@@ -15,11 +15,12 @@ import Toast from 'react-native-toast-message'
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { useLanguage } from '../utils/LanguageContext';
 
 const LoanApplicationScreen = ({ route}) => {
 
   const navigation = useNavigation();  
-
+  const {t} =useLanguage();
 const screenHeight =Dimensions.get('window').height;
 //const containerHeight = 0.2 * screenHeight;
 const {userToken} =useContext(AuthContext);
@@ -345,7 +346,7 @@ const styles = StyleSheet.create({
   }
   return (
     <>
-    <HeaderTab title="Loan Application" />
+    <HeaderTab title={t('loan_application')} />
    
     <SafeAreaView style={{ backgroundColor: '#fff' , flex: 1}}>
     <Spinner
@@ -359,51 +360,53 @@ const styles = StyleSheet.create({
           <View style={styles.topView}>
             <View>
               <Text style={styles.amountText} >{totalAmount.toLocaleString()} TZS</Text>
-              <Text style={styles.amountSubText}>Total Loan Amount</Text>
+              <Text style={styles.amountSubText}>{t('total_loan_amount')}</Text>
             </View>
           </View>
           <View style={styles.middleView}>
-            <Text style={styles.headerMiddleView}>Loan Details</Text>
+            <Text style={styles.headerMiddleView}>{t('loan_detail')}</Text>
             <View style={styles.subMiddleView} >
-                <Text style={styles.leftSubMiddleText}>{ loan_type == 2 ? "Request Loan" : "Request Amount"}</Text>
+            <Text style={styles.leftSubMiddleText}>
+              {loan_type == 2 ? t("request_loan") : t("request_amount")}
+            </Text>
                 <Text>{request_amount.toLocaleString()} TZS</Text>
             </View>
             {
               loan_type == 2 ?
               <View style={styles.subMiddleView} >
-              <Text style={styles.leftSubMiddleText}>Initial Deposit</Text>
+              <Text style={styles.leftSubMiddleText}>{t('initial_deposit')}</Text>
               <Text>{initial_deposit.toLocaleString()} TZS</Text>
                </View>: ''
             }
             
             <View style={styles.subMiddleView} >
-                <Text style={styles.leftSubMiddleText}>Plan</Text>
-                <Text>{plan} month</Text>
+                <Text style={styles.leftSubMiddleText}>{t('plan')}</Text>
+                <Text>{plan} {t('month')}</Text>
             </View>
             <View style={styles.subMiddleView}>
-                <Text style={styles.leftSubMiddleText}>Start Date</Text>
+                <Text style={styles.leftSubMiddleText}>{t('start_date')}</Text>
                 <Text>{startDate}</Text>
             </View>
             <View style={styles.subMiddleView}>
-                <Text style={styles.leftSubMiddleText}>Expected End Date</Text>
+                <Text style={styles.leftSubMiddleText}>{t('expected_date')}</Text>
                 <Text>{endDate}</Text>
             </View>
             {
               device_name && loan_type == 2 ? 
                 <View style={styles.subMiddleView}>
-                  <Text style={styles.leftSubMiddleText}>Device</Text>
+                  <Text style={styles.leftSubMiddleText}>{t('device')}</Text>
                   <Text>{device_name} </Text>
               </View> : ''
             }
             
           </View>
-          <Text style={styles.guarantorHeader}>Guarantors</Text>
+          <Text style={styles.guarantorHeader}>{t('guarantors')}</Text>
           <View style={styles.guarantorContainer}>
           <TouchableOpacity activeOpacity={0.9} style={styles.guarantorView} onPress={toggleBottomNavigationView} >
             <View style={styles.guarantorSubView} >
             { guarantor1Status ? (
               <View style={styles.guarantorSubView}>
-                <Text onPress={toggleBottomNavigationView} style={styles.headerGuarantorView}> Added</Text>
+                <Text onPress={toggleBottomNavigationView} style={styles.headerGuarantorView}> {t('added')}</Text>
                 <Icon
                   name="check"
                   type="font-awesome"
@@ -414,7 +417,7 @@ const styles = StyleSheet.create({
                 </View>
             ):(
               <View style={styles.guarantorSubView}>
-              <Text onPress={toggleBottomNavigationView} style={styles.headerGuarantorView}> Add Guarantor</Text>
+              <Text onPress={toggleBottomNavigationView} style={styles.headerGuarantorView}> {t('add_guarantor')}</Text>
             <Icon
               name="plus-circle"
               type="font-awesome"
@@ -431,7 +434,7 @@ const styles = StyleSheet.create({
             <View style={styles.guarantorSubView} >
             { guarantor2Status ? (
               <View style={styles.guarantorSubView}>
-                <Text onPress={toggleBottomNavigationView2} style={styles.headerGuarantorView}> Added</Text>
+                <Text onPress={toggleBottomNavigationView2} style={styles.headerGuarantorView}> {t('added')}</Text>
                 <Icon
                   name="check"
                   type="font-awesome"
@@ -442,7 +445,7 @@ const styles = StyleSheet.create({
                 </View>
             ):(
               <View style={styles.guarantorSubView}>
-              <Text onPress={toggleBottomNavigationView2} style={styles.headerGuarantorView}> Add Guarantor</Text>
+              <Text onPress={toggleBottomNavigationView2} style={styles.headerGuarantorView}> {t('add_guarantor')}</Text>
             <Icon
               name="plus-circle"
               type="font-awesome"
@@ -459,7 +462,7 @@ const styles = StyleSheet.create({
           </View>
         
           <View style={{ margin: 10}}>
-          <Text style={styles.guarantorHeader}>College Agent</Text>
+          <Text style={styles.guarantorHeader}>{t('college_agent')}</Text>
            <Dropdown
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}
@@ -471,7 +474,7 @@ const styles = StyleSheet.create({
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder="Select College Agent"
+                placeholder={t('select_agent')}
                 searchPlaceholder="Search..."
                 value={value}
                 autoScroll={true}
@@ -513,7 +516,7 @@ const styles = StyleSheet.create({
                   fontWeight: 'bold',
                   color: "#272F3B"
                 }}> 
-                Loan Guarantor
+                {t('loan_guarantor')}
               </Text>
               <View >
                 <FormInput placeholder={guarantor1fs ?? "Guarantor Fullname"} label="Full name" value={guarantor1fs} onChangeText={text =>setGuarantor1fs(text)} />

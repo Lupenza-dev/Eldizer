@@ -15,9 +15,12 @@ import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'
 import { BASE_URL } from '../utils/config'
 import Spinner from 'react-native-loading-spinner-overlay'
+import { useLanguage } from '../utils/LanguageContext'
 
 const HomeScreen = () => {
   const navigation =useNavigation();
+  const { t } = useLanguage();
+
   const {userToken} =useContext(AuthContext);
   const [groupData, setgroupData] =useState([]);
   const [adsData, setadsData] =useState([]);
@@ -68,17 +71,17 @@ const HomeScreen = () => {
        <NMBLinker/>
        </View>
        <View>
-            <DividerText name="Assighn Money"/>
+            <DividerText name={t("Assighn_money")}/>
             <View style={{ paddingHorizontal: 10}}>
-            <IconButton  name="Quizz" icon="edit" onPress={() => navigation.navigate('AssignMentScreen')}/>
+            <IconButton  name={t('quiz')} icon="edit" onPress={() => navigation.navigate('AssignMentScreen')}/>
             </View>
        </View>
        <View style={{ marginVertical: 10}}>
-       <DividerText name="Pay Later"/>
+       <DividerText name={t('pay_later')}/>
        <OurService />
        </View>
        <View>
-       <DividerText name="Unipayment"/>
+       <DividerText name={t("unipayment")}/>
        <UniService/>
        </View>
        <View>

@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
 import pushNotification from './pushNotification';
 import * as Updates from 'expo-updates';
+import { LanguageProvider } from './utils/LanguageContext';
  
 export default function App() {
   async function onFetchUpdateAsync() {
@@ -32,10 +33,12 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1}}>
        <View style={styles.container}>
       <StatusBar style="auto"  />
+      <LanguageProvider>
       <AuthProvider>
       <AppNavigation />
       </AuthProvider>
       <Toast />
+      </LanguageProvider>
     </View>
     </GestureHandlerRootView>
    

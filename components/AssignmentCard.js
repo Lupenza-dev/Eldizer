@@ -3,10 +3,11 @@ import React from 'react';
 import { colors } from '../utils/GlobalStyles';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { useLanguage } from '../utils/LanguageContext';
 
 const AssignmentCard = ({data}) => {
   const navigation = useNavigation();
-
+  const {t} =useLanguage();
   // Map numeric status to string if needed
   const getStatusText = () => {
     if (typeof data.status === 'number') {
@@ -74,24 +75,24 @@ const AssignmentCard = ({data}) => {
         <View style={styles.infoRow}>
           <View style={styles.infoItem}>
             <Icon type="material-community" name="clock-time-four-outline" size={16} color={colors.primary} />
-            <Text style={styles.infoText}>Start: {formatDate(data.start_time)}</Text>
+            <Text style={styles.infoText}>{t('start')}: {formatDate(data.start_time)}</Text>
           </View>
           <View style={styles.infoItem}>
             <Icon type="material-community" name="calendar-month" size={16} color={colors.primary} />
-            <Text style={styles.infoText}>End: {formatDate(data.end_time)}</Text>
+            <Text style={styles.infoText}>{t('end')}: {formatDate(data.end_time)}</Text>
           </View>
         </View>
         <View style={styles.infoRow}>
           <View style={styles.infoItem}>
             <Icon type="material-community" name="help-circle-outline" size={16} color={colors.primary} />
-            <Text style={styles.infoText}>{data.total_questions} Questions</Text>
+            <Text style={styles.infoText}>{data.total_questions} {t('Questions')}</Text>
           </View>
         </View>
         <View style={styles.progressContainer}>
           <View style={styles.progressBar}>
             <View style={[styles.progressFill, { width: `${getProgressPercentage()}%` }]} />
           </View>
-          <Text style={styles.progressText}>{getProgressPercentage()}% Complete</Text>
+          <Text style={styles.progressText}>{getProgressPercentage()}% {t('Complete')}</Text>
         </View>
       </View>
     </TouchableOpacity>

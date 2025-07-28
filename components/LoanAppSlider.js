@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { Slider, Icon } from 'react-native-elements'; 
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useLanguage } from '../utils/LanguageContext';
 
 
 const LoanAppSlider = ({ onApply }) => {
   const [value, setValue] = useState(40000);
+  const {t} =useLanguage();
   return (
     <>
     <View style={styles.container}>
       <View style={styles.subContainer}>
       <View style={styles.upperContainer}>
-            <Text style={styles.uppertextHeader}>Fast Loan</Text>
-            <Text style={styles.upperSubText}>From 40,000 - 200,000</Text>
+            <Text style={styles.uppertextHeader}>{t('fast_loan')}</Text>
+            <Text style={styles.upperSubText}>{t('from')} 40,000 - 200,000</Text>
         </View>
         <View style={styles.loanValue}>
           <Text style={styles.loanText}>{value.toLocaleString()}</Text>
@@ -49,7 +51,7 @@ const LoanAppSlider = ({ onApply }) => {
       </View>
     </View>
     <TouchableOpacity activeOpacity={0.9} style={styles.buttonStyle} onPress={() => onApply(value)}>
-        <Text  style={styles.buttonText}> <Text>Apply Loan  {value.toLocaleString()}</Text></Text>
+        <Text  style={styles.buttonText}> <Text>{t('apply_loan')}  {value.toLocaleString()}</Text></Text>
      </TouchableOpacity>
     </>
   );

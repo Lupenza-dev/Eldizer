@@ -1,16 +1,26 @@
-import { SafeAreaView, StyleSheet, Text, View ,Platform } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View ,Platform, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { Image } from 'react-native';
+import { useLanguage } from '../utils/LanguageContext';
 
 
 const Header = () => {
     const navigation = useNavigation();  
+    const {language,changeLanguage ,t} = useLanguage();
+
    // const [marginValue,setMarginValue] =useState(0);
    let margin =0;
     if (Platform.OS === 'android') {
          margin =40;
     }
+
+    const handleLanguage = () => {
+        const lang_value = language == "en" ? "sw" : "en";
+        changeLanguage(lang_value)
+     }
+
   return (
     <SafeAreaView style={[styles.container]}>
          <View style={[styles.Subcontainer,{marginTop: margin}]}>
@@ -20,8 +30,17 @@ const Header = () => {
               size={30}
               color="#fff"
         />
-        <Text style={styles.headerText}>Home</Text>
-        <View>
+        <Text style={styles.headerText}>{t("home")}</Text>
+        <View style={styles.notificationContainer}>
+        <TouchableOpacity onPress={()=>{handleLanguage()}} style={styles.buttonContainer}>
+               {
+                  language == "en" && <Image style={styles.imageStyle} source={require('../assets/tz.png')}/>
+               }
+               {
+                  language == "sw" && <Image style={styles.imageStyle} source={require('../assets/eng.png')}/>
+               }
+            <Text style={styles.buttonTitle}>{ language == "en" ? "SW" : "EN"}</Text>
+        </TouchableOpacity>
         <Icon
               name="bells"
               type="antdesign"
@@ -62,7 +81,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        left: 15,
+        right: 0,
         top: -6
     },
     Subcontainer:{
@@ -70,5 +89,25 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         margin: 10,
         alignItems: 'center'
+    },
+    buttonContainer:{
+        flexDirection: 'row',
+        gap: 5,
+        alignContent: 'center',
+        alignItems: 'center',
+        marginRight: 20
+    },
+    buttonTitle:{
+      color: "#fff",
+      fontWeight: 'bold',
+      fontSize: 17
+    },
+    imageStyle:{
+       height: 25,
+       width: 25,
+       resizeMode:'contain'
+    },
+    notificationContainer:{
+        flexDirection: 'row'
     }
 })
