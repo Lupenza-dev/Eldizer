@@ -23,6 +23,7 @@ import DeviceScreen from '../screens/DeviceScreen';
 import StudentRegSCreen from '../screens/StudentRegSCreen';
 import AssignMentScreen from '../screens/AssignMentScreen';
 import QuestionScreen from '../screens/QuestionScreen';
+import ContactScreen from '../screens/ContactScreen';
 
 
 
@@ -76,6 +77,7 @@ const DrawerNavigation = () => {
         <Drawer.Screen name="StudentRegSCreen" component={StudentRegSCreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="AssignMentScreen" component={AssignMentScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="QuestionScreen" component={QuestionScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="ContactScreen" component={ContactScreen} options={{ drawerItemStyle:{display: 'none'} }} />
     </Drawer.Navigator>
     </>
   )

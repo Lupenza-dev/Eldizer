@@ -519,12 +519,12 @@ const styles = StyleSheet.create({
                 {t('loan_guarantor')}
               </Text>
               <View >
-                <FormInput placeholder={guarantor1fs ?? "Guarantor Fullname"} label="Full name" value={guarantor1fs} onChangeText={text =>setGuarantor1fs(text)} />
-                <FormInput placeholder={guarantor1rs ?? "Guarantor Relationship"} label="Guarantor Relationship" value={guarantor1rs} onChangeText={text =>setGuarantor1rs(text)}  />
-                <FormInput placeholder={guarantor1pn ?? "Phone number"} label="Phone number" value={guarantor1pn} onChangeText={text =>setGuarantor1pn(text)}  />
+                <FormInput placeholder={guarantor1fs ?? t("guarantor_fullname")} label={t('full_name')} value={guarantor1fs} onChangeText={text =>setGuarantor1fs(text)} />
+                <FormInput placeholder={guarantor1rs ?? t('guarantor_relationship')} label={t("guarantor_relationship")} value={guarantor1rs} onChangeText={text =>setGuarantor1rs(text)}  />
+                <FormInput placeholder={guarantor1pn ?? t('phone_number')} label={t('phone_number')} value={guarantor1pn} onChangeText={text =>setGuarantor1pn(text)}  />
               </View>
               <View style={{ marginTop: 20, padding: 0}}>
-              <IconButton icon="arrow-circle-right" name="Submit Guarantor Details" onPress={submitGuarantor1} />
+              <IconButton icon="arrow-circle-right" name={t('submit_guarantor')} onPress={submitGuarantor1} />
               </View>
             </View>
           </View>
@@ -548,15 +548,15 @@ const styles = StyleSheet.create({
                   fontWeight: 'bold',
                   color: "#272F3B"
                 }}> 
-                Loan Guarantor 2
+                {t('loan_guarantor')} 2
               </Text>
               <View >
-                <FormInput placeholder={guarantor2fs ?? "Guarantor Fullname"} label="Full name"  value={guarantor2fs} onChangeText={text =>setGuarantor2fs(text)}/>
-                <FormInput placeholder={guarantor2rs ?? "Guarantor Relationship"} label="Guarantor Relationship"  value={guarantor2rs} onChangeText={text =>setGuarantor2rs(text)}/>
-                <FormInput placeholder={guarantor2pn ?? "Phone number"} label="Phone number" value={guarantor2pn} onChangeText={text =>setGuarantor2pn(text)}/>
+                <FormInput placeholder={guarantor2fs ?? t("guarantor_fullname")} label={t('full_name')}  value={guarantor2fs} onChangeText={text =>setGuarantor2fs(text)}/>
+                <FormInput placeholder={guarantor2rs ?? t('guarantor_relationship')} label={t("guarantor_relationship")}  value={guarantor2rs} onChangeText={text =>setGuarantor2rs(text)}/>
+                <FormInput placeholder={guarantor2pn ?? t('phone_number')} label={t('phone_number')} value={guarantor2pn} onChangeText={text =>setGuarantor2pn(text)}/>
               </View>
               <View style={{ marginTop: 20, padding: 0}}>
-              <IconButton icon="arrow-circle-right" name="Submit Guarantor Details" onPress={submitGuarantor2} />
+              <IconButton icon="arrow-circle-right" name={t('submit_guarantor')} onPress={submitGuarantor2} />
               </View>
             </View>
           </View>

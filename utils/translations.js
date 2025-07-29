@@ -48,8 +48,12 @@ export const translations = {
       added:"Added",
       college_agent: 'College Agent',
       select_agent: "Select College Agent",
-      loan_guarantor :"Loan Guarantor"
-
+      loan_guarantor :"Loan Guarantor",
+      guarantor_fullname:"Guarantor Fullname",
+      full_name: "Full name",
+      guarantor_relationship: "Guarantor Relationship",
+      phone_number:"Phone number",
+      submit_guarantor: "Submit Guarantor Details"
 
     },
     sw: { 
@@ -98,7 +102,13 @@ export const translations = {
       added:"Wameongezwa",
       college_agent: 'Wakala wa Chuo',
       select_agent: "Chagua wakala wa Chuo",
-      loan_guarantor :"Wadhamin Wa Mkopo"
+      loan_guarantor :"Wadhamin Wa Mkopo",
+      guarantor_fullname:"Jina la Mdhamini",
+      full_name:"Jina Kamili",
+      guarantor_relationship: "Uhusiano na Mdhamini",
+      phone_number:"Namba ya Simu",
+      submit_guarantor: "Wasilisha Taarifa"
+
 
 
     },

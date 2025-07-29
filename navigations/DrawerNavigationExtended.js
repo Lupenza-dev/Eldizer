@@ -27,7 +27,8 @@ const DrawerNavigationExtended = (prop) => {
     color="red"
   /> */}
    
-    <DrawerContentScrollView>
+    <DrawerContentScrollView contentContainerStyle={{ flex: 1 }}>
+      <View style={{ flex: 1, justifyContent: 'space-between'}}>
       <View>
         <View style={styles.topContainer}>
         </View>
@@ -101,7 +102,7 @@ const DrawerNavigationExtended = (prop) => {
             />
           <Text style={styles.linkText}>Terms & Condition</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerlinkContainer} activeOpacity={0.8} >
+        <TouchableOpacity style={styles.drawerlinkContainer} onPress={() =>navigation.navigate('ContactScreen')} activeOpacity={0.8} >
           <Icon
               name="phone"
               type="font-awesome"
@@ -131,6 +132,11 @@ const DrawerNavigationExtended = (prop) => {
         </View>
         
         {/* <DrawerItemList {...prop}/> */}
+      </View>
+      <View style={{ padding: 20, alignItems: 'center' }}>
+        <Text style={{ fontWeight: '300'}}>This App is Owned By</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 15}}>Eldizer-Finance Ltd</Text>
+      </View>
       </View>
     </DrawerContentScrollView>
     </>
