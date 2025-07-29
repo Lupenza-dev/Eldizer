@@ -16,12 +16,13 @@ import axios from 'axios'
 import { BASE_URL } from '../utils/config'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { useLanguage } from '../utils/LanguageContext'
+import WarningCard from '../components/WarningCard'
 
 const HomeScreen = () => {
   const navigation =useNavigation();
   const { t } = useLanguage();
 
-  const {userToken} =useContext(AuthContext);
+  const {userToken,regStage} =useContext(AuthContext);
   const [groupData, setgroupData] =useState([]);
   const [adsData, setadsData] =useState([]);
   const [isLoading,setIsLoading] =useState(false);
@@ -78,7 +79,13 @@ const HomeScreen = () => {
        </View>
        <View style={{ marginVertical: 10}}>
        <DividerText name={t('pay_later')}/>
-       <OurService />
+       {
+          regStage > 1 &&  <OurService />
+        }
+        {
+          regStage > 4 && <WarningCard />
+        }
+       {/* <OurService /> */}
        </View>
        <View>
        <DividerText name={t("unipayment")}/>
