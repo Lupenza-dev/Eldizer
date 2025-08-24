@@ -110,6 +110,7 @@ const loanApplication=()=>{
   })
   .catch((error) => {
     setIsLoading(false);
+    console.log(error.response.data);
     notification(error.response.data.errors);
   });
 

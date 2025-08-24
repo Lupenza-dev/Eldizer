@@ -4,6 +4,7 @@ import { View ,Text, StyleSheet,Image, StatusBar, TouchableOpacity} from 'react-
 import { AuthContext } from '../context/AuthContext';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { useLanguage } from '../utils/LanguageContext';
 
 const DrawerNavigationExtended = (prop) => {
   const navigation = useNavigation();
@@ -13,7 +14,7 @@ const DrawerNavigationExtended = (prop) => {
   const {email} =useContext(AuthContext);
   const {image} =useContext(AuthContext);
   const {logout} =useContext(AuthContext);
-  
+  const {t} =useLanguage();
 
   // useEffect(() => {
   //   setData(JSON.parse(customer));
@@ -58,7 +59,7 @@ const DrawerNavigationExtended = (prop) => {
           </View>
         </View>
         <View style={styles.subDividerContainer}>
-        <Text style={styles.textDivider}>Student Details</Text>
+        <Text style={styles.textDivider}>{t('student_details')}</Text>
         </View>
         <View>
         <TouchableOpacity onPress={ ()=>navigation.navigate('ProfileScreen')}  style={styles.drawerlinkContainer} activeOpacity={0.8} >
@@ -68,7 +69,7 @@ const DrawerNavigationExtended = (prop) => {
             size={17}
             color="#606060"
           />
-          <Text style={styles.linkText}>Profile Info</Text>
+          <Text style={styles.linkText}>{t('profile')}</Text>
         </TouchableOpacity>
         <TouchableOpacity  onPress={() => navigation.navigate("CollegeProfileScreen")} style={styles.drawerlinkContainer} activeOpacity={0.8} >
           <Icon
@@ -77,7 +78,7 @@ const DrawerNavigationExtended = (prop) => {
               size={17}
               color="#606060"
             />
-          <Text style={styles.linkText}>College Info</Text>
+          <Text style={styles.linkText}>{t('college')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() =>navigation.navigate('AddressProfileScreen')} style={styles.drawerlinkContainer} activeOpacity={0.8} >
           <Icon
@@ -86,7 +87,7 @@ const DrawerNavigationExtended = (prop) => {
               size={17}
               color="#606060"
             />
-          <Text style={styles.linkText}>Address Info</Text>
+          <Text style={styles.linkText}>{t('address')}</Text>
         </TouchableOpacity>
         </View>
         <View style={styles.subDividerContainer}>
@@ -100,7 +101,16 @@ const DrawerNavigationExtended = (prop) => {
               size={17}
               color="#606060"
             />
-          <Text style={styles.linkText}>Terms & Condition</Text>
+          <Text style={styles.linkText}>{t('terms')}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.drawerlinkContainer} onPress={() =>navigation.navigate('PrivacyScreen')}  activeOpacity={0.8} >
+          <Icon
+              name="book"
+              type="antdesign"
+              size={17}
+              color="#606060"
+            />
+          <Text style={styles.linkText}>{t('privacy')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.drawerlinkContainer} onPress={() =>navigation.navigate('ContactScreen')} activeOpacity={0.8} >
           <Icon
@@ -109,7 +119,7 @@ const DrawerNavigationExtended = (prop) => {
               size={17}
               color="#606060"
             />
-          <Text style={styles.linkText}>Contact Us</Text>
+          <Text style={styles.linkText}>{t('contact_us')}</Text>
         </TouchableOpacity>
         {/* <TouchableOpacity style={styles.drawerlinkContainer} activeOpacity={0.8}>
           <Icon
@@ -127,7 +137,7 @@ const DrawerNavigationExtended = (prop) => {
               size={17}
               color="#606060"
             />
-          <Text style={styles.linkText}>Logout</Text>
+          <Text style={styles.linkText}>{t('logout')}</Text>
         </TouchableOpacity>
         </View>
         
@@ -135,7 +145,7 @@ const DrawerNavigationExtended = (prop) => {
       </View>
       <View style={{ padding: 20, alignItems: 'center' }}>
         <Text style={{ fontWeight: '300'}}>This App is Owned By</Text>
-        <Text style={{ fontWeight: 'bold', fontSize: 15}}>Eldizer-Finance Ltd</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 15}}>Eldizer Financial Service</Text>
       </View>
       </View>
     </DrawerContentScrollView>

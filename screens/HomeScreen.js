@@ -41,7 +41,7 @@ const HomeScreen = () => {
     };
     axios.request(config)
     .then((response) => {
-        console.log(response.data);
+       // console.log(response.data);
         setIsLoading(false);
         setgroupData(response.data.groups);
         setadsData(response.data.ads);
@@ -68,10 +68,10 @@ const HomeScreen = () => {
         textStyle={{ color: '#FFF' }}
       />
        <CoinCard/>
-       <View style={{ marginTop: 2}}>
+       {/* <View style={{ marginTop: 2}}>
        <NMBLinker/>
-       </View>
-       <View>
+       </View> */}
+       <View style={{ marginVertical: 10}}>
             <DividerText name={t("Assighn_money")}/>
             <View style={{ paddingHorizontal: 10}}>
             <IconButton  name={t('quiz')} icon="edit" onPress={() => navigation.navigate('AssignMentScreen')}/>
@@ -88,8 +88,8 @@ const HomeScreen = () => {
        {/* <OurService /> */}
        </View>
        <View>
-       <DividerText name={t("unipayment")}/>
-       <UniService/>
+       {/* <DividerText name={t("unipayment")}/>
+       <UniService/> */}
        </View>
        <View>
         <Advert  adData ={adsData} groupData={groupData}/>

@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView,Alert } from 'react-native';
+import React, { useContext, useState } from 'react';
 import HeaderTab from '../components/HeaderTab';
 import Footer from '../components/Footer';
 import { Ionicons } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
+import { BASE_URL } from '../utils/config';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 const questions = [
   {
@@ -48,6 +51,8 @@ const QuestionScreen = () => {
   const isFirstQuestion = currentQuestionIndex === 0;
   const isLastQuestion = currentQuestionIndex === quizQuestions.length - 1;
 
+  const {userToken} =useContext(AuthContext);
+
   const handleAnswerSelect = (selectedOption) => {
     setAnswers({
       ...answers,
@@ -67,16 +72,65 @@ const QuestionScreen = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Calculate score
-    let correctAnswers = 0;
-    quizQuestions.forEach((q) => {
-      if (answers[q.id] === q.correctAnswer) {
-        correctAnswers++;
+  // const handleSubmit = () => {
+  //   // Calculate score
+  //   let correctAnswers = 0;
+  //   quizQuestions.forEach((q) => {
+  //     if (answers[q.id] === q.correctAnswer) {
+  //       correctAnswers++;
+  //     }
+  //   });
+  //   setScore(correctAnswers);
+  //   setShowResult(true);
+  // };
+
+  const handleSubmit = async () => {
+    try {
+      // Prepare the submission data
+      const submissionData = {
+        assignment_id: route.params?.assignmentId,
+        answers: Object.entries(answers).map(([questionId, answer]) => ({
+          question_id: parseInt(questionId),
+          answer: answer
+        }))
+      };
+  
+      // Make the API call using Axios
+      const response = await axios.post(
+        `${BASE_URL}/submit-assignment`,
+        submissionData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`,
+          }
+        }
+      );
+  
+      // Update the score based on the API response
+      if (response.data && response.data.score !== undefined) {
+        setScore(response.data.score);
+      } else {
+        // Fallback to local calculation if API doesn't return score
+        let correctAnswers = 0;
+        quizQuestions.forEach((q) => {
+          if (answers[q.id] === q.correctAnswer) {
+            correctAnswers++;
+          }
+        });
+        setScore(correctAnswers);
       }
-    });
-    setScore(correctAnswers);
-    setShowResult(true);
+      
+      setShowResult(true);
+    } catch (error) {
+      console.error('Error submitting assignment:', error);
+      const errorMessage = error.response?.data?.message || 'There was an error submitting your answers. Please try again.';
+      Alert.alert(
+        'Submission Error',
+        errorMessage,
+        [{ text: 'OK' }]
+      );
+    }
   };
 
   const resetQuiz = () => {

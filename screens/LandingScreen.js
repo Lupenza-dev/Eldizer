@@ -42,9 +42,9 @@ const LandingScreen = ( { navigation}) => {
     </View>
   );
 
-   let MaxHeight =0.93;
+   let MaxHeight =0.92;
    if (Platform.OS == "ios") {
-    MaxHeight =0.88;
+    MaxHeight =0.87;
    }
   return (
     <>
@@ -66,6 +66,10 @@ const LandingScreen = ( { navigation}) => {
       </TouchableOpacity> */}
       <View style={{ paddingLeft: 10, paddingRight: 10,}}>
             <IconButton icon="arrow-circle-right" name="Get Started" onPress={() => navigation.navigate('LoginScreen')} />
+      </View>
+      <View style={{ marginVertical:5, alignItems: 'center' }}>
+        <Text style={{ fontWeight: '300', fontSize: 11}}>This App is Owned By</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 12}}>Eldizer Financial Service</Text>
       </View>
       </View>
        </View>
@@ -117,6 +121,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   Maincontainer:{
+    flex: 1,
+    backgroundColor: '#fff'
    // display: 'flex',
    // flexDirection: 'column', // Default direction is column, so this can be omitted
   // justifyContent: 'space-between', // Align components vertically with space in between

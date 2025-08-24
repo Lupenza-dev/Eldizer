@@ -23,7 +23,7 @@ const CoinCard = () => {
                 </View>
                 </View>
                 
-                <Text style={{ color: '#ffff'}}>Logo</Text>
+                <Text style={{ color: '#ffff'}}></Text>
             </View>
             <View style={styles.coinTextContainer}>
                 <Text style={styles.CardSubText}>{t('outstanding_amount')}</Text>

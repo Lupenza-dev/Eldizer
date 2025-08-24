@@ -5,9 +5,11 @@ import GroupCard from './GroupCard'
 import { BASE_URL } from '../utils/config'
 import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'
+import { useLanguage } from '../utils/LanguageContext'
 
 const Advert = ({ adData , groupData}) => {
     const [category,setCategory] =useState(1);
+    const { t} =useLanguage();
     
   return (
     <>
@@ -15,13 +17,13 @@ const Advert = ({ adData , groupData}) => {
       <TouchableOpacity onPress={()=>setCategory(1)}>
         <View style={[styles.buttonView,category == 1 ? styles.activeTab: '']}>
             <Image source={ require('../assets/speaker.png')} style={styles.imageStyle} />
-            <Text style={styles.buttonText}>Matangazo</Text>
+            <Text style={styles.buttonText}>{t('adverts')}</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>setCategory(2)}>
       <View style={[styles.buttonView,category == 2 ? styles.activeTab: '']}>
             <Image source={ require('../assets/community.png')} style={styles.imageStyle} />
-            <Text style={styles.buttonText}>Groups</Text>
+            <Text style={styles.buttonText}>{t('groups')}</Text>
         </View>
       </TouchableOpacity>
     </View>

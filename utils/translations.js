@@ -53,7 +53,18 @@ export const translations = {
       full_name: "Full name",
       guarantor_relationship: "Guarantor Relationship",
       phone_number:"Phone number",
-      submit_guarantor: "Submit Guarantor Details"
+      submit_guarantor: "Submit Guarantor Details",
+      adverts: "Adverts",
+      groups: "Groups",
+      loans: "Loans",
+      payments: 'Payments',
+      student_details: "Student Details",
+      profile: 'Profile Info',
+      college: 'College Info',
+      address: 'Address Info',
+      terms:'Terms & Condition',
+      privacy: 'Privacy policy',
+
 
     },
     sw: { 
@@ -107,8 +118,17 @@ export const translations = {
       full_name:"Jina Kamili",
       guarantor_relationship: "Uhusiano na Mdhamini",
       phone_number:"Namba ya Simu",
-      submit_guarantor: "Wasilisha Taarifa"
-
+      submit_guarantor: "Wasilisha Taarifa",
+      adverts: "Matangazo",
+      groups: "Vikundi",
+      loans: "Mikopo",
+      payments: 'Malipo',
+      student_details: "Taarifa za Mwanachuo",
+      profile: 'Wasifu',
+      college: 'Taarifa za Chuo',
+      address: 'Anuani',
+      terms:'Vigezo na Masharti',
+      privacy: 'Sera ya Faragha',
 
 
     },
