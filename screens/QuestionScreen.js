@@ -3,10 +3,12 @@ import React, { useContext, useState } from 'react';
 import HeaderTab from '../components/HeaderTab';
 import Footer from '../components/Footer';
 import { Ionicons } from '@expo/vector-icons';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { BASE_URL } from '../utils/config';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import Toast from 'react-native-toast-message';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const questions = [
   {
@@ -31,6 +33,9 @@ const questions = [
 
 const QuestionScreen = () => {
   const route = useRoute();
+  const navigation = useNavigation();  
+  const [isLoading,setIsLoading] =useState(false);
+
   // Map incoming questions if provided
   let incomingQuestions = route.params?.questions;
   let quizQuestions = questions;
@@ -85,7 +90,11 @@ const QuestionScreen = () => {
   // };
 
   const handleSubmit = async () => {
+
     try {
+      setIsLoading(true);
+      //alert(route.params?.assignmentId);
+      // return;
       // Prepare the submission data
       const submissionData = {
         assignment_id: route.params?.assignmentId,
@@ -106,23 +115,32 @@ const QuestionScreen = () => {
           }
         }
       );
+
+      Toast.show({
+        type: 'success',
+        text1: "You have successfully submitted your quiz",
+        position: 'top'
+      });
+      setIsLoading(false);
+      navigation.navigate('AssignMentScreen');
   
       // Update the score based on the API response
-      if (response.data && response.data.score !== undefined) {
-        setScore(response.data.score);
-      } else {
-        // Fallback to local calculation if API doesn't return score
-        let correctAnswers = 0;
-        quizQuestions.forEach((q) => {
-          if (answers[q.id] === q.correctAnswer) {
-            correctAnswers++;
-          }
-        });
-        setScore(correctAnswers);
-      }
+      // if (response.data && response.data.score !== undefined) {
+      //   setScore(response.data.score);
+      // } else {
+      //   // Fallback to local calculation if API doesn't return score
+      //   let correctAnswers = 0;
+      //   quizQuestions.forEach((q) => {
+      //     if (answers[q.id] === q.correctAnswer) {
+      //       correctAnswers++;
+      //     }
+      //   });
+      //   setScore(correctAnswers);
+      // }
       
-      setShowResult(true);
+      // setShowResult(true);
     } catch (error) {
+      setIsLoading(false);
       console.error('Error submitting assignment:', error);
       const errorMessage = error.response?.data?.message || 'There was an error submitting your answers. Please try again.';
       Alert.alert(
@@ -163,6 +181,11 @@ const QuestionScreen = () => {
     <>
       <HeaderTab title={`Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`} />
       <SafeAreaView style={styles.container}>
+      <Spinner
+        visible={isLoading}
+        textContent={'Loading...'}
+        textStyle={{ color: '#FFF' }}
+      />
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.questionContainer}>
             <Text style={styles.questionText}>{currentQuestion.question}</Text>

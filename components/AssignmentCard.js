@@ -51,7 +51,7 @@ const AssignmentCard = ({data}) => {
   return (
     <TouchableOpacity 
       style={[styles.container, { borderLeftColor: getStatusColor(), borderLeftWidth: 4 }]} 
-      onPress={() => navigation.navigate('QuestionScreen', { questions: data.questions })} 
+      onPress={() => navigation.navigate('QuestionScreen', { questions: data.questions, assignmentId: data?.assigment_id })} 
       activeOpacity={0.8}
     >
       <View style={styles.upContainer}>
