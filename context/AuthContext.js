@@ -23,6 +23,7 @@ export const AuthProvider =({ children })=>{
     const [isPasswordChanged ,setIsPasswordChanged] =useState(null);
     const [expoPushToken] = pushNotification();
     const [regStage, setRegStage] =useState("");
+    const [outstandingAmount,setOutstandingAmount] =useState(0)
 
 
       
@@ -47,6 +48,7 @@ export const AuthProvider =({ children })=>{
              const image             =response.data.data.customer.image;
              const stage             =response.data.data.customer.registration_stage;
              const student           =response.data.data.customer.student;
+             const outstanding_amount           =response.data.data.outstanding_amount;
         //     toastNotification(userInfos.message,'success');
            // setUserInfo(userInfos);
             setUserToken(token);
@@ -59,7 +61,9 @@ export const AuthProvider =({ children })=>{
             setIsPasswordChanged(password_change);
             setRegStage(stage);
             setIsLoading(false);
+            setOutstandingAmount(outstanding_amount);
         //     //console.log(userInfos);
+           AsyncStorage.setItem('outstanding_amount',outstandingAmount);
            AsyncStorage.setItem('isPasswordChanged',password_change);
            AsyncStorage.setItem('userToken',token);
            AsyncStorage.setItem('studentName',studentName);
@@ -99,6 +103,7 @@ export const AuthProvider =({ children })=>{
         AsyncStorage.removeItem('email');
         AsyncStorage.removeItem('image');
         AsyncStorage.removeItem('stage');
+        AsyncStorage.removeItem('outstanding_amount');
     }
 
     const isLogedin =async()=>{
@@ -113,6 +118,7 @@ export const AuthProvider =({ children })=>{
         let image  =await AsyncStorage.getItem('image');
         let password_change  =await AsyncStorage.getItem('isPasswordChanged');
         let stage  =await AsyncStorage.getItem('stage');
+        let outstanding_amount  =await AsyncStorage.getItem('outstanding_amount');
 
         setUserToken(userToken);
         setStudentName(studentName);
@@ -124,6 +130,7 @@ export const AuthProvider =({ children })=>{
         setImage(image);
         setIsPasswordChanged(password_change);
         setRegStage(stage);
+        setOutstandingAmount(outstanding_amount);
 
         } catch (error) {
             console.log("is loged in error" + error); 
@@ -138,7 +145,7 @@ export const AuthProvider =({ children })=>{
     useEffect(()=>{
         isLogedin();
     },[expoPushToken]);
-    return <AuthContext.Provider value={{login ,logout,userToken,studentName,userInfo,isLoading,customer,student,customerName,email,image,isPasswordChanged,regStage,completeRegistration}}>
+    return <AuthContext.Provider value={{login ,logout,userToken,studentName,userInfo,isLoading,customer,student,customerName,email,image,isPasswordChanged,regStage,completeRegistration,outstandingAmount}}>
         {children}
        
     </AuthContext.Provider>

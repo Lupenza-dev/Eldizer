@@ -4,12 +4,14 @@ import { colors } from '../utils/GlobalStyles';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../utils/LanguageContext';
+import Toast from 'react-native-toast-message';
 
 const AssignmentCard = ({data}) => {
   const navigation = useNavigation();
   const {t} =useLanguage();
   // Map numeric status to string if needed
   const getStatusText = () => {
+    if(data.participation_status) return "Participated";
     if (typeof data.status === 'number') {
       switch (data.status) {
         case 1: return 'Active';
@@ -28,17 +30,23 @@ const AssignmentCard = ({data}) => {
       case 'Active': return '#2196F3'; // Blue
       case 'In Progress': return '#FFC107'; // Yellow
       case 'Not Started': return '#9E9E9E'; // Grey
+      case 'Participated': return '#21B532'; // Grey
       default: return '#9E9E9E';
     }
   };
 
   // Progress percentage based on progress string
   const getProgressPercentage = () => {
-    const progress = (data.progress || '').toLowerCase();
-    if (progress === 'completed') return 100;
-    if (progress === 'in progress') return 50;
-    if (progress === 'not started') return 0;
-    return 0;
+    if (data.participation_status) {
+        return (data?.participant?.score_gained / data?.participant?.total_questions) * 100;
+    } else {
+      return 0;
+    }
+    // const progress = (data.progress || '').toLowerCase();
+    // if (progress === 'completed') return 90;
+    // if (progress === 'in progress') return 50;
+    // if (progress === 'not started') return 0;
+    // return 0;
   };
 
   // Format date
@@ -48,10 +56,18 @@ const AssignmentCard = ({data}) => {
     return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
+  const alertUser = () => {
+    Toast.show({
+      type: 'success',
+      text1: "You have already participated on this quiz",
+      position: 'top'
+    });
+  }
+
   return (
     <TouchableOpacity 
       style={[styles.container, { borderLeftColor: getStatusColor(), borderLeftWidth: 4 }]} 
-      onPress={() => navigation.navigate('QuestionScreen', { questions: data.questions, assignmentId: data?.assigment_id })} 
+      onPress={() => data?.participation_status ? alertUser(): navigation.navigate('QuestionScreen', { questions: data.questions, assignmentId: data?.assigment_id })} 
       activeOpacity={0.8}
     >
       <View style={styles.upContainer}>
@@ -87,6 +103,14 @@ const AssignmentCard = ({data}) => {
             <Icon type="material-community" name="help-circle-outline" size={16} color={colors.primary} />
             <Text style={styles.infoText}>{data.total_questions} {t('Questions')}</Text>
           </View>
+          {
+            data?.participant?.score_gained && (
+            <View style={styles.infoItem}>
+            <Icon type="material-community" name="target" size={16} color={colors.primary} />
+            <Text style={styles.infoText}>{data.participant?.score_gained} {t('score')}</Text>
+          </View>)
+          }
+          
         </View>
         <View style={styles.progressContainer}>
           <View style={styles.progressBar}>

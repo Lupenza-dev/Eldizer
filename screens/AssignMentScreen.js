@@ -28,10 +28,11 @@ const AssignMentScreen = () => {
     axios.request(config)
     .then((response) => {
         setIsLoading(false);
+        console.log(response.data.data);
         setAssignment(response.data.data);
     })
     .catch((error) => {
-    // console.log(error);
+    console.log(error);
         setIsLoading(false);
         console.log(error.response);
     });

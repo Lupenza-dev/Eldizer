@@ -64,6 +64,7 @@ export const translations = {
       address: 'Address Info',
       terms:'Terms & Condition',
       privacy: 'Privacy policy',
+      score: 'Score Gained'
 
 
     },
@@ -129,6 +130,7 @@ export const translations = {
       address: 'Anuani',
       terms:'Vigezo na Masharti',
       privacy: 'Sera ya Faragha',
+      score: 'Score Gained'
 
 
     },
