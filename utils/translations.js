@@ -64,7 +64,10 @@ export const translations = {
       address: 'Address Info',
       terms:'Terms & Condition',
       privacy: 'Privacy policy',
-      score: 'Score Gained'
+      score: 'Score Gained',
+      interest: 'Interest Rate',
+      fee_charges: 'Fees and Charges',
+      late_payment: "Late Payment"
 
 
     },
@@ -130,7 +133,12 @@ export const translations = {
       address: 'Anuani',
       terms:'Vigezo na Masharti',
       privacy: 'Sera ya Faragha',
-      score: 'Score Gained'
+      score: 'Score Gained',
+      interest: 'Riba',
+      fee_charges: 'Ada',
+      late_payment: "Ada ya Ucheleweshaji"
+
+
 
 
     },

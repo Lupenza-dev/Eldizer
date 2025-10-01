@@ -11,6 +11,7 @@ const ApplicationScreen = () => {
 
     useEffect(() => {
         setData(loan);
+        console.log(loan);
     }, [loan]);
   return (
     <>
@@ -45,12 +46,21 @@ const ApplicationScreen = () => {
                 <Text style={styles.rightTextSubContainer}>{data.installment_amount}</Text>
             </View>
             <View style={styles.subContainer}>
+                <Text style={styles.leftTextSubContainer}>Interest Amount</Text>
+                <Text style={styles.rightTextSubContainer}>{data.interest_amount}</Text>
+            </View>
+            <View style={styles.subContainer}>
                 <Text style={styles.leftTextSubContainer}>Interest Rate</Text>
                 <Text style={styles.rightTextSubContainer}>{data.interest_rate}</Text>
             </View>
+           
             <View style={styles.subContainer}>
-                <Text style={styles.leftTextSubContainer}>Interest Amount</Text>
-                <Text style={styles.rightTextSubContainer}>{data.interest_amount}</Text>
+                <Text style={styles.leftTextSubContainer}>Fees and Charges</Text>
+                <Text style={styles.rightTextSubContainer}>{data.fee_charges}</Text>
+            </View>
+            <View style={styles.subContainer}>
+                <Text style={styles.leftTextSubContainer}>Late Payment</Text>
+                <Text style={styles.rightTextSubContainer}>{data.late_charges}</Text>
             </View>
             <View style={styles.subContainer}>
                 <Text style={styles.leftTextSubContainer}>Start Date</Text>

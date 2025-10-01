@@ -41,6 +41,10 @@ const [value,setValue] =useState(1);
 const [agents,setAgents]=useState([]);
 const [isLoading,setIsLoading] =useState(false);
 const [initialDeposit ,setInitialDeposit] =useState(null);
+const [interest,setInterest] =useState("");
+const [latePayment,setLatePayment] =useState("");
+const [charges,setCharges] =useState('');
+
 const getAgents=()=>{
 
     let config = {
@@ -133,12 +137,15 @@ const loanCalculator=()=>{
         Authorization: `Bearer ${userToken}`
       }
     }).then(response => {
-     // console.log(response.data);
       setTotalAmount(response.data.data.total_amount);
       setStartDate(response.data.data.start_date);
       setEndDate(response.data.data.end_date);
       setPlan(response.data.data.plan);
       setInitialDeposit(response.data.data.initial_deposit);
+
+      setInterest(response.data.data.interest_charge);
+      setLatePayment(response.data.data.late_payment);
+      setCharges(response.data.data.fees_and_charges);
     }).catch(error => {
       console.log(error.response.data);
     });
@@ -219,10 +226,10 @@ const styles = StyleSheet.create({
     subMiddleView:{
         flexDirection: 'row',
         justifyContent:'space-between',
-        paddingVertical: 3
+        paddingVertical: 2
     },
     leftSubMiddleText:{
-        fontSize: 18,
+        fontSize: 13,
         fontWeight: '500',
         color: "#000"
     },
@@ -275,6 +282,10 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10
   },
+  leftSubtitle:{
+    fontSize: 11,
+    fontWeight: '400'
+  }
 
   });
   const [visible, setVisible] = useState(false);
@@ -370,33 +381,45 @@ const styles = StyleSheet.create({
             <Text style={styles.leftSubMiddleText}>
               {loan_type == 2 ? t("request_loan") : t("request_amount")}
             </Text>
-                <Text>{request_amount.toLocaleString()} TZS</Text>
+                <Text style={styles.leftSubtitle}>{request_amount.toLocaleString()} TZS</Text>
             </View>
             {
               loan_type == 2 ?
               <View style={styles.subMiddleView} >
               <Text style={styles.leftSubMiddleText}>{t('initial_deposit')}</Text>
-              <Text>{initial_deposit.toLocaleString()} TZS</Text>
+              <Text style={styles.leftSubtitle}>{initial_deposit.toLocaleString()} TZS</Text>
                </View>: ''
             }
             
             <View style={styles.subMiddleView} >
                 <Text style={styles.leftSubMiddleText}>{t('plan')}</Text>
-                <Text>{plan} {t('month')}</Text>
+                <Text style={styles.leftSubtitle}>{plan} {t('month')}</Text>
             </View>
             <View style={styles.subMiddleView}>
                 <Text style={styles.leftSubMiddleText}>{t('start_date')}</Text>
-                <Text>{startDate}</Text>
+                <Text style={styles.leftSubtitle}>{startDate}</Text>
             </View>
             <View style={styles.subMiddleView}>
                 <Text style={styles.leftSubMiddleText}>{t('expected_date')}</Text>
-                <Text>{endDate}</Text>
+                <Text style={styles.leftSubtitle}>{endDate}</Text>
+            </View>
+            <View style={styles.subMiddleView}>
+                <Text style={styles.leftSubMiddleText}>{t('interest')}</Text>
+                <Text style={styles.leftSubtitle}>{interest}</Text>
+            </View>
+            <View style={styles.subMiddleView}>
+                <Text style={styles.leftSubMiddleText}>{t('fee_charges')}</Text>
+                <Text style={styles.leftSubtitle}>{charges}</Text>
+            </View>
+            <View style={styles.subMiddleView}>
+                <Text style={styles.leftSubMiddleText}>{t('late_payment')}</Text>
+                <Text style={styles.leftSubtitle}>{latePayment}</Text>
             </View>
             {
               device_name && loan_type == 2 ? 
                 <View style={styles.subMiddleView}>
                   <Text style={styles.leftSubMiddleText}>{t('device')}</Text>
-                  <Text>{device_name} </Text>
+                  <Text style={styles.leftSubtitle}>{device_name} </Text>
               </View> : ''
             }
             
