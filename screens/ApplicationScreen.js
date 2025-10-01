@@ -11,7 +11,6 @@ const ApplicationScreen = () => {
 
     useEffect(() => {
         setData(loan);
-        console.log(loan);
     }, [loan]);
   return (
     <>
