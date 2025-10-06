@@ -33,7 +33,7 @@ const ApplicationScreen = () => {
                 <Text style={styles.rightTextSubContainer}>{data.amount}</Text>
             </View>
             <View style={styles.subContainer}>
-                <Text style={styles.leftTextSubContainer}>Loan Amount</Text>
+                <Text style={styles.leftTextSubContainer}>Total Loan Repayment</Text>
                 <Text style={styles.rightTextSubContainer}>{data.loan_amount}</Text>
             </View>
             <View style={styles.subContainer}>
@@ -41,13 +41,13 @@ const ApplicationScreen = () => {
                 <Text style={styles.rightTextSubContainer}>{data.plan}</Text>
             </View>
             <View style={styles.subContainer}>
-                <Text style={styles.leftTextSubContainer}>Installment Amount</Text>
+                <Text style={styles.leftTextSubContainer}>Single Installment At Maturity</Text>
                 <Text style={styles.rightTextSubContainer}>{data.installment_amount}</Text>
             </View>
-            <View style={styles.subContainer}>
+            {/* <View style={styles.subContainer}>
                 <Text style={styles.leftTextSubContainer}>Interest Amount</Text>
                 <Text style={styles.rightTextSubContainer}>{data.interest_amount}</Text>
-            </View>
+            </View> */}
             <View style={styles.subContainer}>
                 <Text style={styles.leftTextSubContainer}>Interest Rate</Text>
                 <Text style={styles.rightTextSubContainer}>{data.interest_rate}</Text>

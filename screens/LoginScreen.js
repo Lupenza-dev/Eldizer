@@ -91,6 +91,10 @@ const LoginScreen = ({ navigation}) => {
             <Text style={{ fontWeight: 'bold', fontSize: 12}}>Eldizer Financial Service</Text>
         </View>
         </View>
+        <View>
+            <Text>Privacy</Text>
+            <Text>Privacy</Text>
+        </View>
         
        
     </ScrollView>

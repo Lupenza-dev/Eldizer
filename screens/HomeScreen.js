@@ -26,7 +26,7 @@ const HomeScreen = () => {
   const [groupData, setgroupData] =useState([]);
   const [adsData, setadsData] =useState([]);
   const [isLoading,setIsLoading] =useState(false);
-  //console.log(userToken);
+  console.log(regStage);
 
   //const {userToken} =useContext(AuthContext);
     const adsGroupFetch=()=>{
@@ -83,7 +83,7 @@ const HomeScreen = () => {
           regStage > 1 &&  <OurService />
         }
         {
-          regStage > 4 && <WarningCard />
+          regStage < 4 && <WarningCard />
         }
        {/* <OurService /> */}
        </View>
