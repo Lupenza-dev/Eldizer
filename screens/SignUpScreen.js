@@ -174,11 +174,23 @@ const SignUpScreen = () => {
             error={errorMessage.confirmError} 
           />
         <TouchableOpacity style={styles.buttonStyle} onPress={()=>submitData()}>
-        <Text style={styles.buttonText}>Register</Text>
-         </TouchableOpacity>
-         <View style={{ marginVertical:5, alignItems: 'center' }}>
-            <Text style={{ fontWeight: '300', fontSize: 11}}>This App is Owned By</Text>
-            <Text style={{ fontWeight: 'bold', fontSize: 12}}>Eldizer Financial Service</Text>
+            <Text style={styles.buttonText}>Register</Text>
+        </TouchableOpacity>
+        
+        <View style={{ marginVertical: 20, alignItems: 'center' }}>
+            <View style={styles.privacyContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('PrivacyScreen')}>
+                    <Text style={styles.privacyText}>Privacy Policy</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('TermsScreen')}>
+                    <Text style={styles.privacyText}>Terms & Conditions</Text>
+                </TouchableOpacity>
+            </View>
+            
+            <View style={{ marginTop: 20, alignItems: 'center' }}>
+                <Text style={{ fontWeight: '300', fontSize: 11, marginBottom: 5 }}>This App is Owned By</Text>
+                <Text style={{ fontWeight: 'bold', fontSize: 12 }}>Eldizer Financial Service</Text>
+            </View>
         </View>
     </View>
   )
@@ -210,5 +222,16 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: colors.primary
+    },
+    privacyContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '80%',
+        marginBottom: 10
+    },
+    privacyText: {
+        fontSize: 12,
+        color: colors.primary,
+        textDecorationLine: 'underline'
     }
 })

@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation}) => {
        
     }
   return (
-    <ScrollView  style={{ backgroundColor: '#fff'}}>
+    <ScrollView  style={{ backgroundColor: '#fff', flex: 1 }}>
          <StatusBar
         animated={true}
         color="#fff"
@@ -85,24 +85,30 @@ const LoginScreen = ({ navigation}) => {
         <Text style={styles.buttonText}>Create Account</Text>
          </TouchableOpacity>
 
+        <View style={{ marginVertical: 20, alignItems: 'center' }}>
+            <View style={styles.privacyContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('PrivacyScreen')}>
+                    <Text style={styles.privacyText}>Privacy Policy</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('TermsScreen')}>
+                    <Text style={styles.privacyText}>Terms & Conditions</Text>
+                </TouchableOpacity>
+            </View>
+            
+            <View style={{ marginTop: 20, alignItems: 'center' }}>
+                <Text style={{ fontWeight: '300', fontSize: 11, marginBottom: 5 }}>This App is Owned By</Text>
+                <Text style={{ fontWeight: 'bold', fontSize: 12 }}>Eldizer Financial Service</Text>
+            </View>
         </View>
-        <View style={{ marginVertical:5, alignItems: 'center' }}>
-            <Text style={{ fontWeight: '300', fontSize: 11}}>This App is Owned By</Text>
-            <Text style={{ fontWeight: 'bold', fontSize: 12}}>Eldizer Financial Service</Text>
         </View>
         </View>
-        <View>
-            <Text>Privacy</Text>
-            <Text>Privacy</Text>
-        </View>
-        
-       
     </ScrollView>
   )
 }
 
 const styles =StyleSheet.create({
     mainContainer:{
+        flex: 1,
         backgroundColor: '#fff',
         justifyContent: 'space-between'
     },
@@ -110,9 +116,9 @@ const styles =StyleSheet.create({
         backgroundColor: '#fff',
         borderTopRightRadius: 25,
         borderTopLeftRadius: 25,
-        padding: 10,
+        padding: 20,
         marginTop: -80,
-        // height: '50%'
+        flex: 1,
     },
     imageStyle:{
         width: '100%',
@@ -180,8 +186,21 @@ const styles =StyleSheet.create({
         color: 'red',
         marginVertical: 5,
         fontSize: 13
-     }
-
+     },
+     privacyContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%',
+        marginTop: 'auto',
+        paddingTop: 20,
+        borderTopWidth: 1,
+        borderTopColor: '#f0f0f0',
+    },
+    privacyText: {
+        marginHorizontal: 15,
+        color: '#666',
+        fontSize: 14,
+    },
 })
 
 export default LoginScreen

@@ -73,7 +73,7 @@ const TermsScreen = () => {
 
       <Text style={styles.subheading}>6. Rate of Interest</Text>
       <Text style={styles.text}>
-        Processing Fee 2%, Service Fee 2%, Verification 1%, Disbursement 1%, Insurance 0.5%, Interest 3.5% per month.
+        One Off Management Fee 9.5% , Interest 3.5%  and Penalt 5%.
       </Text>
 
       <Text style={styles.heading}>B: OPERATIONAL TERMS AND CONDITIONS</Text>

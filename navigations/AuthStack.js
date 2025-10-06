@@ -9,6 +9,8 @@ import DrawerNavigation from './DrawerNavigation';
 import ChangePassword from '../screens/ChangePassword';
 import RegistrationScreen from '../screens/RegistrationScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import PrivacyScreen from '../screens/PrivacyScreen';
+import TermsScreen from '../screens/TermsScreen';
 
 
 
@@ -32,6 +34,8 @@ const AuthStack = () => {
     <Stack.Screen name='ChangePassword'  component={ChangePassword} options={{ headerShown: false , headerTitle:"Registration", headerBackTitleVisible:false }} />
     <Stack.Screen name='RegistrationScreen'  component={RegistrationScreen} options={{ headerShown: false , headerTitle:"Registration", headerBackTitleVisible:false }} />
     <Stack.Screen name='SignUpScreen'  component={SignUpScreen} options={{ headerShown: true , headerTitle:"Registration", headerBackTitleVisible:false, headerBackTitle: () => null, }} />
+    <Stack.Screen name='PrivacyScreen'  component={PrivacyScreen} options={{ headerShown: false , headerTitle:"Privacy Screen", headerBackTitleVisible:false, headerBackTitle: () => null, }} />
+    <Stack.Screen name='TermsScreen'  component={TermsScreen} options={{ headerShown: false , headerTitle:"Terms and Condition", headerBackTitleVisible:false, headerBackTitle: () => null, }} />
     {/* <Stack.Screen name='Bottom'  component={BottomTabNavigation} options={{ headerShown: false}} /> */}
     <Stack.Screen name='Bottom' component={DrawerNavigation} options={{ headerShown: false}}/>
     </Stack.Navigator>
