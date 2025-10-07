@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { SafeAreaView, ScrollView ,RefreshControl } from 'react-native'
 import { View, Text } from 'react-native'
 import Spinner from 'react-native-loading-spinner-overlay'
@@ -10,15 +10,16 @@ import PaymentCard from '../components/PaymentCard'
 import Search from '../components/Search'
 import { AuthContext } from '../context/AuthContext'
 import { BASE_URL } from '../utils/config'
+import { useQuery } from '@tanstack/react-query'
 
 const PaymentScreen = () => {
   const {userToken} =useContext(AuthContext);
-  const [paymentData, setPaymentData] =useState([]);
-  const [isLoading,setIsLoading]      =useState(false);
+  // const [paymentData, setPaymentData] =useState([]);
+  // const [isLoading,setIsLoading]      =useState(false);
   const [refreshing, setRefreshing] =useState(false);
 
 
-const payments=()=>{
+const payments = async ()=>{
   let config = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -27,30 +28,26 @@ const payments=()=>{
       'Authorization': `Bearer ${userToken}`, 
     }
   };
-  setIsLoading(true);
-  axios.request(config)
-  .then((response) => {
-    setIsLoading(false);
-    console.log(response.data.data);
-    setPaymentData(response.data.data);
-  })
-  .catch((error) => {
-    setIsLoading(false);
-    console.log(error.response);
-  });
+ 
+  const response = await axios.request(config);
+  return response.data.data;
 
 }
-useEffect(() => {
-  payments();
-}, []);
 
-const onRefresh = React.useCallback(() => {
+const { data: paymentData = [], isLoading, refetch } = useQuery({
+  queryKey: ['payments'],
+  queryFn: payments,
+});
+
+
+// useEffect(() => {
+//   payments();
+// }, []);
+
+const onRefresh = useCallback(() => {
   setRefreshing(true);
-  payments();
-  setTimeout(() => {
-    setRefreshing(false);
-  }, 2000);
-}, []);
+  refetch().finally(() => setRefreshing(false));
+}, [refetch]);
 
   return (
     <>

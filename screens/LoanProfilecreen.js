@@ -46,17 +46,17 @@ const LoanProfilecreen = () => {
                     <Text style={styles.rowLeftSubtitle}>{loan.request_amount}</Text>
                 </View>
                 <View>
-                    <Text style={styles.rowTitle}>Granted Amount</Text>
+                    <Text style={styles.rowTitle}>Total Loan Repayment</Text>
                     <Text style={styles.rowRightSubtitle}>{loan.loan_amount}</Text>
                 </View>
             </View>
             <View style={styles.rowContainer}>
                 <View>
                     <Text style={styles.rowTitle}>Plan</Text>
-                    <Text style={styles.rowLeftSubtitle}>{loan.plan} month</Text>
+                    <Text style={styles.rowLeftSubtitle}>{loan.plan}</Text>
                 </View>
                 <View>
-                    <Text style={styles.rowTitle}>Installment Amount</Text>
+                    <Text style={styles.rowTitle}>Single Installment At Maturity</Text>
                     <Text style={styles.rowRightSubtitle}>{loan.installment_amount}</Text>
                 </View>
             </View>
@@ -66,9 +66,18 @@ const LoanProfilecreen = () => {
                     <Text style={styles.rowLeftSubtitle}>{loan.interest_rate}</Text>
                 </View>
                 <View>
-                    <Text style={styles.rowTitle}>Interest Amount</Text>
-                    <Text style={styles.rowRightSubtitle}>{loan.interest_amount}</Text>
+                    <Text style={styles.rowTitle}>Fees and Charges</Text>
+                    <Text style={styles.rowRightSubtitle}>{loan.fee_charges}</Text>
                 </View>
+            </View>
+            <View style={styles.rowContainer}>
+                <View>
+                    <Text style={styles.rowTitle}>Late Payment</Text>
+                    <Text style={styles.rowLeftSubtitle}>{loan.late_charges}</Text>
+                </View>
+                {/* <View>
+                   
+                </View> */}
             </View>
         </View>
         

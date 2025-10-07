@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import pushNotification from './pushNotification';
 import * as Updates from 'expo-updates';
 import { LanguageProvider } from './utils/LanguageContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
  
 export default function App() {
   async function onFetchUpdateAsync() {
@@ -28,17 +29,20 @@ export default function App() {
     onFetchUpdateAsync();
   }, []);
 
+  const queryClient = new QueryClient();
 
   return (
     <GestureHandlerRootView style={{ flex: 1}}>
        <View style={styles.container}>
       <StatusBar style="auto"  />
+      <QueryClientProvider client={queryClient}>
       <LanguageProvider>
       <AuthProvider>
       <AppNavigation />
       </AuthProvider>
       <Toast />
       </LanguageProvider>
+      </QueryClientProvider>
     </View>
     </GestureHandlerRootView>
    

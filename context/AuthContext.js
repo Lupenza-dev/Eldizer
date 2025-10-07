@@ -63,7 +63,7 @@ export const AuthProvider =({ children })=>{
             setIsLoading(false);
             setOutstandingAmount(outstanding_amount);
         //     //console.log(userInfos);
-           AsyncStorage.setItem('outstanding_amount',outstandingAmount);
+           AsyncStorage.setItem('outstanding_amount',JSON.stringify(outstandingAmount));
            AsyncStorage.setItem('isPasswordChanged',password_change);
            AsyncStorage.setItem('userToken',token);
            AsyncStorage.setItem('studentName',studentName);
