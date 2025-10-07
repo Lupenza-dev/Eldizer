@@ -8,6 +8,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import HeaderTab from '../components/HeaderTab';
 import Footer from '../components/Footer';
@@ -21,6 +22,7 @@ const LoanApplicationScreen = ({ route }) => {
   const navigation = useNavigation();
   const { t } = useLanguage();
   const { userToken } = useContext(AuthContext);
+  const queryClient = useQueryClient();
 
   const screenHeight = Dimensions.get('window').height;
   const { request_amount, plan_applied, loan_type, device_name, device_id, initial_deposit } = route.params;
@@ -78,20 +80,21 @@ const LoanApplicationScreen = ({ route }) => {
     }
   };
 
-  const loanApplication = async () => {
-    if (!agentValue) return notification(t('select_agent'));
-    if (
-      !guarantor1.fs ||
-      !guarantor1.rs ||
-      !guarantor1.pn ||
-      !guarantor2.fs ||
-      !guarantor2.rs ||
-      !guarantor2.pn
-    )
-      return notification(t('fill_guarantor_details'));
+  // ------------------ MUTATION (loanApplication) ------------------
+  const loanApplicationMutation = useMutation({
+    mutationFn: async () => {
+      if (!agentValue) throw new Error(t('select_agent'));
+      if (
+        !guarantor1.fs ||
+        !guarantor1.rs ||
+        !guarantor1.pn ||
+        !guarantor2.fs ||
+        !guarantor2.rs ||
+        !guarantor2.pn
+      ) {
+        throw new Error(t('fill_guarantor_details'));
+      }
 
-    setIsLoading(true);
-    try {
       const { data } = await axios.post(
         `${BASE_URL}/loan-application`,
         {
@@ -110,15 +113,27 @@ const LoanApplicationScreen = ({ route }) => {
         },
         { headers: { Authorization: `Bearer ${userToken}` } }
       );
+      return data;
+    },
 
+    onSuccess: (data) => {
       Toast.show({ type: 'success', text1: data.message, position: 'top' });
-      navigation.navigate('HomeScreen');
-    } catch (error) {
-      notification(error.response?.data?.errors || 'Application failed');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
+      // ✅ Refresh the loan list immediately
+      queryClient.invalidateQueries(['loans']);
+
+      // ✅ Navigate back to home
+      navigation.navigate('LoanScreen');
+    },
+
+    onError: (error) => {
+      const message =
+        error.response?.data?.errors ||
+        error.message ||
+        'Application failed';
+      Toast.show({ type: 'error', text1: message, position: 'top' });
+    },
+  });
 
   // ------------------ EFFECTS ------------------
   useEffect(() => {
@@ -133,17 +148,14 @@ const LoanApplicationScreen = ({ route }) => {
   );
 
   // ------------------ HELPERS ------------------
-  const notification = (message) =>
-    Toast.show({ type: 'error', text1: message, position: 'top' });
-
   const toggleGuarantor1 = () => setVisibleGuarantor1((prev) => !prev);
   const toggleGuarantor2 = () => setVisibleGuarantor2((prev) => !prev);
 
   const submitGuarantor = (index) => {
     const g = index === 1 ? guarantor1 : guarantor2;
-    if (!g.fs) return notification(t('guarantor_fullname_required'));
-    if (!g.rs) return notification(t('guarantor_relationship_required'));
-    if (!g.pn) return notification(t('guarantor_phone_required'));
+    if (!g.fs) return Toast.show({ type: 'error', text1: t('guarantor_fullname_required') });
+    if (!g.rs) return Toast.show({ type: 'error', text1: t('guarantor_relationship_required') });
+    if (!g.pn) return Toast.show({ type: 'error', text1: t('guarantor_phone_required') });
 
     index === 1
       ? setGuarantor1({ ...g, status: true }) || setVisibleGuarantor1(false)
@@ -160,7 +172,11 @@ const LoanApplicationScreen = ({ route }) => {
     <>
       <HeaderTab title={t('loan_application')} />
       <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Spinner visible={isLoading} textContent="Loading..." textStyle={{ color: '#FFF' }} />
+        <Spinner
+          visible={isLoading || loanApplicationMutation.isPending}
+          textContent="Loading..."
+          textStyle={{ color: '#FFF' }}
+        />
 
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <View style={styles.container}>
@@ -223,7 +239,11 @@ const LoanApplicationScreen = ({ route }) => {
 
             {/* ---- SUBMIT BUTTON ---- */}
             <View style={{ paddingHorizontal: 10, marginTop: 15 }}>
-              <IconButton icon="arrow-circle-right" name={t('confirm_loan_application')} onPress={loanApplication} />
+              <IconButton
+                icon="arrow-circle-right"
+                name={t('confirm_loan_application')}
+                onPress={() => loanApplicationMutation.mutate()}
+              />
             </View>
           </View>
 
@@ -252,7 +272,6 @@ const LoanApplicationScreen = ({ route }) => {
 };
 
 // ------------------ SUB COMPONENTS ------------------
-
 const DetailRow = ({ label, value }) => (
   <View style={styles.subMiddleView}>
     <Text style={styles.leftSubMiddleText}>{label}</Text>
@@ -291,7 +310,6 @@ const GuarantorBottomSheet = ({ visible, onClose, title, guarantor, setGuarantor
 );
 
 // ------------------ STYLES ------------------
-
 const styles = StyleSheet.create({
   scrollViewContent: { flexGrow: 1 },
   container: { flex: 1 },
