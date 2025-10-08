@@ -25,7 +25,7 @@ const FormWizard = () => {
 
   const [expoPushToken] = pushNotification();
   const [currentStep, setCurrentStep] = useState(0);
-  const steps = ['Address Info', 'College Info', 'Other Info'];
+  const steps = ['Address Info', 'College Info'];
   const navigation = useNavigation();
   const [regions, setRegions] = useState([]);
   const [colleges, setColleges] = useState([]);
@@ -104,6 +104,7 @@ const FormWizard = () => {
   }, [expoPushToken]);
 
   const handleNextStep = () => {
+    console.log("currentStep",currentStep);
     if (currentStep + 1 < steps.length) {
       if (currentStep === 0) {
         if (!idnumber) {
@@ -137,14 +138,15 @@ const FormWizard = () => {
          else {
           setCurrentStep(currentStep + 1);
         }
-      } else if (currentStep === 2) {
-        if (!image) {
-          notification("Image field required !!! 😡😡😡");
-        } 
-         else {
-          setCurrentStep(currentStep + 1);
-        }
-      }
+      } 
+      // else if (currentStep === 2) {
+      //   if (!image) {
+      //     notification("Image field required !!! 😡😡😡");
+      //   } 
+      //    else {
+      //     setCurrentStep(currentStep + 1);
+      //   }
+      // }
     }
   };
 
@@ -241,9 +243,20 @@ const FormWizard = () => {
   };
 
   const submitForm = async () => {
-    if (!image) {
-      notification("Image field required !!! 😡😡😡"); 
-    } else {
+    if (!collegeValue) {
+      notification("College Name field required !!! 😡😡😡");
+    } else if (!registrationid) {
+      notification("Registration Field field required !!! 😡😡😡");
+    } else if (!course) {
+      notification("Course Field field required !!! 😡😡😡");
+    } else if (!yearValue) {
+      notification("Course Year Field field required !!! 😡😡😡");
+    } else if (!heslbValue) {
+      notification("Heslb Status field required !!! 😡😡😡");
+    }else if(!indexno){
+      notification("Form Four Index No field required !!! 😡");
+    }
+    else {
       
     setIsLoading(true);
     var new_date = formatDateString(residence);
@@ -520,7 +533,7 @@ const FormWizard = () => {
               {/* <FormInput placeholder="HESLB status" label="HESLB status" /> */}
             </View>
           }
-           {currentStep === 2 &&
+           {/* {currentStep === 2 &&
             <View>
               <Spinner
                 visible={isLoading}
@@ -529,7 +542,7 @@ const FormWizard = () => {
               />
               <ImageUpload onImageChange={handleImageChange} />
             </View>
-          }
+          } */}
             {/* Add other steps/forms here */}
           </View>
           <View style={styles.buttonsContainer}>

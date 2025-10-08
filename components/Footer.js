@@ -85,7 +85,7 @@ const Footer = () => {
     </View>
     <View style={{ marginVertical:5, alignItems: 'center' }}>
             <Text style={{ fontWeight: '300', fontSize: 11}}>This App is Owned By</Text>
-            <Text style={{ fontWeight: 'bold', fontSize: 12}}>Eldizer Financial Service</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 12}}>El-dizer Financial Service</Text>
       </View>
       </View>
     </SafeAreaView>

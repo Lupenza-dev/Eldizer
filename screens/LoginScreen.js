@@ -97,7 +97,7 @@ const LoginScreen = ({ navigation}) => {
             
             <View style={{ marginTop: 20, alignItems: 'center' }}>
                 <Text style={{ fontWeight: '300', fontSize: 11, marginBottom: 5 }}>This App is Owned By</Text>
-                <Text style={{ fontWeight: 'bold', fontSize: 12 }}>Eldizer Financial Service</Text>
+                <Text style={{ fontWeight: 'bold', fontSize: 12 }}>El-dizer Financial Service</Text>
             </View>
         </View>
         </View>
