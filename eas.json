@@ -16,7 +16,10 @@
       }
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "ios": {
+        "image": "latest"    // ← this line fixes it
+      }
     }
   },
   "submit": {

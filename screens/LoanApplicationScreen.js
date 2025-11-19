@@ -207,7 +207,7 @@ const LoanApplicationScreen = ({ route }) => {
             </View>
 
             {/* ---- GUARANTORS ---- */}
-            <Text style={styles.guarantorHeader}>{t('guarantors')}</Text>
+            {/* <Text style={styles.guarantorHeader}>{t('guarantors')}</Text>
             <GuarantorButton
               added={guarantor1.status}
               label={t('add_guarantor')}
@@ -218,7 +218,7 @@ const LoanApplicationScreen = ({ route }) => {
               label={`${t('add_guarantor')} 2`}
               onPress={toggleGuarantor2}
               marginTop={30}
-            />
+            /> */}
 
             {/* ---- AGENT ---- */}
             <View style={{ margin: 10 }}>

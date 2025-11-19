@@ -42,7 +42,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-toast-message": "^2.1.6",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-wizard": "^2.1.1"
+    "react-native-wizard": "^2.1.1",
+    "expo-build-properties": "~0.13.3"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0"
