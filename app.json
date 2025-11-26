@@ -62,23 +62,25 @@
           "username": "lupenza"
         }
       ],
-      
       "expo-font",
       [
         "expo-build-properties",
         {
           "ios": {
-            "useFrameworks": "static",   // already default in SDK 52, but safe to keep
-            "modularHeaders": true       // ← this fixes your GoogleUtilities error
+            "useFrameworks": "static",
+            "modularHeaders": true
           },
           "android": {
             "compileSdkVersion": 35,
             "targetSdkVersion": 35,
             "buildToolsVersion": "35.0.0",
-            "nativePageSizes": ["16KB"]
+            "nativePageSizes": [
+              "16KB"
+            ]
           }
         }
-      ]
+      ],
+      "expo-asset"
     ]
   }
 }

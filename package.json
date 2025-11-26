@@ -19,7 +19,9 @@
     "@rneui/themed": "^0.0.0-edge.2",
     "@tanstack/react-query": "^5.90.2",
     "axios": "^1.4.0",
-    "expo": "^52.0.37",
+    "expo": "^52.0.0",
+    "expo-asset": "~11.0.5",
+    "expo-build-properties": "~0.13.3",
     "expo-constants": "~17.0.8",
     "expo-device": "~7.0.3",
     "expo-font": "~13.0.4",
@@ -42,8 +44,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-toast-message": "^2.1.6",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-wizard": "^2.1.1",
-    "expo-build-properties": "~0.13.3"
+    "react-native-wizard": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0"
