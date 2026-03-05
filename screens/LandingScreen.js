@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { s, Image, StyleSheet, Text, TouchableOpacity, View,SafeAreaView, Dimensions, StatusBar, Platform } from 'react-native';
+import { Image, StyleSheet, Text, View, Dimensions, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Carousel from 'react-native-reanimated-carousel';
 import IconButton from '../components/IconButton';
 
@@ -27,72 +28,89 @@ const slideList = [
   }
 ];
 
-const LandingScreen = ( { navigation}) => {
+const LandingScreen = ({ navigation }) => {
   const carouselRef = useRef(null);
+  
   const renderSlides = ({ item }) => (
-    <View style={styles.container}>
+    <View style={styles.slideContainer}>
       <View>
         <Text style={styles.textHeader}>{item.header}</Text>
         <Text style={styles.textSub}>{item.subtext}</Text>
       </View>
       <View>
-        <Image style={{ width: width , height: height*0.65}} source={item.image} />
+        <Image 
+          style={styles.imageStyle} 
+          source={item.image} 
+          resizeMode="contain"
+        />
       </View>
-     
     </View>
   );
 
-   let MaxHeight =0.92;
-   if (Platform.OS == "ios") {
-    MaxHeight =0.87;
-   }
+  let carouselHeight = 0.70;
+  if (Platform.OS === "ios") {
+    carouselHeight = 0.65;
+  }
+
   return (
-    <>
-    {/* <SafeAreaView> */}
-      <View style={styles.Maincontainer}>
-      <View style={{ backgroundColor: 'white', paddingTop: 10 }}>
-      <Carousel
-        ref={carouselRef}
-        loop
-        width={width}
-        height={height*MaxHeight}
-        autoPlay={true}
-        data={slideList}
-        scrollAnimationDuration={3000}
-        renderItem={renderSlides}
-      />
-       {/* <TouchableOpacity style={styles.buttonStyle} onPress={() => navigation.navigate('LoginScreen')}>
-        <Text style={styles.buttonText}>Get Started</Text>
-      </TouchableOpacity> */}
-      <View style={{ paddingLeft: 10, paddingRight: 10,}}>
-            <IconButton icon="arrow-circle-right" name="Get Started" onPress={() => navigation.navigate('LoginScreen')} />
+    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+      <View style={styles.mainContainer}>
+        {/* Carousel Section */}
+        <View style={styles.carouselContainer}>
+          <Carousel
+            ref={carouselRef}
+            loop
+            width={width}
+            height={height * carouselHeight}
+            autoPlay={true}
+            data={slideList}
+            scrollAnimationDuration={3000}
+            renderItem={renderSlides}
+          />
+        </View>
+
+        {/* Bottom Section with Button */}
+        <View style={styles.bottomSection}>
+          <View style={styles.buttonContainer}>
+            <IconButton 
+              icon="arrow-circle-right" 
+              name="Get Started" 
+              onPress={() => navigation.navigate('LoginScreen')} 
+            />
+          </View>
+          
+          <View style={styles.footerText}>
+            <Text style={styles.footerSubtext}>This App is Owned By</Text>
+            <Text style={styles.footerBrand}>El-dizer Financial Service</Text>
+          </View>
+        </View>
       </View>
-      <View style={{ marginVertical:5, alignItems: 'center' }}>
-        <Text style={{ fontWeight: '300', fontSize: 11}}>This App is Owned By</Text>
-        <Text style={{ fontWeight: 'bold', fontSize: 12}}>El-dizer Financial Service</Text>
-      </View>
-      </View>
-       </View>
-   
-   
-    {/* </SafeAreaView> */}
-   
-   </>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 40,
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  carouselContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  slideContainer: {
+    marginHorizontal: 20,
+    marginTop: 20,
   },
   textHeader: {
     fontSize: 35,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#272F3B'
+    color: '#272F3B',
   },
   textSub: {
     fontSize: 15,
@@ -100,36 +118,32 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginTop: 10,
     marginBottom: 20,
-    color: '#D54536'
+    color: '#D54536',
   },
   imageStyle: {
-    width: '100%',
-    height: 500,
+    width: width - 40,
+    height: height * 0.45,
   },
-  buttonStyle: {
-    justifyContent: 'center',
+  bottomSection: {
+    backgroundColor: 'white',
+    paddingBottom: Platform.OS === 'ios' ? 0 : 10,
+  },
+  buttonContainer: {
+    paddingHorizontal: 10,
+    marginBottom: 5,
+  },
+  footerText: {
+    marginVertical: 5,
     alignItems: 'center',
-    height: 60,
-    backgroundColor: '#272F3B',
-    borderRadius: 10,
-    marginLeft: 5,
-    marginRight: 5,
   },
-  buttonText: {
-    fontSize: 20,
-    color: '#fff',
-    fontWeight: '500',
+  footerSubtext: {
+    fontWeight: '300',
+    fontSize: 11,
   },
-  Maincontainer:{
-    flex: 1,
-    backgroundColor: '#fff'
-   // display: 'flex',
-   // flexDirection: 'column', // Default direction is column, so this can be omitted
-  // justifyContent: 'space-between', // Align components vertically with space in between
-   // alignItems: 'stretch', // Stretch components to fill the full width
-  // alignItems: 'center',
-  // alignContent: 'center'
-  }
+  footerBrand: {
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
 });
 
-export {LandingScreen};
+export { LandingScreen };

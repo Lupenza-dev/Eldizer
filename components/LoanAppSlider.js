@@ -29,6 +29,9 @@ const LoanAppSlider = ({ onApply }) => {
         maximumValue={200000}
         minimumValue={40000}
         step={10000}
+        minimumTrackTintColor="#FFFFFF"
+  maximumTrackTintColor="#000000"
+
         trackStyle={{ height: 10, backgroundColor: 'transparent' }}
         thumbStyle={{ height: 20, width: 20, backgroundColor: 'transparent' }}
         thumbProps={{

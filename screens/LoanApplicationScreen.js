@@ -59,6 +59,7 @@ const LoanApplicationScreen = ({ route }) => {
   };
 
   const loanCalculator = async () => {
+    console.log('ndani ya loan');
     try {
       const { data } = await axios.post(
         `${BASE_URL}/loan-calculator`,
@@ -67,6 +68,7 @@ const LoanApplicationScreen = ({ route }) => {
       );
 
       const info = data.data;
+      console.log('--info---',info);
       setTotalAmount(info.total_amount);
       setStartDate(info.start_date);
       setEndDate(info.end_date);
@@ -76,6 +78,7 @@ const LoanApplicationScreen = ({ route }) => {
       setLatePayment(info.late_payment);
       setCharges(info.fees_and_charges);
     } catch (error) {
+      console.log(error);
       console.log(error.response?.data);
     }
   };
@@ -139,12 +142,12 @@ const LoanApplicationScreen = ({ route }) => {
   useEffect(() => {
     loanCalculator();
     getAgents();
-  }, []);
+  }, [userToken,request_amount]);
 
   useFocusEffect(
     useCallback(() => {
       loanCalculator();
-    }, [])
+    }, [userToken,request_amount])
   );
 
   // ------------------ HELPERS ------------------

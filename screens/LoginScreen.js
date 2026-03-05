@@ -70,7 +70,7 @@ const LoginScreen = ({ navigation}) => {
         <View>
             {/* <Text style={styles.textLabel}>Password</Text> */}
             <MediumText style={styles.textLabel}  text="Password"/>
-            <TextInput placeholder='Write Password' secureTextEntry style={styles.textInput} onChangeText={text =>setPassword(text)} />
+            <TextInput placeholder='Write Password' secureTextEntry={true} value={password} style={styles.textInput} onChangeText={text =>setPassword(text)} />
             {passwordError ? <Text style={styles.textAlert}>Password required</Text> : "" }
             
         </View>
