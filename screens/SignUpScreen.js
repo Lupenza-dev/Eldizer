@@ -10,6 +10,7 @@ import axios from 'axios';
 import { BASE_URL } from '../utils/config';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Toast from 'react-native-toast-message';
+import { ScrollView } from 'react-native';
 
 const SignUpScreen = () => {
     const route = useRoute();
@@ -122,6 +123,7 @@ const SignUpScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       <Spinner
           visible={isLoading}
           textContent={'Loading...'}
@@ -192,6 +194,7 @@ const SignUpScreen = () => {
                 <Text style={{ fontWeight: 'bold', fontSize: 12 }}>El-dizer Financial Service</Text>
             </View>
         </View>
+        </ScrollView>
     </View>
   )
 }

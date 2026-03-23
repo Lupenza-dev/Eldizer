@@ -42,7 +42,7 @@ const Header = () => {
             <Text style={styles.buttonTitle}>{ language == "en" ? "SW" : "EN"}</Text>
         </TouchableOpacity>
         <Icon
-              name="bells"
+              name="bell"
               type="antdesign"
               size={30}
               color="#fff"

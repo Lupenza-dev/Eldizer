@@ -1,7 +1,6 @@
-import React, { useRef } from 'react';
-import { Image, StyleSheet, Text, View, Dimensions, Platform } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Image, StyleSheet, Text, View, Dimensions, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Carousel from 'react-native-reanimated-carousel';
 import IconButton from '../components/IconButton';
 
 const width = Dimensions.get('window').width;
@@ -29,10 +28,11 @@ const slideList = [
 ];
 
 const LandingScreen = ({ navigation }) => {
-  const carouselRef = useRef(null);
+  const scrollViewRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
   
-  const renderSlides = ({ item }) => (
-    <View style={styles.slideContainer}>
+  const renderSlides = (item, index) => (
+    <View key={item.id} style={styles.slideContainer}>
       <View>
         <Text style={styles.textHeader}>{item.header}</Text>
         <Text style={styles.textSub}>{item.subtext}</Text>
@@ -47,6 +47,12 @@ const LandingScreen = ({ navigation }) => {
     </View>
   );
 
+  const handleScroll = (event) => {
+    const contentOffset = event.nativeEvent.contentOffset.x;
+    const index = Math.round(contentOffset / width);
+    setCurrentIndex(index);
+  };
+
   let carouselHeight = 0.70;
   if (Platform.OS === "ios") {
     carouselHeight = 0.65;
@@ -57,16 +63,30 @@ const LandingScreen = ({ navigation }) => {
       <View style={styles.mainContainer}>
         {/* Carousel Section */}
         <View style={styles.carouselContainer}>
-          <Carousel
-            ref={carouselRef}
-            loop
-            width={width}
-            height={height * carouselHeight}
-            autoPlay={true}
-            data={slideList}
-            scrollAnimationDuration={3000}
-            renderItem={renderSlides}
-          />
+          <ScrollView
+            ref={scrollViewRef}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            onScroll={handleScroll}
+            scrollEventThrottle={16}
+            style={{ height: height * carouselHeight }}
+          >
+            {slideList.map((item, index) => renderSlides(item, index))}
+          </ScrollView>
+          
+          {/* Pagination dots */}
+          <View style={styles.pagination}>
+            {slideList.map((_, index) => (
+              <View
+                key={index}
+                style={[
+                  styles.dot,
+                  { backgroundColor: index === currentIndex ? '#D54536' : '#ccc' }
+                ]}
+              />
+            ))}
+          </View>
         </View>
 
         {/* Bottom Section with Button */}
@@ -103,6 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   slideContainer: {
+    width: width,
     marginHorizontal: 20,
     marginTop: 20,
   },
@@ -143,6 +164,21 @@ const styles = StyleSheet.create({
   footerBrand: {
     fontWeight: 'bold',
     fontSize: 12,
+  },
+  pagination: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 4,
   },
 });
 

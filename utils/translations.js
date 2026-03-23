@@ -67,7 +67,8 @@ export const translations = {
       score: 'Score Gained',
       interest: 'Interest Rate',
       fee_charges: 'Fees and Charges',
-      late_payment: "Late Payment"
+      late_payment: "Late Payment",
+      bank_name: "Select Bank Name",
 
 
     },
@@ -136,7 +137,9 @@ export const translations = {
       score: 'Score Gained',
       interest: 'Riba',
       fee_charges: 'Ada',
-      late_payment: "Ada ya Ucheleweshaji"
+      late_payment: "Ada ya Ucheleweshaji",
+      bank_name: "Chagua Jina la Benki",
+
 
 
 

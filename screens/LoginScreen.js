@@ -7,6 +7,7 @@ import { AuthContext } from '../context/AuthContext'
 import MediumText from '../components/MediumText'
 import IconButton from '../components/IconButton'
 import pushNotification from '../pushNotification'
+import NewForm from '../components/NewForm'
 
 const LoginScreen = ({ navigation}) => {
     const {login,isLoading} =useContext(AuthContext);
@@ -62,16 +63,29 @@ const LoginScreen = ({ navigation}) => {
         </View>
         <View>
             {/* <Text style={styles.textLabel}>Username</Text> */}
-            <MediumText style={styles.textLabel}  text="Username"/>
+            {/* <MediumText style={styles.textLabel}  text="Username"/>
             <TextInput placeholder='Write Username ' style={styles.textInput} value={username} onChangeText={text =>setUserName(text)} />
-            {nameError ? <Text style={styles.textAlert}>Username required</Text>: ""}
+            {nameError ? <Text style={styles.textAlert}>Username required</Text>: ""} */}
+
+            <NewForm label="Enter Username" icon_name="user" icon_type="antdesign" value={username} 
+             onChangeText={text => {
+                setUserName(text);
+            }} 
+            error={nameError} 
+          />
             
         </View>
         <View>
             {/* <Text style={styles.textLabel}>Password</Text> */}
-            <MediumText style={styles.textLabel}  text="Password"/>
+            {/* <MediumText style={styles.textLabel}  text="Password"/>
             <TextInput placeholder='Write Password' secureTextEntry={true} value={password} style={styles.textInput} onChangeText={text =>setPassword(text)} />
-            {passwordError ? <Text style={styles.textAlert}>Password required</Text> : "" }
+            {passwordError ? <Text style={styles.textAlert}>Password required</Text> : "" } */}
+            <NewForm label="Enter Password" icon_name="lock" icon_type="antdesign" value={password} 
+             onChangeText={text => {
+                setPassword(text);
+            }} 
+            error={passwordError} 
+          />
             
         </View>
         <TouchableOpacity style={styles.buttonStyle} onPress={()=>userLogin(username,password)}>

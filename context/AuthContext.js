@@ -123,14 +123,14 @@ export const AuthProvider =({ children })=>{
         setUserToken(userToken);
         setStudentName(studentName);
        // setUserInfo(userInfo);
-        setCustomer(customer);
-        setStudent(student);
-        setCustomerName(customerName);
-        setEmail(email);
-        setImage(image);
-        setIsPasswordChanged(password_change);
-        setRegStage(stage);
-        setOutstandingAmount(outstanding_amount);
+        setCustomer(JSON.parse(customer));
+        setStudent(JSON.parse(student));
+        setCustomerName(JSON.parse(customerName));
+        setEmail(JSON.parse(email));
+        setImage(JSON.parse(image));
+        setIsPasswordChanged(JSON.parse(password_change));
+        setRegStage(JSON.parse(stage));
+        setOutstandingAmount(JSON.parse(outstanding_amount));
 
         } catch (error) {
             console.log("is loged in error" + error); 
