@@ -106,12 +106,18 @@ const OurService = () => {
         <View style={styles.bottomNavigationView2}>
           <View style={styles.sheetHandle} />
           <View style={styles.comingSoonContent}>
-            <View style={styles.warningIconWrapper}>
-              <Image source={require('../assets/warning.png')} style={styles.warninImageStyle} />
+            <View style={styles.warningIconOuterRing}>
+              <View style={styles.warningIconWrapper}>
+                <Image source={require('../assets/warning.png')} style={styles.warninImageStyle} />
+              </View>
+            </View>
+            <View style={styles.serviceBadge}>
+              <Text style={styles.serviceBadgeText}>{t('pedi')}</Text>
             </View>
             <Text style={styles.comingSoonTitle}>{t('coming_soon')}</Text>
+            <Text style={styles.comingSoonSubtitle}>{t('coming_soon_message')}</Text>
           </View>
-          <View style={{ marginHorizontal: 16, marginTop: 16 }}>
+          <View style={{ marginHorizontal: 16, marginTop: 20, marginBottom: 24 }}>
             <IconButton icon="arrow-circle-right" name={t('close')} onPress={toggleBottomNavigationView2} />
           </View>
         </View>
@@ -191,35 +197,65 @@ const styles = StyleSheet.create({
         backgroundColor: '#f3f4f6',
         marginVertical: 8,
     },
-    warningIconWrapper: {
-        width: 90,
-        height: 90,
-        borderRadius: 45,
-        backgroundColor: '#fef3c7',
+    warningIconOuterRing: {
+        width: 108,
+        height: 108,
+        borderRadius: 54,
+        backgroundColor: 'rgba(254, 243, 199, 0.45)',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 10,
     },
+    warningIconWrapper: {
+        width: 84,
+        height: 84,
+        borderRadius: 42,
+        backgroundColor: '#fef3c7',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     warninImageStyle:{
-        height: 56,
-        width: 56,
+        height: 48,
+        width: 48,
         resizeMode: 'contain',
     },
     comingSoonContent: {
         alignItems: 'center',
         marginTop: 16,
+        paddingHorizontal: 24,
+    },
+    serviceBadge: {
+        backgroundColor: 'rgba(213, 69, 54, 0.1)',
+        paddingHorizontal: 14,
+        paddingVertical: 5,
+        borderRadius: 14,
+        marginTop: 14,
+    },
+    serviceBadgeText: {
+        fontSize: 12,
+        fontWeight: '700',
+        color: '#D54536',
+        letterSpacing: 0.5,
+        textTransform: 'uppercase',
     },
     comingSoonTitle: {
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: '700',
         color: '#111827',
-        marginTop: 14,
+        marginTop: 10,
+    },
+    comingSoonSubtitle: {
+        textAlign: 'center',
+        fontSize: 14,
+        color: '#6b7280',
+        lineHeight: 20,
+        marginTop: 8,
     },
     bottomNavigationView2: {
         backgroundColor: '#fff',
-        height: screenHeight * 0.32,
         borderTopRightRadius: 24,
         borderTopLeftRadius: 24,
+        paddingBottom: 8,
     },
 })
