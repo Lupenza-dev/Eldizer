@@ -63,9 +63,9 @@ export const AuthProvider =({ children })=>{
             setIsLoading(false);
             setOutstandingAmount(outstanding_amount);
         //     //console.log(userInfos);
-           AsyncStorage.setItem('outstanding_amount',JSON.stringify(outstandingAmount));
-           AsyncStorage.setItem('isPasswordChanged',password_change);
-           AsyncStorage.setItem('userToken',token);
+           AsyncStorage.setItem('outstanding_amount',JSON.stringify(outstanding_amount));
+           AsyncStorage.setItem('isPasswordChanged',JSON.stringify(password_change));
+           //AsyncStorage.setItem('userToken',token);
            AsyncStorage.setItem('studentName',studentName);
            AsyncStorage.setItem('stage',JSON.stringify(stage));
            // AsyncStorage.setItem('userInfo',userInfo);
@@ -93,7 +93,7 @@ export const AuthProvider =({ children })=>{
        // setUserInfo(null);
         setStudentName(null);
         setIsPasswordChanged(null);
-        AsyncStorage.removeItem('userToken');
+       // AsyncStorage.removeItem('userToken');
         AsyncStorage.removeItem('isPasswordChanged');
         AsyncStorage.removeItem('studentName');
        // AsyncStorage.removeItem('userInfo');
@@ -106,11 +106,19 @@ export const AuthProvider =({ children })=>{
         AsyncStorage.removeItem('outstanding_amount');
     }
 
-    const isLogedin =async()=>{
+    const safeParse = (value) => {
         try {
-        let userToken =await AsyncStorage.getItem('userToken');
+            return value ? JSON.parse(value) : null;
+        } catch (error) {
+            return value;
+        }
+    };
+
+    const isLogedin =async()=>{
+        // logout();
+        try {
+        // let userToken =await AsyncStorage.getItem('userToken');
         let studentName =await AsyncStorage.getItem('studentName');
-        //let userInfo =await AsyncStorage.getItem('userInfo');
         let customer =await AsyncStorage.getItem('customer');
         let student  =await AsyncStorage.getItem('student');
         let customerName  =await AsyncStorage.getItem('customerName');
@@ -120,17 +128,16 @@ export const AuthProvider =({ children })=>{
         let stage  =await AsyncStorage.getItem('stage');
         let outstanding_amount  =await AsyncStorage.getItem('outstanding_amount');
 
-        setUserToken(userToken);
+       // setUserToken(userToken);
         setStudentName(studentName);
-       // setUserInfo(userInfo);
-        setCustomer(JSON.parse(customer));
-        setStudent(JSON.parse(student));
-        setCustomerName(JSON.parse(customerName));
-        setEmail(JSON.parse(email));
-        setImage(JSON.parse(image));
-        setIsPasswordChanged(JSON.parse(password_change));
-        setRegStage(JSON.parse(stage));
-        setOutstandingAmount(JSON.parse(outstanding_amount));
+        setCustomer(safeParse(customer));
+        setStudent(safeParse(student));
+        setCustomerName(safeParse(customerName));
+        setEmail(safeParse(email));
+        setImage(safeParse(image));
+        setIsPasswordChanged(safeParse(password_change));
+        setRegStage(safeParse(stage));
+        setOutstandingAmount(safeParse(outstanding_amount));
 
         } catch (error) {
             console.log("is loged in error" + error); 

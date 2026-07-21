@@ -3,168 +3,208 @@ import React, { useEffect, useState } from 'react'
 import {Icon } from 'react-native-elements'; 
 import { useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 
-
-
 const LoanCard = (props) => {
-const loan =props.data;
-const [borderColor ,setBorderColor]=useState([]);
-const [textColor ,setTextColor]=useState([]);
+    const loan = props.data;
+    const [borderColor, setBorderColor] = useState({});
+    const [textColor, setTextColor] = useState({});
     const navigation = useNavigation();
 
-const handleLoanClick=(has_contract,contract,loan)=>{
-    if (has_contract == "Yes") {
-        navigation.navigate('LoanProfilecreen', { contract: contract, });
-    } else {
-        navigation.navigate('ApplicationScreen' ,{loan: loan});
-    }
-}
-
-useEffect(() => {
-    const level =loan.level;
-    if (level == "GRANTED") {
-        setTextColor({color: '#59B259'});
-        setBorderColor( {borderColor: "#59B259"});
+    const handleLoanClick = (has_contract, contract, loan) => {
+        if (has_contract == "Yes") {
+            navigation.navigate('LoanProfilecreen', { contract: contract, });
+        } else {
+            navigation.navigate('ApplicationScreen', { loan: loan });
+        }
     }
 
-    if (level == "Cancelled" || level == "Rejected by Agent" || level == "Rejected by Admin" || level == "Default" ) {
-        setTextColor({color: '#F70000'});
-        setBorderColor( {borderColor: "#F70000"});
-    }
-    
-  }, []);
-    
+    useEffect(() => {
+        const level = loan.level;
+        if (level == "GRANTED") {
+            setTextColor({ color: '#059669' });
+            setBorderColor({ borderColor: "#059669", backgroundColor: '#f0fdf4' });
+        }
+        if (level == "Cancelled" || level == "Rejected by Agent" || level == "Rejected by Admin" || level == "Default") {
+            setTextColor({ color: '#dc2626' });
+            setBorderColor({ borderColor: "#dc2626", backgroundColor: '#fef2f2' });
+        }
+    }, []);
 
-  return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={() => handleLoanClick(loan.has_contract,loan.contract,loan)}>
-     <View >
-        <View style={styles.topContainer}>
-            <View style={styles.iconViewContainer}>
-            <Icon
-              name="user-o"
-              type="font-awesome"
-              size={20}
-              color="#272F3B"
-            />
-            <Icon
-              name="money"
-              type="font-awesome"
-              size={20}
-              style={{ transform: [{ rotate: '90deg' }] }}
-              color="#272F3B"
-            />
-            </View>
-            <View>
-            <Text style={styles.textHeader}>Personal Loan</Text> 
-            <View style={styles.tableContainer}>
-                <View>
-                    <Text style={styles.tabletd}>Loan ID</Text>
-                    <Text style={styles.tabletd}>Amount</Text>
-                    <Text style={styles.tabletd}>Application Date</Text>
+    return (
+        <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={() => handleLoanClick(loan.has_contract, loan.contract, loan)}>
+            <View style={styles.card}>
+                {/* Header Section */}
+                <View style={styles.header}>
+                    <View style={styles.iconContainer}>
+                        <Icon
+                            name="briefcase"
+                            type="font-awesome"
+                            size={24}
+                            color="#1f2937"
+                        />
+                    </View>
+                    <View style={styles.headerContent}>
+                        <Text style={styles.loanType}>Personal Loan</Text>
+                        <Text style={styles.loanId}>#{loan.loan_code}</Text>
+                    </View>
+                    <View style={[styles.statusBadge, borderColor]}>
+                        <Text style={[styles.statusText, textColor]}>{loan.level}</Text>
+                    </View>
                 </View>
-                <View style={{ paddingLeft: 30}}>
-                    <Text style={styles.tabletd}>{loan.loan_code}</Text>
-                    <Text style={styles.tabletd}>{loan.amount.toLocaleString()}</Text>
-                    <Text style={styles.tabletd}>{loan.application_date}</Text>
+
+                {/* Divider */}
+                <View style={styles.divider} />
+
+                {/* Details Section */}
+                <View style={styles.detailsSection}>
+                    <View style={styles.detailRow}>
+                        <View style={styles.detailItem}>
+                            <Text style={styles.detailLabel}>Amount</Text>
+                            <Text style={styles.detailValue}>TZS {loan.amount.toLocaleString()}</Text>
+                        </View>
+                        <View style={styles.detailItem}>
+                            <Text style={styles.detailLabel}>Application Date</Text>
+                            <Text style={styles.detailValue}>{loan.application_date}</Text>
+                        </View>
+                    </View>
                 </View>
-            </View> 
+
+                {/* Footer Section */}
+                <View style={styles.footer}>
+                    <View style={styles.totalAmountContainer}>
+                        <Text style={styles.totalAmountLabel}>Total Amount</Text>
+                        <Text style={styles.totalAmountValue}>TZS {loan.loan_amount.toLocaleString()}</Text>
+                    </View>
+                    <Icon
+                        name="chevron-right"
+                        type="font-awesome"
+                        size={16}
+                        color="#6b7280"
+                    />
+                </View>
             </View>
-            
-        </View>
-        <View style={styles.bottomView}>
-            <View>
-            <Text style={styles.numberText}>TZS {loan.loan_amount.toLocaleString()}</Text>
-            </View>
-            <View style={[styles.statusLabel,borderColor]}>
-            <Text style={[styles.statusText,textColor]}>{loan.level}</Text>
-            </View>
-        </View>
-    </View>
-    </TouchableOpacity>
-   
-  )
+        </TouchableOpacity>
+    )
 }
 
 export default LoanCard
 
 const styles = StyleSheet.create({
-    container:{
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        margin: 10,
-        marginVertical: 5,
-        height: 170,
-        borderRadius: 10,
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0,},
-        shadowRadius: 10,
-        elevation: 6,
-        backgroundColor: 'white',
-       // width: 100,
+    container: {
+        marginHorizontal: 16,
+        marginVertical: 8,
     },
-    leftContainer:{
-        flexDirection: 'row',
-        gap: 10
-
-    },
-    image:{
-        height: 60,
-        width: 60,
-        marginLeft: 10,
-    },
-    textHeader:{
-        fontSize: 20,
-        fontWeight: '600',
-    },
-    numberText:{
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    statusText:{
-        fontSize: 15,
-        fontWeight: '500',
-        color: '#272F3B',
-        fontWeight: 'bold'
-    },
-    topContainer:{
-        flexDirection: "row",
-        paddingTop: 20
-    },
-    tableContainer:{
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    iconViewContainer:{
-        flexDirection: 'row',
-        backgroundColor: 'rgba(7, 133, 134,0.2)',
-        height: 60,
-        width: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginLeft: 20,
-        borderRadius: 50,
-        marginRight: 20
-    },
-    tabletd:{
-        fontSize: 15,
-        color: 'gray'
-    },
-    bottomView:{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 10,
-        marginHorizontal: 10,
-        marginTop: 10
-    },
-    statusLabel:{
-        backgroundColor: '#fff',
-        height: 40,
-        width: 160,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 30,
+    card: {
+        backgroundColor: '#ffffff',
+        borderRadius: 12,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        elevation: 4,
         borderWidth: 1,
-        borderColor: "#272F3B"
-    }
+        borderColor: '#f3f4f6',
+        overflow: 'hidden',
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 16,
+        paddingBottom: 12,
+    },
+    iconContainer: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        backgroundColor: '#f8fafc',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 12,
+    },
+    headerContent: {
+        flex: 1,
+    },
+    loanType: {
+        fontSize: 18,
+        fontWeight: '700',
+        color: '#111827',
+        marginBottom: 2,
+    },
+    loanId: {
+        fontSize: 14,
+        color: '#6b7280',
+        fontWeight: '500',
+    },
+    statusBadge: {
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 20,
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        minWidth: 100,
+    },
+    statusText: {
+        fontSize: 12,
+        fontWeight: '600',
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
+    },
+    divider: {
+        height: 1,
+        backgroundColor: '#f3f4f6',
+        marginHorizontal: 16,
+    },
+    detailsSection: {
+        padding: 16,
+        paddingTop: 12,
+    },
+    detailRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    detailItem: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    detailLabel: {
+        fontSize: 12,
+        color: '#6b7280',
+        fontWeight: '500',
+        marginBottom: 4,
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
+    },
+    detailValue: {
+        fontSize: 16,
+        color: '#111827',
+        fontWeight: '600',
+        textAlign: 'center',
+    },
+    footer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 16,
+        paddingTop: 12,
+        backgroundColor: '#fafbfc',
+    },
+    totalAmountContainer: {
+        flex: 1,
+    },
+    totalAmountLabel: {
+        fontSize: 12,
+        color: '#6b7280',
+        fontWeight: '500',
+        marginBottom: 2,
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
+    },
+    totalAmountValue: {
+        fontSize: 20,
+        color: '#111827',
+        fontWeight: '700',
+    },
 })

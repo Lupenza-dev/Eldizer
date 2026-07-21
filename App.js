@@ -9,8 +9,37 @@ import pushNotification from './pushNotification';
 import * as Updates from 'expo-updates';
 import { LanguageProvider } from './utils/LanguageContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
  
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+  const [fontsLoaded, fontError] = useFonts({
+    'anticon': require('./assets/icon-fonts/anticon.ttf'),
+    'entypo': require('./assets/icon-fonts/entypo.ttf'),
+    'evilicons': require('./assets/icon-fonts/evilicons.ttf'),
+    'feather': require('./assets/icon-fonts/feather.ttf'),
+    'FontAwesome': require('./assets/icon-fonts/FontAwesome.ttf'),
+    'FontAwesome5Free-Brand': require('./assets/icon-fonts/FontAwesome5Free-Brand.ttf'),
+    'FontAwesome5Free-Regular': require('./assets/icon-fonts/FontAwesome5Free-Regular.ttf'),
+    'FontAwesome5Free-Solid': require('./assets/icon-fonts/FontAwesome5Free-Solid.ttf'),
+    'Fontisto': require('./assets/icon-fonts/Fontisto.ttf'),
+    'foundation': require('./assets/icon-fonts/foundation.ttf'),
+    'ionicons': require('./assets/icon-fonts/ionicons.ttf'),
+    'material': require('./assets/icon-fonts/material.ttf'),
+    'material-community': require('./assets/icon-fonts/material-community.ttf'),
+    'octicons': require('./assets/icon-fonts/octicons.ttf'),
+    'simple-line-icons': require('./assets/icon-fonts/simple-line-icons.ttf'),
+    'zocial': require('./assets/icon-fonts/zocial.ttf'),
+  });
+
+  useEffect(() => {
+    if (fontsLoaded || fontError) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
   async function onFetchUpdateAsync() {
     try {
       const update = await Updates.checkForUpdateAsync();
@@ -26,10 +55,14 @@ export default function App() {
   }
 
   useEffect(() => {
-    onFetchUpdateAsync();
+    //onFetchUpdateAsync();
   }, []);
 
   const queryClient = new QueryClient();
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <GestureHandlerRootView style={{ flex: 1}}>

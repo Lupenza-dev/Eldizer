@@ -3,10 +3,10 @@ import React from 'react'
 
 const DividerText = (props) => {
   return (
-    <View>
-        <View style={styles.textContainer} >
-          <Text style={styles.headerText}>{props.name}</Text>
-      </View>
+    <View style={styles.textContainer}>
+        <View style={styles.accentBar} />
+        <Text style={styles.headerText}>{props.name}</Text>
+        <View style={styles.dividerLine} />
     </View>
   )
 }
@@ -14,16 +14,28 @@ const DividerText = (props) => {
 export default DividerText
 
 const styles = StyleSheet.create({
-    headerText:{
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#272F3B',
+    textContainer:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 12,
+        marginHorizontal: 10,
+        gap: 10,
       },
-      textContainer:{
-        borderLeftWidth: 5,
-        borderLeftColor: "#272F3B",
-        marginBottom: 10,
-        paddingHorizontal: 10,
-        marginHorizontal: 10
-      }
+      accentBar:{
+        width: 5,
+        height: 22,
+        borderRadius: 3,
+        backgroundColor: '#272F3B',
+      },
+      headerText:{
+        fontSize: 18,
+        fontWeight: '700',
+        color: '#272F3B',
+        letterSpacing: 0.3,
+      },
+      dividerLine:{
+        flex: 1,
+        height: 1,
+        backgroundColor: '#E5E7EB',
+      },
 })

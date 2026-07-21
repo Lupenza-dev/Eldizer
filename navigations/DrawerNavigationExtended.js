@@ -10,7 +10,7 @@ const DrawerNavigationExtended = (prop) => {
   const navigation = useNavigation();
   const [data ,setData] =useState(null);
 
-  const {customerName} =useContext(AuthContext);
+  const {customerName,customer} =useContext(AuthContext);
   const {email} =useContext(AuthContext);
   const {image} =useContext(AuthContext);
   const {logout} =useContext(AuthContext);
@@ -71,7 +71,9 @@ const DrawerNavigationExtended = (prop) => {
           />
           <Text style={styles.linkText}>{t('profile')}</Text>
         </TouchableOpacity>
-        <TouchableOpacity  onPress={() => navigation.navigate("CollegeProfileScreen")} style={styles.drawerlinkContainer} activeOpacity={0.8} >
+        {
+          customer.customer_type == 1 && (
+            <TouchableOpacity  onPress={() => navigation.navigate("CollegeProfileScreen")} style={styles.drawerlinkContainer} activeOpacity={0.8} >
           <Icon
               name="graduation-cap"
               type="font-awesome"
@@ -80,6 +82,9 @@ const DrawerNavigationExtended = (prop) => {
             />
           <Text style={styles.linkText}>{t('college')}</Text>
         </TouchableOpacity>
+          )
+        }
+        
         <TouchableOpacity onPress={() =>navigation.navigate('AddressProfileScreen')} style={styles.drawerlinkContainer} activeOpacity={0.8} >
           <Icon
               name="address-book-o"
@@ -96,7 +101,7 @@ const DrawerNavigationExtended = (prop) => {
         <View>
         <TouchableOpacity style={styles.drawerlinkContainer} onPress={() =>navigation.navigate('TermsScreen')}  activeOpacity={0.8} >
           <Icon
-              name="filetext1"
+              name="file1"
               type="antdesign"
               size={17}
               color="#606060"

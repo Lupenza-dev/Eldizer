@@ -36,7 +36,7 @@ import NewForm from "../components/NewForm";
 const LoanApplicationScreen = ({ route }) => {
   const navigation = useNavigation();
   const { t } = useLanguage();
-  const { userToken } = useContext(AuthContext);
+  const { userToken,customer } = useContext(AuthContext);
   const queryClient = useQueryClient();
 
   const screenHeight = Dimensions.get("window").height;
@@ -130,10 +130,22 @@ const LoanApplicationScreen = ({ route }) => {
   // ------------------ MUTATION (loanApplication) ------------------
   const loanApplicationMutation = useMutation({
     mutationFn: async () => {
-      console.log('agent value',agentValue)
-      if (!agentValue) throw new Error(t("select_agent"));
-      if (!bankId) throw new Error(t("bank_name"));
-      if (!accountNumber) throw new Error("Account number is required");
+      //console.log('agent value',agentValue)
+      if (!agentValue && customer?.customer_type === 1) 
+         return Toast.show({
+        type: "error",
+        text1: "Please select Agent",
+      });
+      if (!bankId) 
+         return Toast.show({
+        type: "error",
+        text1: "Please select Bank",
+      });
+      if (!accountNumber) 
+         return Toast.show({
+        type: "error",
+        text1: "Please enter Account number",
+      });
 
       const { data } = await axios.post(
         `${BASE_URL}/loan-application`,
@@ -283,8 +295,11 @@ console.log('error',error);
 
             {/* ---- AGENT ---- */}
             <View style={{ margin: 10 }}>
-              <Text style={styles.guarantorHeader}>{t("college_agent")}</Text>
-              <Dropdown
+              {
+                customer?.customer_type === 1 && (
+                  <>
+                  <Text style={styles.guarantorHeader}>{t("college_agent")}</Text>
+                   <Dropdown
                 style={styles.dropdown}
                 data={dropdownData}
                 search
@@ -298,7 +313,11 @@ console.log('error',error);
                   <AntDesign color="black" name="down" size={12} />
                 )}
               />
-              <Dropdown
+                  </>
+                )
+              }
+             
+                <Dropdown
                 style={styles.dropdown}
                 data={banks}
                 search
@@ -312,6 +331,7 @@ console.log('error',error);
                   <AntDesign color="black" name="down" size={12} />
                 )}
               />
+            
               <View style={{ marginTop: 20}}>
               <NewForm
                 label="Enter Account Number"

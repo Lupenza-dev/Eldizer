@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Icon } from 'react-native-elements'
 import { Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
@@ -7,11 +7,13 @@ import { BottomSheet } from 'react-native-btr'
 import IconButton from './IconButton'
 import LoanAppSlider from './LoanAppSlider'
 import { useLanguage } from '../utils/LanguageContext'
+import { AuthContext } from '../context/AuthContext'
 
 const screenHeight =Dimensions.get('window').height;
 
 const OurService = () => {
     const navigation =useNavigation();
+    const {customer} =useContext(AuthContext);
     const {t} =useLanguage();
 
     const [visible, setVisible] = useState(false);
@@ -37,96 +39,83 @@ const OurService = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.serviceContainer} onPress={toggleBottomNavigationView} >
-        <View style={styles.iconView}>
-            <Image source={ require('../assets/money.png')} style={styles.imageStyle} />
+      <TouchableOpacity
+        style={styles.serviceContainer}
+        activeOpacity={0.7}
+        onPress={toggleBottomNavigationView}
+      >
+        <View style={[styles.iconView, { backgroundColor: '#ecfdf5' }]}>
+          <Image source={require('../assets/money.png')} style={styles.imageStyle} />
         </View>
         <Text style={styles.serviceText}>{t('money_loan')}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.serviceContainer} onPress={()=>navigation.navigate('DeviceScreen',{
-        device_category: 1
-      })} >
-        <View style={styles.iconView}>
-            <Image source={ require('../assets/phone.png')} style={styles.imageStyle} />
+
+      <TouchableOpacity
+        style={styles.serviceContainer}
+        activeOpacity={0.7}
+        onPress={() => navigation.navigate('DeviceScreen', { device_category: 1 })}
+      >
+        <View style={[styles.iconView, { backgroundColor: '#eff6ff' }]}>
+          <Image source={require('../assets/phone.png')} style={styles.imageStyle} />
         </View>
         <Text style={styles.serviceText}>{t('phone_loan')}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.serviceContainer} onPress={()=>navigation.navigate('DeviceScreen',{
-        device_category: 2
-      })}>
-        <View style={styles.iconView}>
-        <Image source={ require('../assets/laptop.png')} style={styles.imageStyle} />
 
+      <TouchableOpacity
+        style={styles.serviceContainer}
+        activeOpacity={0.7}
+        onPress={() => navigation.navigate('DeviceScreen', { device_category: 2 })}
+      >
+        <View style={[styles.iconView, { backgroundColor: '#fef3c7' }]}>
+          <Image source={require('../assets/laptop.png')} style={styles.imageStyle} />
         </View>
         <Text style={styles.serviceText}>{t('laptop_loan')}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.serviceContainer} onPress={toggleBottomNavigationView2}>
-        <View style={styles.iconView}>
-        <Image source={ require('../assets/box.png')} style={styles.imageStyle} />
 
+      <TouchableOpacity
+        style={styles.serviceContainer}
+        activeOpacity={0.7}
+        onPress={toggleBottomNavigationView2}
+      >
+        <View style={[styles.iconView, { backgroundColor: '#fce7f3' }]}>
+          <Image source={require('../assets/box.png')} style={styles.imageStyle} />
         </View>
         <Text style={styles.serviceText}>{t('pedi')}</Text>
       </TouchableOpacity>
+
       <BottomSheet
-          visible={visible}
-          //setting the visibility state of the bottom shee
-          onBackButtonPress={toggleBottomNavigationView}
-          //Toggling the visibility state on the click of the back botton
-          onBackdropPress={toggleBottomNavigationView}
-          //Toggling the visibility state on the clicking out side of the sheet
-        >
-          {/*Bottom Sheet inner View*/}
-          <View style={styles.bottomNavigationView}>
-            <View style={{ margin: 10}}>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  padding: 10,
-                  fontSize: 20,
-                  fontWeight: 'bold',
-                  color: "#272F3B"
-                }}> 
-               {t('money_loan')}
-              </Text>
-             <View>
-                <LoanAppSlider onApply={closeBottomSheetAndNavigate} />
-             </View>
-            </View>
+        visible={visible}
+        onBackButtonPress={toggleBottomNavigationView}
+        onBackdropPress={toggleBottomNavigationView}
+      >
+        <View style={styles.bottomNavigationView}>
+          <View style={styles.sheetHandle} />
+          <View style={styles.sheetContent}>
+            <Text style={styles.sheetTitle}>{t('money_loan')}</Text>
+            <View style={styles.sheetDivider} />
+            <LoanAppSlider onApply={closeBottomSheetAndNavigate} />
           </View>
-        </BottomSheet>
-        <BottomSheet
-          visible={visible2}
-          //setting the visibility state of the bottom shee
-          onBackButtonPress={toggleBottomNavigationView2}
-          //Toggling the visibility state on the click of the back botton
-          onBackdropPress={toggleBottomNavigationView2}
-          //Toggling the visibility state on the clicking out side of the sheet
-        >
-          {/*Bottom Sheet inner View*/}
-          <View style={styles.bottomNavigationView2}>
-            <View style={{ margin: 10 , alignItems: 'center'}}>
-                <Image source={require('../assets/warning.png')} style={styles.warninImageStyle}/>
-              
-             <View>
-             <Text
-                style={{
-                  textAlign: 'center',
-                //   padding: 10,
-                  fontSize: 20,
-                  fontWeight: 'bold',
-                  color: "#272F3B",
-                  marginTop: 10
-                }}> 
-               {t('coming_soon')}
-              </Text>
-             </View>
-            
+        </View>
+      </BottomSheet>
+
+      <BottomSheet
+        visible={visible2}
+        onBackButtonPress={toggleBottomNavigationView2}
+        onBackdropPress={toggleBottomNavigationView2}
+      >
+        <View style={styles.bottomNavigationView2}>
+          <View style={styles.sheetHandle} />
+          <View style={styles.comingSoonContent}>
+            <View style={styles.warningIconWrapper}>
+              <Image source={require('../assets/warning.png')} style={styles.warninImageStyle} />
             </View>
-            <View style={{ marginHorizontal: 10, marginTop: 10}}>
-             <IconButton icon="arrow-circle-right" name={t('close')} onPress={toggleBottomNavigationView2} />
-             </View>
+            <Text style={styles.comingSoonTitle}>{t('coming_soon')}</Text>
           </View>
-        </BottomSheet>
+          <View style={{ marginHorizontal: 16, marginTop: 16 }}>
+            <IconButton icon="arrow-circle-right" name={t('close')} onPress={toggleBottomNavigationView2} />
+          </View>
+        </View>
+      </BottomSheet>
     </View>
   )
 }
@@ -137,46 +126,100 @@ const styles = StyleSheet.create({
     container:{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 10,
+        paddingHorizontal: 16,
         gap: 10,
     },
     iconView:{
-        paddingVertical: 5,
-        borderRadius: 10,
-        alignItems: 'center'
+        paddingVertical: 12,
+        borderRadius: 14,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 8,
     },
     serviceContainer:{
         flex: 1,
-        borderWidth: .4,
-        paddingVertical: 5,
-        borderRadius: 8
+        backgroundColor: '#ffffff',
+        paddingVertical: 12,
+        paddingHorizontal: 8,
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: '#f3f4f6',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 6,
+        elevation: 3,
     },
     serviceText:{
         textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 15,
-        marginTop: 3
+        fontWeight: '600',
+        fontSize: 12,
+        color: '#111827',
+        letterSpacing: 0.2,
     },
     imageStyle:{
-        height: 40,
-        width: 40
+        height: 36,
+        width: 36,
+        resizeMode: 'contain',
     },
     bottomNavigationView: {
         backgroundColor: '#fff',
         height: screenHeight * 0.40,
-        borderTopRightRadius: 30,
-        borderTopLeftRadius: 30,
-        
+        borderTopRightRadius: 24,
+        borderTopLeftRadius: 24,
+    },
+    sheetHandle: {
+        width: 44,
+        height: 5,
+        borderRadius: 3,
+        backgroundColor: '#e5e7eb',
+        alignSelf: 'center',
+        marginTop: 10,
+    },
+    sheetContent: {
+        margin: 16,
+    },
+    sheetTitle: {
+        textAlign: 'center',
+        paddingVertical: 8,
+        fontSize: 20,
+        fontWeight: '700',
+        color: '#111827',
+    },
+    sheetDivider: {
+        height: 1,
+        backgroundColor: '#f3f4f6',
+        marginVertical: 8,
+    },
+    warningIconWrapper: {
+        width: 90,
+        height: 90,
+        borderRadius: 45,
+        backgroundColor: '#fef3c7',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
     },
     warninImageStyle:{
-        height: 70,
-        width: 70
+        height: 56,
+        width: 56,
+        resizeMode: 'contain',
+    },
+    comingSoonContent: {
+        alignItems: 'center',
+        marginTop: 16,
+    },
+    comingSoonTitle: {
+        textAlign: 'center',
+        fontSize: 20,
+        fontWeight: '700',
+        color: '#111827',
+        marginTop: 14,
     },
     bottomNavigationView2: {
         backgroundColor: '#fff',
-        height: screenHeight * 0.30,
-        borderTopRightRadius: 30,
-        borderTopLeftRadius: 30,
-        
+        height: screenHeight * 0.32,
+        borderTopRightRadius: 24,
+        borderTopLeftRadius: 24,
     },
 })

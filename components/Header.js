@@ -23,40 +23,51 @@ const Header = () => {
 
   return (
     <SafeAreaView style={[styles.container]}>
-         <View style={[styles.Subcontainer,{marginTop: margin}]}>
-        <Icon onPress={()=>navigation.openDrawer()}
-              name="bars"
-              type="antdesign"
-              size={30}
-              color="#fff"
-        />
-        <Text style={styles.headerText}>{t("home")}</Text>
-        <View style={styles.notificationContainer}>
-        <TouchableOpacity onPress={()=>{handleLanguage()}} style={styles.buttonContainer}>
-               {
-                  language == "en" && <Image style={styles.imageStyle} source={require('../assets/tz.png')}/>
-               }
-               {
-                  language == "sw" && <Image style={styles.imageStyle} source={require('../assets/eng.png')}/>
-               }
-            <Text style={styles.buttonTitle}>{ language == "en" ? "SW" : "EN"}</Text>
+      <View style={[styles.Subcontainer, { marginTop: margin }]}>
+        <TouchableOpacity
+          onPress={() => navigation.openDrawer()}
+          style={styles.iconButton}
+          activeOpacity={0.7}
+        >
+          <Icon
+            name="bars"
+            type="antdesign"
+            size={22}
+            color="#fff"
+          />
         </TouchableOpacity>
-        <Icon
-              name="bell"
+
+        <Text style={styles.headerText}>{t("home")}</Text>
+
+        <View style={styles.notificationContainer}>
+          <TouchableOpacity
+            onPress={() => handleLanguage()}
+            style={styles.buttonContainer}
+            activeOpacity={0.7}
+          >
+            {
+              language == "en" && <Image style={styles.imageStyle} source={require('../assets/tz.png')} />
+            }
+            {
+              language == "sw" && <Image style={styles.imageStyle} source={require('../assets/eng.png')} />
+            }
+            <Text style={styles.buttonTitle}>{language == "en" ? "SW" : "EN"}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.iconButton} activeOpacity={0.7}>
+            <Icon
+              name="bells"
               type="antdesign"
-              size={30}
+              size={20}
               color="#fff"
-        />
-        <View style={styles.subTextContainer} >
-            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 15}}>0</Text>
+            />
+            <View style={styles.subTextContainer}>
+              <Text style={styles.badgeText}>0</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-        </View>
-        
-        
-      
-    </View>
+      </View>
     </SafeAreaView>
-   
   )
 }
 
@@ -65,49 +76,77 @@ export default Header
 const styles = StyleSheet.create({
     container:{
         backgroundColor: "#272F3B",
-        color: "#fff",
-        // padding: 10
+        borderBottomLeftRadius: 16,
+        borderBottomRightRadius: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.15,
+        shadowRadius: 8,
+        elevation: 6,
     },
     headerText:{
-        fontSize: 20,
+        fontSize: 19,
         color: "#fff",
-        fontWeight: 'bold'
+        fontWeight: '700',
+        letterSpacing: 0.5,
     },
     subTextContainer:{
-        height: 20,
-        width: 20,
-        borderRadius: 50,
-        backgroundColor: 'red',
+        minWidth: 18,
+        height: 18,
+        borderRadius: 9,
+        backgroundColor: '#EF4444',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        right: 0,
-        top: -6
+        right: -2,
+        top: -2,
+        borderWidth: 1.5,
+        borderColor: '#272F3B',
+        paddingHorizontal: 3,
+    },
+    badgeText:{
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 10,
     },
     Subcontainer:{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        margin: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal: 14,
+        paddingVertical: 12,
+    },
+    iconButton:{
+        height: 42,
+        width: 42,
+        borderRadius: 21,
+        backgroundColor: 'rgba(255, 255, 255, 0.12)',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     buttonContainer:{
         flexDirection: 'row',
-        gap: 5,
-        alignContent: 'center',
+        gap: 6,
         alignItems: 'center',
-        marginRight: 20
+        backgroundColor: 'rgba(255, 255, 255, 0.12)',
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        borderRadius: 21,
+        marginRight: 12,
     },
     buttonTitle:{
       color: "#fff",
-      fontWeight: 'bold',
-      fontSize: 17
+      fontWeight: '700',
+      fontSize: 14,
     },
     imageStyle:{
-       height: 25,
-       width: 25,
-       resizeMode:'contain'
+       height: 20,
+       width: 20,
+       borderRadius: 10,
+       resizeMode:'cover'
     },
     notificationContainer:{
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
     }
 })

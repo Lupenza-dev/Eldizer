@@ -10,40 +10,34 @@ const { width } = Dimensions.get('window')
 const CoinCard = () => {
     const { customerName, email, outstandingAmount } = useContext(AuthContext)
     const { t } = useLanguage()
-    
+
+    const initials = (customerName ?? '')
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(word => word[0].toUpperCase())
+        .join('')
+
     return (
         <View style={styles.container}>
             <View style={styles.card}>
+                {/* Decorative background circles */}
+                <View style={styles.decorativeCircle} />
+                <View style={styles.decorativeCircleSmall} />
+
                 {/* Header with user info */}
                 <View style={styles.header}>
+                    <View style={styles.avatar}>
+                        <Text style={styles.avatarText}>{initials || <Icon name='user' type='antdesign' color={colors.white} size={22}/>}</Text>
+                    </View>
                     <View style={styles.userInfo}>
-                        <View style={styles.userRow}>
-                            <View style={styles.iconWrapper}>
-                                <Icon name='user' type='antdesign' color={colors.white} size={16}/>
-                            </View>
-                            <Text style={styles.userName}>{customerName}</Text>
-                        </View>
+                        <Text style={styles.greeting}>Welcome back,</Text>
+                        <Text style={styles.userName} numberOfLines={1}>{customerName}</Text>
                         <View style={styles.emailRow}>
-                            <View style={styles.iconWrapper}>
-                                <Icon name='mail' type='antdesign' color={colors.white} size={14}/>
-                            </View>
-                            <Text style={styles.userEmail}>{email}</Text>
+                            <Icon name='mail' type='antdesign' color='rgba(255, 255, 255, 0.7)' size={12}/>
+                            <Text style={styles.userEmail} numberOfLines={1}>{email}</Text>
                         </View>
                     </View>
-                    
-                    {/* Decorative element */}
-                    {/* <View style={styles.decorativeCircle} /> */}
-                </View>
-                
-                {/* Outstanding amount section */}
-                <View style={styles.amountSection}>
-                    <View style={styles.amountContainer}>
-                        <Text style={styles.amountLabel}>{t('outstanding_amount')}</Text>
-                        <Text style={styles.amountValue}>{outstandingAmount}</Text>
-                    </View>
-                    
-                    {/* Gradient overlay effect */}
-                    <View style={styles.gradientOverlay} />
                 </View>
             </View>
         </View>
@@ -59,9 +53,8 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: colors.primary,
-        borderRadius: 16,
+        borderRadius: 20,
         padding: 20,
-        minHeight: 140,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -75,52 +68,72 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        marginBottom: 20,
+        alignItems: 'center',
+        zIndex: 2,
+    },
+    avatar: {
+        width: 56,
+        height: 56,
+        borderRadius: 28,
+        backgroundColor: 'rgba(255, 255, 255, 0.18)',
+        borderWidth: 1.5,
+        borderColor: 'rgba(255, 255, 255, 0.35)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 14,
+    },
+    avatarText: {
+        color: '#ffffff',
+        fontSize: 20,
+        fontWeight: '700',
+        letterSpacing: 1,
     },
     userInfo: {
         flex: 1,
         zIndex: 2,
     },
-    userRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 8,
+    greeting: {
+        color: 'rgba(255, 255, 255, 0.7)',
+        fontSize: 12,
+        fontWeight: '500',
+        textTransform: 'uppercase',
+        letterSpacing: 0.8,
+        marginBottom: 2,
     },
     emailRow: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    iconWrapper: {
-        width: 32,
-        height: 32,
-        borderRadius: 16,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginRight: 12,
+        gap: 6,
+        marginTop: 4,
     },
     userName: {
         color: '#ffffff',
-        fontSize: 18,
+        fontSize: 19,
         fontWeight: '700',
-        flex: 1,
     },
     userEmail: {
-        color: 'rgba(255, 255, 255, 0.9)',
-        fontSize: 14,
+        color: 'rgba(255, 255, 255, 0.85)',
+        fontSize: 13,
         fontWeight: '400',
         flex: 1,
     },
     decorativeCircle: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        backgroundColor: 'rgba(255, 255, 255, 0.08)',
         position: 'absolute',
-        right: -20,
-        top: -20,
+        right: -30,
+        top: -40,
+    },
+    decorativeCircleSmall: {
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+        backgroundColor: 'rgba(255, 255, 255, 0.06)',
+        position: 'absolute',
+        right: 40,
+        bottom: -30,
     },
     amountSection: {
         position: 'relative',

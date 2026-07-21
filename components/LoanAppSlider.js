@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Slider, Icon } from 'react-native-elements'; 
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../utils/LanguageContext';
+import { AuthContext } from '../context/AuthContext';
 
 
 const LoanAppSlider = ({ onApply }) => {
   const [value, setValue] = useState(40000);
+  const {customer} =useContext(AuthContext);
   const {t} =useLanguage();
   return (
     <>
@@ -14,7 +16,7 @@ const LoanAppSlider = ({ onApply }) => {
       <View style={styles.subContainer}>
       <View style={styles.upperContainer}>
             <Text style={styles.uppertextHeader}>{t('fast_loan')}</Text>
-            <Text style={styles.upperSubText}>{t('from')} 40,000 - 200,000</Text>
+            <Text style={styles.upperSubText}>{t('from')} 40,000 - {customer?.customer_type === 2 ? 500000 : 200000}</Text>
         </View>
         <View style={styles.loanValue}>
           <Text style={styles.loanText}>{value.toLocaleString()}</Text>
@@ -26,7 +28,7 @@ const LoanAppSlider = ({ onApply }) => {
         <Slider
         value={value}
         onValueChange={setValue}
-        maximumValue={200000}
+        maximumValue={customer?.customer_type === 2 ? 500000 : 200000}
         minimumValue={40000}
         step={10000}
         minimumTrackTintColor="#FFFFFF"

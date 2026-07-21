@@ -3,19 +3,35 @@ import React from 'react'
 import { Icon } from 'react-native-elements'
 import { colors } from '../utils/GlobalStyles'
 import { useNavigation } from '@react-navigation/native'
+import { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 
 const WarningCard = () => {
   const navigation = useNavigation();
+  const {customer} = useContext(AuthContext);
 
+  // console.log(customer);
+
+  const redirectUser = () => {
+    if (customer?.customer_type == 1) {
+      navigation.navigate('StudentRegSCreen')
+    } else {
+      navigation.navigate('InternRegistrationScreen');
+    }
+  }
   return (
     <View style={styles.container}>
         <View style={styles.iconContainer}>
-            <Icon name='warning' type='antdesign' size={28} reverse={true} color={colors.warning}/>
+            <View style={styles.iconCircle}>
+                <Icon name='warning' type='antdesign' size={24} color={colors.warning}/>
+            </View>
         </View>
-        <View>
-            <Text style={styles.title}>Please complete registration in order  {'\n'}to be able to use our service</Text>
-            <TouchableOpacity activeOpacity={0.9} style={styles.buttonStyle} onPress={()=>navigation.navigate('StudentRegSCreen')} >
-              <Text  style={styles.buttonText}> <Text>Complete Registration </Text></Text>
+        <View style={styles.contentContainer}>
+            <Text style={styles.title}>Complete Your Registration</Text>
+            <Text style={styles.subtitle}>Please complete registration in order to be able to use our service</Text>
+            <TouchableOpacity activeOpacity={0.8} style={styles.buttonStyle} onPress={redirectUser} >
+              <Text style={styles.buttonText}>Complete Registration</Text>
+              <Icon name='arrowright' type='antdesign' size={16} color='#fff' />
             </TouchableOpacity>
         </View>
     </View>
@@ -26,37 +42,62 @@ export default WarningCard
 
 const styles = StyleSheet.create({
     container:{
-        marginHorizontal: 10,
-        display: 'flex',
+        marginHorizontal: 14,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#FFF8E7',
         borderWidth: 1,
-        borderRadius: 10,
-        paddingHorizontal: 10,
-        paddingVertical: 15,
-        marginTop: 20
+        borderColor: '#F5DFA0',
+        borderRadius: 14,
+        paddingHorizontal: 14,
+        paddingVertical: 16,
+        marginTop: 20,
+        shadowColor: '#E8B61B',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.10,
+        shadowRadius: 8,
+        elevation: 3,
     },
-    title:{
-        fontSize: 18,
-        fontWeight: '500'
-
+    iconContainer:{
+        marginRight: 14,
     },
-    buttonStyle: {
+    iconCircle:{
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        backgroundColor: '#FFF0C2',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#272F3B',
-        borderRadius: 10,
-        margin: 10,
-        padding: 10
-      },
-      buttonText: {
-        fontSize: 15,
-        color: '#fff',
-        fontWeight: '500',
-      },
-      iconContainer:{
+    },
+    contentContainer:{
+        flex: 1,
+    },
+    title:{
+        fontSize: 16,
+        fontWeight: '700',
+        color: '#3D3100',
+        marginBottom: 4,
+    },
+    subtitle:{
+        fontSize: 13,
+        fontWeight: '400',
+        color: '#7A6A2E',
+        lineHeight: 18,
+        marginBottom: 12,
+    },
+    buttonStyle: {
         flexDirection: 'row',
-        alignContent: 'center',
-        alignItems: 'center'
-      }
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.warning,
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 16,
+        gap: 6,
+    },
+    buttonText: {
+        fontSize: 14,
+        color: '#fff',
+        fontWeight: '600',
+    },
 })

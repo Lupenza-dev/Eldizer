@@ -17,7 +17,7 @@ const BottomTabNavigation = () => {
         tabBarIcon: ({ color, size, focused }) => {
           let iconName;
           if (route.name === 'Home') {
-            iconName = focused ? 'ios-home-sharp' : 'ios-home-outline';
+            iconName = focused ? 'home-sharp' : 'home-outline';
           } else if (route.name === 'Loan') {
             iconName = focused ? 'settings' : 'settings-outline';
           } else if (route.name === 'Payments') {

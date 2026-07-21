@@ -17,16 +17,17 @@ import { BASE_URL } from '../utils/config'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { useLanguage } from '../utils/LanguageContext'
 import WarningCard from '../components/WarningCard'
+import DashStatistics from '../components/DashStatistics'
 
 const HomeScreen = () => {
   const navigation =useNavigation();
   const { t } = useLanguage();
 
-  const {userToken,regStage} =useContext(AuthContext);
+  const {userToken,regStage,customer} =useContext(AuthContext);
   const [groupData, setgroupData] =useState([]);
   const [adsData, setadsData] =useState([]);
   const [isLoading,setIsLoading] =useState(false);
-  console.log(regStage);
+  console.log(customer.customer_type);
 
   //const {userToken} =useContext(AuthContext);
     const adsGroupFetch=()=>{
@@ -68,15 +69,21 @@ const HomeScreen = () => {
         textStyle={{ color: '#FFF' }}
       />
        <CoinCard/>
+       <DashStatistics/>
        {/* <View style={{ marginTop: 2}}>
        <NMBLinker/>
        </View> */}
-       <View style={{ marginVertical: 10}}>
+       {
+        customer?.customer_type == 1 && (
+          <View style={{ marginVertical: 10}}>
             <DividerText name={t("Assighn_money")}/>
             <View style={{ paddingHorizontal: 10}}>
             <IconButton  name={t('quiz')} icon="edit" onPress={() => navigation.navigate('AssignMentScreen')}/>
             </View>
-       </View>
+          </View>
+        )
+       }
+      
        <View style={{ marginVertical: 10}}>
        <DividerText name={t('pay_later')}/>
        {

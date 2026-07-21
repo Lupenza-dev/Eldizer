@@ -346,7 +346,7 @@ const FormWizard = () => {
                   }
                   {i < currentStep && /* Checked */
                     <View style={{ alignItems: 'center', justifyContent: 'center', width: 30, height: 30, backgroundColor: '#0faf9a', borderWidth: 2, borderColor: '#0faf9a', borderRadius: 15, marginBottom: 10 }}>
-                      <Ionicons name="md-checkmark" size={20} color="#fff" />
+                      <Ionicons name="checkmark" size={20} color="#fff" />
                     </View>
                   }
                   {i === currentStep && /* Selected */

@@ -42,7 +42,7 @@ const DropdownComponent = (props) => {
                 // <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
                 <Icon
                 name="location-pin"
-                type="Ionicons"
+                type="entypo"
                 size={20}
                 color="#272F3B"
                 style={styles.icon}

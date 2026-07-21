@@ -9,9 +9,12 @@ import Search from '../components/Search';
 import { AuthContext } from '../context/AuthContext';
 import { BASE_URL } from '../utils/config';
 import { useQuery } from '@tanstack/react-query';
+import { useRoute } from '@react-navigation/native';
 
 const LoanScreen = () => {
   const { userToken } = useContext(AuthContext);
+  const route = useRoute();
+  const filter = route.params?.filter ?? 0;
   const [refreshing, setRefreshing] = useState(false);
 
   const loans = async () => {
@@ -21,14 +24,16 @@ const LoanScreen = () => {
       url: `${BASE_URL}/get-loans`,
       headers: { 
         'Authorization': `Bearer ${userToken}`,
+        'Content-Type': 'application/json',
       },
+      data: { filter: filter },
     };
     const response = await axios.request(config);
     return response.data.data;
   };
 
   const { data: loanData = [], isLoading, refetch } = useQuery({
-    queryKey: ['loans'],
+    queryKey: ['loans', filter],
     queryFn: loans,
   });
 

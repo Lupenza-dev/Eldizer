@@ -62,7 +62,14 @@
           "username": "lupenza"
         }
       ],
-      "expo-font",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/icon-fonts"
+          ]
+        }
+      ],
       [
         "expo-build-properties",
         {

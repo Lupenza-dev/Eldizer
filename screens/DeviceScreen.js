@@ -9,6 +9,7 @@ import axios from 'axios'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { Image, TouchableOpacity } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { colors } from '../utils/GlobalStyles'
 
 const DeviceScreen = () => {
  const navigation = useNavigation();
@@ -70,49 +71,53 @@ const DeviceScreen = () => {
  return (
    <>
      <HeaderTab title="Devices We Offer" />
-     <SafeAreaView style={{ backgroundColor: '#fff', flex: 1 }}>
+     <SafeAreaView style={styles.screen}>
        <Spinner
          visible={isLoading}
          textContent={'Loading...'}
          textStyle={{ color: '#FFF' }}
        />
        <Search />
-       <ScrollView>
+       <ScrollView showsVerticalScrollIndicator={false}>
          <View style={styles.container}>
            {deviceChunks.map((chunk, i) => (
              <View key={i} style={styles.row}>
                {chunk.map((device, j) => (
                  <View key={j} style={styles.deviceCard}>
-                   <Image style={styles.imageStyle} source={{ uri: device.image }} />
-                   <View style={styles.textContainer}>
-                     <Text style={styles.title}>Name</Text>
-                     <Text style={styles.subTitle}>{device.name}</Text>
+                   <View style={styles.imageWrapper}>
+                     <Image style={styles.imageStyle} source={{ uri: device.image }} />
                    </View>
-                   <View style={styles.textContainer}>
-                     <Text style={styles.title}>Amount</Text>
-                     <Text style={styles.subTitle}>{device.price.toLocaleString()}</Text>
+                   <View style={styles.cardBody}>
+                     <Text style={styles.deviceName} numberOfLines={2}>{device.name}</Text>
+                     <View style={styles.detailsGrid}>
+                       <View style={styles.detailItem}>
+                         <Text style={styles.detailLabel}>Amount</Text>
+                         <Text style={styles.detailValue}>{device.price.toLocaleString()}</Text>
+                       </View>
+                       <View style={styles.detailItem}>
+                         <Text style={styles.detailLabel}>Deposit</Text>
+                         <Text style={styles.detailValue}>{device.initial_deposit.toLocaleString()}</Text>
+                       </View>
+                       <View style={styles.detailItem}>
+                         <Text style={styles.detailLabel}>Plan</Text>
+                         <Text style={styles.detailValue}>{device.plan}</Text>
+                       </View>
+                     </View>
+                     <TouchableOpacity
+                       style={styles.buttonContainer}
+                       activeOpacity={0.8}
+                       onPress={() => navigation.navigate('LoanApplicationScreen', {
+                         request_amount: device.price - device.initial_deposit,
+                         plan_applied: device.plan,
+                         loan_type: 2,
+                         device_name: device.name,
+                         device_id: device.id,
+                         initial_deposit: device.initial_deposit
+                       })}
+                     >
+                       <Text style={styles.buttonText}>Apply / Purchase</Text>
+                     </TouchableOpacity>
                    </View>
-                   <View style={styles.textContainer}>
-                     <Text style={styles.title}>Initial Deposit</Text>
-                     <Text style={styles.subTitle}>{device.initial_deposit.toLocaleString()}</Text>
-                   </View>
-                   <View style={styles.textContainer}>
-                     <Text style={styles.title}>Plan</Text>
-                     <Text style={styles.subTitle}>{device.plan}</Text>
-                   </View>
-                   <TouchableOpacity
-                     style={styles.buttonContainer}
-                     onPress={() => navigation.navigate('LoanApplicationScreen', {
-                       request_amount: device.price - device.initial_deposit,
-                       plan_applied: device.plan,
-                       loan_type: 2,
-                       device_name: device.name,
-                       device_id: device.id,
-                       initial_deposit: device.initial_deposit
-                     })}
-                   >
-                     <Text style={styles.buttonText}>Apply / Purchase</Text>
-                   </TouchableOpacity>
                  </View>
                ))}
              </View>
@@ -128,60 +133,101 @@ const DeviceScreen = () => {
 export default DeviceScreen;
 
 const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: '#f8fafc',
+    flex: 1,
+  },
   container: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 16,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 15,
+    marginBottom: 16,
   },
   deviceCard: {
-    width: '48%', // Two cards per row, take 48% width each
+    width: '48%',
+    borderRadius: 12,
+    backgroundColor: '#ffffff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 4,
     borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 10,
-    backgroundColor: '#fff',
+    borderColor: '#f3f4f6',
+    overflow: 'hidden',
+  },
+  imageWrapper: {
+    backgroundColor: '#f8fafc',
+    padding: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#f3f4f6',
   },
   imageStyle: {
-    // width: '100%',
-    // height: 150,
-    // resizeMode: 'cover',
-    // borderRadius: 8,
-    // marginBottom: 5,
-    aspectRatio: 1, 
+    width: '100%',
+    aspectRatio: 1,
     resizeMode: 'contain',
-    // zIndex: 1
   },
-  textContainer: {
+  cardBody: {
+    padding: 12,
+  },
+  deviceName: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 10,
+  },
+  detailsGrid: {
+    marginBottom: 12,
+  },
+  detailItem: {
     flexDirection: 'row',
-    marginVertical: 2,
-    justifyContent: 'space-between'
-
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f8fafc',
   },
-  title: {
+  detailLabel: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#6b7280',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  detailValue: {
     fontSize: 14,
-    fontWeight: 'bold',
-    width: '40%'
-  },
-  subTitle: {
-    fontSize: 13,
-    fontWeight: '400',
-    width: '60%'
+    fontWeight: '600',
+    color: '#111827',
   },
   buttonContainer: {
-    backgroundColor: '#272F3B',
-    paddingVertical: 10,
+    backgroundColor: colors.primary,
+    paddingVertical: 12,
     borderRadius: 10,
-    marginTop: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: colors.primary,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
   },
   buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 15,
-  }
+    color: '#ffffff',
+    fontWeight: '700',
+    fontSize: 13,
+    letterSpacing: 0.3,
+  },
 });
