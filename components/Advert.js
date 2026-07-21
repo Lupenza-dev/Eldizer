@@ -14,17 +14,25 @@ const Advert = ({ adData , groupData}) => {
   return (
     <>
     <View style={styles.container}>
-      <TouchableOpacity onPress={()=>setCategory(1)}>
-        <View style={[styles.buttonView,category == 1 ? styles.activeTab: '']}>
-            <Image source={ require('../assets/speaker.png')} style={styles.imageStyle} />
-            <Text style={styles.buttonText}>{t('adverts')}</Text>
-        </View>
+      <TouchableOpacity
+        style={[styles.buttonView, category == 1 && styles.activeTab]}
+        onPress={() => setCategory(1)}
+        activeOpacity={0.8}
+      >
+        <Image source={require('../assets/speaker.png')} style={styles.imageStyle} />
+        <Text style={[styles.buttonText, category == 1 ? styles.activeText : styles.inactiveText]}>
+          {t('adverts')}
+        </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=>setCategory(2)}>
-      <View style={[styles.buttonView,category == 2 ? styles.activeTab: '']}>
-            <Image source={ require('../assets/community.png')} style={styles.imageStyle} />
-            <Text style={styles.buttonText}>{t('groups')}</Text>
-        </View>
+      <TouchableOpacity
+        style={[styles.buttonView, category == 2 && styles.activeTab]}
+        onPress={() => setCategory(2)}
+        activeOpacity={0.8}
+      >
+        <Image source={require('../assets/community.png')} style={styles.imageStyle} />
+        <Text style={[styles.buttonText, category == 2 ? styles.activeText : styles.inactiveText]}>
+          {t('groups')}
+        </Text>
       </TouchableOpacity>
     </View>
     <View>
@@ -43,28 +51,44 @@ export default Advert
 
 const styles = StyleSheet.create({
     container:{
-        paddingHorizontal: 10,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 10,
+        marginTop: 12,
+        marginHorizontal: 10,
+        backgroundColor: '#f1f3f5',
+        borderRadius: 14,
+        padding: 4,
+        gap: 4,
     },
     imageStyle:{
-        height: 30,
-        width: 30
+        height: 24,
+        width: 24,
+        resizeMode: 'contain',
     },
     buttonView:{
+        flex: 1,
         flexDirection: 'row',
-        gap: 10,
+        gap: 8,
         alignItems: 'center',
-        padding: 10,
-        borderWidth: 1,
-        borderRadius: 10
+        justifyContent: 'center',
+        paddingVertical: 10,
+        borderRadius: 11,
     },
     buttonText:{
-        fontWeight: 'bold',
-        fontSize: 17
+        fontWeight: '700',
+        fontSize: 15,
     },
     activeTab:{
-        backgroundColor: 'rgba(7, 133, 134,0.1)',
+        backgroundColor: '#ffffff',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+    activeText:{
+        color: '#272F3B',
+    },
+    inactiveText:{
+        color: '#9ca3af',
     }
 })
