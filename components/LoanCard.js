@@ -4,6 +4,7 @@ import {Icon } from 'react-native-elements';
 import { useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 
 const LoanCard = (props) => {
+    console.log(props.data);
     const loan = props.data;
     const [borderColor, setBorderColor] = useState({});
     const [textColor, setTextColor] = useState({});

@@ -11,10 +11,10 @@ import NewForm from '../components/NewForm'
 
 const LoginScreen = ({ navigation}) => {
     const {login,isLoading} =useContext(AuthContext);
-   // const [username ,setUserName] =useState("luhaboy13@gmail.com");
-   // const [password ,setPassword] =useState("Admin@123");
-    const [username ,setUserName] =useState(null);
-    const [password ,setPassword] =useState(null);
+   const [username ,setUserName] =useState("elibarikidavid23@gmail.com");
+   const [password ,setPassword] =useState("ELibariki23.,");
+    // const [username ,setUserName] =useState(null);
+    // const [password ,setPassword] =useState(null);
     const [nameError,setNameError] =useState(false);
     const [passwordError,setPasswordError] =useState(false);
     const [expoPushToken] = pushNotification();
