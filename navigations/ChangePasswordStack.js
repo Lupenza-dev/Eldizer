@@ -20,7 +20,7 @@ const ChangePasswordStack = () => {
       headerStyle:{
         backgroundColor: '#272F3B'
       }
-    }}  initialRouteName={ChangePassword}>
+    }}  initialRouteName="ChangePassword">
     <Stack.Screen name='ChangePassword'  component={ChangePassword}  options={{
       headerShown: false
     }} />

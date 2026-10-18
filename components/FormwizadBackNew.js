@@ -5,7 +5,7 @@ import Step1 from "./formsteps/Step1";
 import Step2 from "./formsteps/Step2";
 import IconButton from "./IconButton";
 import MediumText from "./MediumText";
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 import Step3 from "./formsteps/Step3";
 import Step4 from "./formsteps/Step4";
 import Toast from 'react-native-toast-message'

@@ -1,10 +1,9 @@
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import {Icon } from 'react-native-elements'; 
+import Icon from './Icon';
 import { useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 
 const LoanCard = (props) => {
-    console.log(props.data);
     const loan = props.data;
     const [borderColor, setBorderColor] = useState({});
     const [textColor, setTextColor] = useState({});

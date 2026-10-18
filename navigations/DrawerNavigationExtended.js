@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { View ,Text, StyleSheet,Image, StatusBar, TouchableOpacity} from 'react-native';
 import { AuthContext } from '../context/AuthContext';
-import { Icon } from 'react-native-elements';
+import Icon from '../components/Icon';
 import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../utils/LanguageContext';
 

@@ -1,15 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { Text, View, Button, Platform } from 'react-native';
 import * as Device from 'expo-device';
-import * as Notifications from 'expo-notifications';
-import Constants from 'expo-constants';
+
+import Constants, { ExecutionEnvironment } from 'expo-constants';
+
+// Expo Go cannot register remote push notifications. Load the native module only
+// in standalone/development builds, keeping the rest of the app usable in Go.
+const Notifications =
+  Platform.OS !== 'web' && Constants.executionEnvironment !== ExecutionEnvironment.StoreClient
+    ? require('expo-notifications')
+    : null;
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const pushNotification = () => {
-    Notifications.setNotificationHandler({
+    Notifications?.setNotificationHandler({
         handleNotification: async () => ({
-          shouldShowAlert: true,
+          shouldShowBanner: true,
+          shouldShowList: true,
           shouldPlaySound: false,
           shouldSetBadge: false,
         }),
@@ -27,7 +35,10 @@ const pushNotification = () => {
             body: 'Here is the notification body',
             data: { data: 'goes here' },
           },
-          trigger: { seconds: 2 },
+          trigger: {
+            type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+            seconds: 2,
+          },
         });
     }
       
@@ -70,9 +81,13 @@ const pushNotification = () => {
       }
   
     useEffect(() => {
+      if (!Notifications) return;
+
       registerForPushNotificationsAsync().then(async (token) => {
         setExpoPushToken(token);
         //await AsyncStorage.setItem('expoPushToken', token);
+      }).catch(error => {
+        console.warn('Push notification registration failed:', error.message);
       });
   
       notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
@@ -84,8 +99,8 @@ const pushNotification = () => {
       });
   
       return () => {
-        Notifications.removeNotificationSubscription(notificationListener.current);
-        Notifications.removeNotificationSubscription(responseListener.current);
+        notificationListener.current?.remove();
+        responseListener.current?.remove();
       };
     }, []);
 

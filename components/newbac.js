@@ -9,7 +9,7 @@ import { BASE_URL } from '../utils/config';
 import DropDownSelect from './DropDownSelect';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 import SweetAlert from './SweetAlert';
 import Toast from 'react-native-toast-message'
 import HeaderTab from './HeaderTab'; 

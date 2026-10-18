@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
-import { Icon } from 'react-native-elements'; 
+import Icon from './Icon';
 
 
 const Search = () => {

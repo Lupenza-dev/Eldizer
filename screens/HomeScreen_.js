@@ -7,7 +7,7 @@ import LoanAppSlider from '../components/LoanAppSlider'
 import LoanProcess from '../components/LoanProcess'
 import Partners from '../components/Partners'
 import { AuthContext } from '../context/AuthContext'
-import { Icon } from 'react-native-elements';
+import Icon from '../components/Icon';
 import { useNavigation } from '@react-navigation/native'
 import Service from '../components/Service'
 import WarningCard from '../components/WarningCard'

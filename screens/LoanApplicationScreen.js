@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { Icon } from "react-native-elements";
+import Icon from '../components/Icon';
 import { BottomSheet } from "react-native-btr";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";

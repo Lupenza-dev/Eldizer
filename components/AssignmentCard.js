@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { colors } from '../utils/GlobalStyles';
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../utils/LanguageContext';
 import Toast from 'react-native-toast-message';

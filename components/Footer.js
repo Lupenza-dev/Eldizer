@@ -1,9 +1,9 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useContext } from 'react';
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 import { useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../utils/LanguageContext';
 
 const { width, height } = Dimensions.get('window');
@@ -117,7 +117,7 @@ const Footer = () => {
   });
 
   return (
-    <SafeAreaView>
+    <SafeAreaView edges={['bottom', 'left', 'right']}>
       <View style={styles.container}>
         <View style={styles.navContainer}>
           {navItems.map((item) => {

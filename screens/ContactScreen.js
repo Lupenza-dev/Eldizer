@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Linking, ScrollView } from 'react-native'
 import React from 'react'
 import HeaderTab from '../components/HeaderTab'
-import { Icon } from 'react-native-elements'
+import Icon from '../components/Icon';
 import { colors } from '../utils/GlobalStyles'
 
 const ContactScreen = () => {

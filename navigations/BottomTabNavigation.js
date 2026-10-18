@@ -4,7 +4,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LoanScreen from '../screens/LoanScreen';
 import PaymentScreen from '../screens/PaymentScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const BottomTabNavigation = () => {
   const Tab = createBottomTabNavigator();

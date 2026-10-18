@@ -9,7 +9,7 @@ import PaymentScreen from '../screens/PaymentScreen';
 import { StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Icon } from 'react-native-elements';
+import Icon from '../components/Icon';
 import LoanProfilecreen from '../screens/LoanProfilecreen';
 import ApplicationScreen from '../screens/ApplicationScreen';
 import DrawerNavigationExtended from './DrawerNavigationExtended';
@@ -26,6 +26,7 @@ import QuestionScreen from '../screens/QuestionScreen';
 import ContactScreen from '../screens/ContactScreen';
 import PrivacyScreen from '../screens/PrivacyScreen';
 import InternRegistrationScreen from '../screens/InternRegistrationScreen';
+import EcoWaterServiceScreen from '../screens/EcoWaterServiceScreen';
 
 
 
@@ -81,6 +82,7 @@ const DrawerNavigation = () => {
         <Drawer.Screen name="QuestionScreen" component={QuestionScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="ContactScreen" component={ContactScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="PrivacyScreen" component={PrivacyScreen} options={{ drawerItemStyle:{display: 'none'} }} />
+        <Drawer.Screen name="EcowaterServiceScreen" component={EcoWaterServiceScreen} options={{ drawerItemStyle:{display: 'none'} }} />
         <Drawer.Screen name="InternRegistrationScreen" component={InternRegistrationScreen} options={{ drawerItemStyle:{display: 'none'} }} />
 
     </Drawer.Navigator>

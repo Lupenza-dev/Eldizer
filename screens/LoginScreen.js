@@ -11,8 +11,8 @@ import NewForm from '../components/NewForm'
 
 const LoginScreen = ({ navigation}) => {
     const {login,isLoading} =useContext(AuthContext);
-   const [username ,setUserName] =useState("elibarikidavid23@gmail.com");
-   const [password ,setPassword] =useState("ELibariki23.,");
+   const [username ,setUserName] =useState("luhaboy13@gmail.com");
+   const [password ,setPassword] =useState("Admin@123");
     // const [username ,setUserName] =useState(null);
     // const [password ,setPassword] =useState(null);
     const [nameError,setNameError] =useState(false);
@@ -142,7 +142,7 @@ const styles =StyleSheet.create({
         
     },
     headertext:{
-        marginTop: 15,
+        marginTop: 10,
         marginBottom: 15,
         fontSize: 20,
         fontWeight: '500',

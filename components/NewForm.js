@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet,Text } from 'react-native';
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 import { colors } from '../utils/GlobalStyles';
 
 const NewForm = (props) => {
@@ -42,6 +42,7 @@ const NewForm = (props) => {
           // onChangeText={setText}
           onChangeText={(setText,props.onChangeText)}
           value={value}
+          keyboardType={props.keyboardType}
           secureTextEntry={props.secureText}
         />
       </View>

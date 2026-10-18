@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import React, { useContext } from 'react'
 import { colors } from '../utils/GlobalStyles'
-import { Icon } from 'react-native-elements'
+import Icon from './Icon';
 import { AuthContext } from '../context/AuthContext'
 import { useLanguage } from '../utils/LanguageContext'
 

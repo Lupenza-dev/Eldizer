@@ -61,7 +61,7 @@ const SignUpScreen = () => {
         text1: response.data.message ?? null,
         position: 'top',
       });
-      navigation.navigate('LoginScreen');
+      navigation.popTo('LoginScreen');
     } catch (error) {
       console.log(error.response.data);
       setIsLoading(false);

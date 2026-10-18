@@ -9,7 +9,7 @@ import {
   Dimensions,
   SafeAreaView
 } from 'react-native';
-import { Icon } from 'react-native-elements';
+import Icon from '../components/Icon';
 import HeaderTab from '../components/HeaderTab';
 
 const { width } = Dimensions.get('window');

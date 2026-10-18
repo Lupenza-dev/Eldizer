@@ -1,15 +1,14 @@
 import { SafeAreaView, StyleSheet, Text, View ,Platform, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 import { useNavigation } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 const HeaderTab = (props) => {
     const navigation = useNavigation();  
-    let margin =0;
-    if (Platform.OS === 'android') {
-         margin =40;
-    }
+    const insets = useSafeAreaInsets();
+    const margin = Platform.OS === 'android' ? insets.top : 0;
     
   return (
     <View style={[styles.container]}>

@@ -17,7 +17,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import PhoneInput from './PhoneInput';
 import pushNotification from '../pushNotification';
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 import { AuthContext } from '../context/AuthContext';
 
 const FormWizard = () => {

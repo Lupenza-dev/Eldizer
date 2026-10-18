@@ -4,35 +4,20 @@ import { AuthProvider } from './context/AuthContext';
 import AppNavigation from './navigations/AppNavigation';
 import Toast from 'react-native-toast-message';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useEffect } from 'react';
 import pushNotification from './pushNotification';
 import * as Updates from 'expo-updates';
 import { LanguageProvider } from './utils/LanguageContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
+import { iconFonts } from './components/Icon';
 import * as SplashScreen from 'expo-splash-screen';
  
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [fontsLoaded, fontError] = useFonts({
-    'anticon': require('./assets/icon-fonts/anticon.ttf'),
-    'entypo': require('./assets/icon-fonts/entypo.ttf'),
-    'evilicons': require('./assets/icon-fonts/evilicons.ttf'),
-    'feather': require('./assets/icon-fonts/feather.ttf'),
-    'FontAwesome': require('./assets/icon-fonts/FontAwesome.ttf'),
-    'FontAwesome5Free-Brand': require('./assets/icon-fonts/FontAwesome5Free-Brand.ttf'),
-    'FontAwesome5Free-Regular': require('./assets/icon-fonts/FontAwesome5Free-Regular.ttf'),
-    'FontAwesome5Free-Solid': require('./assets/icon-fonts/FontAwesome5Free-Solid.ttf'),
-    'Fontisto': require('./assets/icon-fonts/Fontisto.ttf'),
-    'foundation': require('./assets/icon-fonts/foundation.ttf'),
-    'ionicons': require('./assets/icon-fonts/ionicons.ttf'),
-    'material': require('./assets/icon-fonts/material.ttf'),
-    'material-community': require('./assets/icon-fonts/material-community.ttf'),
-    'octicons': require('./assets/icon-fonts/octicons.ttf'),
-    'simple-line-icons': require('./assets/icon-fonts/simple-line-icons.ttf'),
-    'zocial': require('./assets/icon-fonts/zocial.ttf'),
-  });
+  const [fontsLoaded, fontError] = useFonts(iconFonts);
 
   useEffect(() => {
     if (fontsLoaded || fontError) {
@@ -60,12 +45,13 @@ export default function App() {
 
   const queryClient = new QueryClient();
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded && !fontError) {
     return null;
   }
 
   return (
     <GestureHandlerRootView style={{ flex: 1}}>
+      <SafeAreaProvider>
        <View style={styles.container}>
       <StatusBar style="auto"  />
       <QueryClientProvider client={queryClient}>
@@ -77,6 +63,7 @@ export default function App() {
       </LanguageProvider>
       </QueryClientProvider>
     </View>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
    
   );

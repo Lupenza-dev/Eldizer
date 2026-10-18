@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { Icon } from 'react-native-elements'
+import Icon from './Icon';
 import { colors } from '../utils/GlobalStyles'
 import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'

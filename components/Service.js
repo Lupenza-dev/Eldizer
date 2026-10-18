@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { View ,Text, StyleSheet ,Image } from 'react-native'
-import { Icon } from 'react-native-elements'
+import Icon from './Icon';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const Service = () => {

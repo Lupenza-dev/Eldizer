@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react';
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 import * as ImagePicker from 'expo-image-picker';
 
 
@@ -10,7 +10,7 @@ const ImageUpload = ({onImageChange}) => {
     const pickImage = async () => {
       // No permissions request is necessary for launching the image library
       let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        mediaTypes: ['images', 'videos'],
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,

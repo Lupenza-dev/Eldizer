@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { Icon } from 'react-native-elements'
+import Icon from './Icon';
 import { Image } from 'react-native'
 
 const UniService = () => {

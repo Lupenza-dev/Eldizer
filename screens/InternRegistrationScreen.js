@@ -12,7 +12,7 @@ import { AuthContext } from '../context/AuthContext'
 import Toast from 'react-native-toast-message'
 import Spinner from 'react-native-loading-spinner-overlay'
 import { useNavigation } from '@react-navigation/native'
-import { Icon } from 'react-native-elements'
+import Icon from '../components/Icon';
 import * as DocumentPicker from 'expo-document-picker'
 
 const InternRegistrationScreen = () => {

@@ -11,7 +11,6 @@ import RegistrationScreen from '../screens/RegistrationScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import PrivacyScreen from '../screens/PrivacyScreen';
 import TermsScreen from '../screens/TermsScreen';
-import { TurboModuleRegistry } from 'react-native';
 
 
 
@@ -25,18 +24,18 @@ const AuthStack = () => {
       headerStyle:{
         backgroundColor: '#272F3B'
       }
-    }}  initialRouteName={LandingScreen}>
+    }}  initialRouteName="LandingScreen">
     <Stack.Screen name='LandingScreen'  component={LandingScreen}  options={{
       headerShown: false
     }} />
     <Stack.Screen  name='LoginScreen'  component={LoginScreen} options={{ headerShown: false}}  />
     <Stack.Screen name='Forgotpassword'  component={ForgotPasswordScreen} options={{ headerBackTitle: "", title: "Recover Password"}}  />
-    <Stack.Screen name='RegisterScreen'  component={RegisterScreen} options={{ headerShown: true , headerTitle:"Registration", headerBackTitleVisible:false }} />
-    <Stack.Screen name='ChangePassword'  component={ChangePassword} options={{ headerShown: false , headerTitle:"Registration", headerBackTitleVisible:false, headerBackTitle: () => null }} />
-    <Stack.Screen name='RegistrationScreen'  component={RegistrationScreen} options={{ headerShown: TurboModuleRegistry , headerTitle:"Registration", headerBackTitleVisible:false }} />
-    <Stack.Screen name='SignUpScreen'  component={SignUpScreen} options={{ headerShown: true , headerTitle:"Registration", headerBackTitleVisible:false }} />
-    <Stack.Screen name='PrivacyScreen'  component={PrivacyScreen} options={{ headerShown: false , headerTitle:"Privacy Screen", headerBackTitleVisible:false, headerBackTitle: () => null, }} />
-    <Stack.Screen name='TermsScreen'  component={TermsScreen} options={{ headerShown: false , headerTitle:"Terms and Condition", headerBackTitleVisible:false, headerBackTitle: () => null, }} />
+    <Stack.Screen name='RegisterScreen'  component={RegisterScreen} options={{ headerShown: true , headerTitle:"Registration", headerBackButtonDisplayMode:"minimal" }} />
+    <Stack.Screen name='ChangePassword'  component={ChangePassword} options={{ headerShown: false , headerTitle:"Registration", headerBackButtonDisplayMode:"minimal" }} />
+    <Stack.Screen name='RegistrationScreen'  component={RegistrationScreen} options={{ headerShown: true , headerTitle:"Registration", headerBackButtonDisplayMode:"minimal" }} />
+    <Stack.Screen name='SignUpScreen'  component={SignUpScreen} options={{ headerShown: true , headerTitle:"Registration", headerBackButtonDisplayMode:"minimal" }} />
+    <Stack.Screen name='PrivacyScreen'  component={PrivacyScreen} options={{ headerShown: false , headerTitle:"Privacy Screen", headerBackButtonDisplayMode:"minimal", }} />
+    <Stack.Screen name='TermsScreen'  component={TermsScreen} options={{ headerShown: false , headerTitle:"Terms and Condition", headerBackButtonDisplayMode:"minimal", }} />
     {/* <Stack.Screen name='Bottom'  component={BottomTabNavigation} options={{ headerShown: false}} /> */}
     <Stack.Screen name='Bottom' component={DrawerNavigation} options={{ headerShown: false}}/>
     </Stack.Navigator>

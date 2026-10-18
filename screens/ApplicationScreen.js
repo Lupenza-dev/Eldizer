@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, ScrollView, StyleSheet, Dimensions } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import HeaderTab from '../components/HeaderTab'
-import { Icon } from 'react-native-elements'; 
+import Icon from '../components/Icon';
 import { useRoute } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
 

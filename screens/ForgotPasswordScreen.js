@@ -63,7 +63,7 @@ const changePassword = () => {
             setRealOtp(response.data.otp);
             setIsotpsent(true);
             if (response.data.password_set) {
-              navigation.navigate('LoginScreen');
+              navigation.popTo('LoginScreen');
             }
           }).catch(error => {
             setIsLoading(false);

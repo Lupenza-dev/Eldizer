@@ -1,29 +1,21 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useContext, useState } from 'react'
-import { Icon } from 'react-native-elements'
+import React, { useState } from 'react'
 import { Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { BottomSheet } from 'react-native-btr'
-import IconButton from './IconButton'
 import LoanAppSlider from './LoanAppSlider'
 import { useLanguage } from '../utils/LanguageContext'
-import { AuthContext } from '../context/AuthContext'
 
 const screenHeight =Dimensions.get('window').height;
 
 const OurService = () => {
     const navigation =useNavigation();
-    const {customer} =useContext(AuthContext);
     const {t} =useLanguage();
 
     const [visible, setVisible] = useState(false);
-    const [visible2, setVisible2] = useState(false);
 
     const toggleBottomNavigationView = () => {
         setVisible(!visible); 
-    };
-    const toggleBottomNavigationView2 = () => {
-        setVisible2(!visible2); 
     };
 
     const closeBottomSheetAndNavigate = (value) => {
@@ -75,12 +67,12 @@ const OurService = () => {
       <TouchableOpacity
         style={styles.serviceContainer}
         activeOpacity={0.7}
-        onPress={toggleBottomNavigationView2}
+        onPress={() => navigation.navigate('EcowaterServiceScreen')}
       >
         <View style={[styles.iconView, { backgroundColor: '#fce7f3' }]}>
-          <Image source={require('../assets/box.png')} style={styles.imageStyle} />
+          <Image source={require('../assets/ecowater.png')} style={styles.imageStyle} />
         </View>
-        <Text style={styles.serviceText}>{t('pedi')}</Text>
+        <Text style={styles.serviceText}>Eco Water</Text>
       </TouchableOpacity>
 
       <BottomSheet
@@ -98,30 +90,7 @@ const OurService = () => {
         </View>
       </BottomSheet>
 
-      <BottomSheet
-        visible={visible2}
-        onBackButtonPress={toggleBottomNavigationView2}
-        onBackdropPress={toggleBottomNavigationView2}
-      >
-        <View style={styles.bottomNavigationView2}>
-          <View style={styles.sheetHandle} />
-          <View style={styles.comingSoonContent}>
-            <View style={styles.warningIconOuterRing}>
-              <View style={styles.warningIconWrapper}>
-                <Image source={require('../assets/warning.png')} style={styles.warninImageStyle} />
-              </View>
-            </View>
-            <View style={styles.serviceBadge}>
-              <Text style={styles.serviceBadgeText}>{t('pedi')}</Text>
-            </View>
-            <Text style={styles.comingSoonTitle}>{t('coming_soon')}</Text>
-            <Text style={styles.comingSoonSubtitle}>{t('coming_soon_message')}</Text>
-          </View>
-          <View style={{ marginHorizontal: 16, marginTop: 20, marginBottom: 24 }}>
-            <IconButton icon="arrow-circle-right" name={t('close')} onPress={toggleBottomNavigationView2} />
-          </View>
-        </View>
-      </BottomSheet>
+
     </View>
   )
 }
@@ -173,6 +142,9 @@ const styles = StyleSheet.create({
         height: screenHeight * 0.40,
         borderTopRightRadius: 24,
         borderTopLeftRadius: 24,
+        marginBottom: 50,
+        // paddingBottom: 20,
+        
     },
     sheetHandle: {
         width: 44,
@@ -196,66 +168,5 @@ const styles = StyleSheet.create({
         height: 1,
         backgroundColor: '#f3f4f6',
         marginVertical: 8,
-    },
-    warningIconOuterRing: {
-        width: 108,
-        height: 108,
-        borderRadius: 54,
-        backgroundColor: 'rgba(254, 243, 199, 0.45)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 10,
-    },
-    warningIconWrapper: {
-        width: 84,
-        height: 84,
-        borderRadius: 42,
-        backgroundColor: '#fef3c7',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    warninImageStyle:{
-        height: 48,
-        width: 48,
-        resizeMode: 'contain',
-    },
-    comingSoonContent: {
-        alignItems: 'center',
-        marginTop: 16,
-        paddingHorizontal: 24,
-    },
-    serviceBadge: {
-        backgroundColor: 'rgba(213, 69, 54, 0.1)',
-        paddingHorizontal: 14,
-        paddingVertical: 5,
-        borderRadius: 14,
-        marginTop: 14,
-    },
-    serviceBadgeText: {
-        fontSize: 12,
-        fontWeight: '700',
-        color: '#D54536',
-        letterSpacing: 0.5,
-        textTransform: 'uppercase',
-    },
-    comingSoonTitle: {
-        textAlign: 'center',
-        fontSize: 22,
-        fontWeight: '700',
-        color: '#111827',
-        marginTop: 10,
-    },
-    comingSoonSubtitle: {
-        textAlign: 'center',
-        fontSize: 14,
-        color: '#6b7280',
-        lineHeight: 20,
-        marginTop: 8,
-    },
-    bottomNavigationView2: {
-        backgroundColor: '#fff',
-        borderTopRightRadius: 24,
-        borderTopLeftRadius: 24,
-        paddingBottom: 8,
     },
 })

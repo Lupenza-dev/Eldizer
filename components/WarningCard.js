@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { Icon } from 'react-native-elements'
+import Icon from './Icon';
 import { colors } from '../utils/GlobalStyles'
 import { useNavigation } from '@react-navigation/native'
 import { useContext } from 'react'

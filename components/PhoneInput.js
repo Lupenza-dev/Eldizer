@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Icon } from 'react-native-elements';
+import Icon from './Icon';
 
 const PhoneInput = (props) => {
   return (

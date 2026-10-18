@@ -1,6 +1,6 @@
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { Icon } from 'react-native-elements'
+import Icon from './Icon';
 import { colors } from '../utils/GlobalStyles'
 
 const GroupCard = ({group}) => {
